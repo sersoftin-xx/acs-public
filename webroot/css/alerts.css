@@ -1,0 +1,8 @@
+.alert {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    min-height: 50px;
+    min-width: 250px;
+}

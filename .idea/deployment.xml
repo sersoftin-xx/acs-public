@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="ACSFTP">
+    <serverData>
+      <paths name="ACSFTP">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/www/sergo-cheats.ru/acs" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/www/sergo-cheats.ru/acs/bin" />
+            <excludedPath path="/www/sergo-cheats.ru/acs/logs" />
+            <excludedPath path="/www/sergo-cheats.ru/acs/tests" />
+            <excludedPath path="/www/sergo-cheats.ru/acs/tmp" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
