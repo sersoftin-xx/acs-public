@@ -18,7 +18,7 @@ return [
                 'li' => null
             ],
             'controller' => 'Bids',
-            'actions' => ['index', 'filter']
+            'action' => 'index'
         ],
         [
             'name' => 'new_bids',
@@ -30,7 +30,7 @@ return [
                 'li' => null
             ],
             'controller' => 'Bids',
-            'actions' => ['recent']
+            'action' => 'recent'
         ],
         [
             'name' => 'users',
@@ -42,7 +42,7 @@ return [
                 'li' => null
             ],
             'controller' => 'Users',
-            'actions' => ['index']
+            'action' => 'index'
         ],
         [
             'name' => 'pcs',
@@ -54,7 +54,7 @@ return [
                 'li' => null
             ],
             'controller' => 'Pcs',
-            'actions' => ['index']
+            'action' => 'index'
         ],
         [
             'name' => 'products',
@@ -66,7 +66,7 @@ return [
                 'li' => 'hidden-xs hidden-sm hidden-md'
             ],
             'controller' => 'Products',
-            'actions' => ['index']
+            'action' => 'index'
         ],
         [
             'name' => 'filters',
@@ -78,7 +78,7 @@ return [
                 'li' => null
             ],
             'controller' => 'Filters',
-            'actions' => ['index']
+            'action' => 'index'
         ]
     ]
 ];

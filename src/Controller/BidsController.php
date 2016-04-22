@@ -15,101 +15,6 @@ use Cake\I18n\Time;
 class BidsController extends AppController
 {
 
-    public function filter()
-    {
-        debug($this->request->data);
-        $this->render('index');
-    }
-//
-//    public function pc($id = null)
-//    {
-//        $this->loadModel('Users');
-//        $this->loadModel('Pcs');
-//        $this->loadModel('Products');
-//        $products = $this->Products->find('all');
-//        $users = $this->Users->find('all');
-//        $pcs = $this->Pcs->find('all');
-//        $this->set('bids', $this->Bids->find('active', [
-//            'contain' => ['Pcs', 'Products']
-//        ])->select([
-//            'id',
-//            'Products.id',
-//            'Products.name',
-//            'Pcs.id',
-//            'Pcs.name',
-//            'Pcs.user_id',
-//            'username' => $users->select(['name'])->where([
-//                'id' => $pcs->newExpr('user_id')
-//            ]),
-//            'activation_date',
-//            'expiration_date'
-//        ])->where([
-//            'pc_id' => $id
-//        ]));
-//        $this->set('products', $products);
-//        $this->set('_serialize', ['bids']);
-//        $this->render('index');
-//    }
-//
-//    public function user($id = null)
-//    {
-//        $this->loadModel('Users');
-//        $this->loadModel('Products');
-//        $products = $this->Products->find('all');
-//        $users = $this->Users->find('all');
-//        $bids = $this->Bids->find('active', [
-//            'contain' => ['Pcs', 'Products']
-//        ])->select([
-//            'id',
-//            'Products.id',
-//            'Products.name',
-//            'Pcs.id',
-//            'Pcs.name',
-//            'Pcs.user_id',
-//            'username' => $users->select(['name'])->where([
-//                'id' => $id
-//            ]),
-//            'activation_date',
-//            'expiration_date'
-//        ]);
-//        debug($bids);
-//        $this->set('bids', $bids);
-//        $this->set('products', $products);
-//        $this->set('_serialize', ['bids']);
-//        $this->render('index');
-//    }
-//
-//
-//    public function product($id = null)
-//    {
-//        $this->loadModel('Users');
-//        $this->loadModel('Pcs');
-//        $this->loadModel('Products');
-//        $products = $this->Products->find('all');
-//        $users = $this->Users->find('all');
-//        $pcs = $this->Pcs->find('all');
-//        $this->set('bids', $this->Bids->find('active', [
-//            'contain' => ['Pcs', 'Products']
-//        ])->select([
-//            'id',
-//            'Products.id',
-//            'Products.name',
-//            'Pcs.id',
-//            'Pcs.name',
-//            'Pcs.user_id',
-//            'username' => $users->select('name')->where([
-//                'id' => $pcs->newExpr('user_id')
-//            ]),
-//            'activation_date',
-//            'expiration_date'
-//        ])->where([
-//            'product_id' => $id
-//        ]));
-//        $this->set('products', $products);
-//        $this->set('_serialize', ['bids']);
-//        $this->render('index');
-//    }
-
     public function getInfo($id = null)
     {
         $bid = $this->Bids->get($id);
@@ -201,10 +106,13 @@ class BidsController extends AppController
         $this->loadModel('Users');
         $this->loadModel('Pcs');
         $this->loadModel('Products');
-        $products = $this->Products->find('all');
+        $products = $this->Products->find('all')->select([
+            'id',
+            'name'
+        ]);
         $users = $this->Users->find('all');
         $pcs = $this->Pcs->find('all');
-        $this->set('bids', $this->Bids->find('active', [
+        $bids = $this->Bids->find('active', [
             'contain' => ['Pcs', 'Products']
         ])->select([
             'id',
@@ -218,9 +126,25 @@ class BidsController extends AppController
             ]),
             'activation_date',
             'expiration_date'
-        ]));
+        ]);
+        if (isset($this->request->data['pc_id'])) {
+            $bids->where([
+                'pc_id' => $this->request->query['pc_id']
+            ]);
+        }
+        if (isset($this->request->data['product_id'])) {
+            $bids->where([
+                'product_id' => $this->request->query['product_id']
+            ]);
+        }
+        if (isset($this->request->data['user_id'])) {
+            $bids->where([
+                'Pcs.user_id' => $this->request->query['user_id']
+            ]);
+        }
+        $this->set('bids', $bids);
         $this->set('products', $products);
-        $this->set('_serialize', ['bids']);
+        $this->render('index');
     }
 
     /**

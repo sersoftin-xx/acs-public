@@ -31,16 +31,7 @@ class MenuHelper extends Helper
             $itemHasBadge = $menuItem['hasBadge'];
             $itemBadge = $menuItem['classes']['badge'];
             $itemController = $menuItem['controller'];
-            $itemControllerActions = $menuItem['actions'];
-            $itemIsActive = false;
-            if (($this->request->params['controller'] === $itemController)) {
-                foreach ($itemControllerActions as $itemControllerAction) {
-                    if ($itemControllerAction === $this->request->params['action']) {
-                        $itemIsActive = true;
-                        break;
-                    }
-                }
-            }
+            $itemIsActive = (($this->request->params['controller'] === $itemController) && ($this->request->params['action'] === $menuItem['action']));
 
             if ($itemIcon != null) {
                 $itemIcon = $this->Html->tag('span', '', ['class' => $itemIcon]);
@@ -53,7 +44,7 @@ class MenuHelper extends Helper
             }
             $menuLink = $this->Html->link(
                 $itemIcon . ' ' . $itemCaption . ' ' . $itemBadge,
-                ['controller' => $menuItem['controller'], 'action' => $itemControllerActions[0]], ['escape' => false]);
+                ['controller' => $menuItem['controller'], 'action' => $menuItem['action']], ['escape' => false]);
             $menuElement = $this->Html->tag('li', $menuLink, ['class' => $itemIsActive ? 'active ' . $menuItem['classes']['li'] : $menuItem['classes']['li'], 'role' => 'presentation']);
             $menu .= $menuElement;
         }
