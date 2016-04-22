@@ -11,57 +11,74 @@ return [
         [
             'name' => 'active_bids',
             'caption' => 'Active',
+            'hasBadge' => true,
             'icon' => 'fa fa-check-square-o',
             'classes' => [
                 'badge' => null,
                 'li' => null
             ],
             'controller' => 'Bids',
-            'action' => 'index'
+            'actions' => ['index', 'filter']
         ],
         [
             'name' => 'new_bids',
             'caption' => 'Bids',
+            'hasBadge' => true,
             'icon' => 'glyphicon glyphicon-asterisk',
             'classes' => [
                 'badge' => 'red-badge',
                 'li' => null
             ],
             'controller' => 'Bids',
-            'action' => 'recent'
+            'actions' => ['recent']
         ],
         [
             'name' => 'users',
             'caption' => 'Users',
+            'hasBadge' => true,
             'icon' => 'glyphicon glyphicon-user',
             'classes' => [
                 'badge' => null,
                 'li' => null
             ],
             'controller' => 'Users',
-            'action' => 'index'
+            'actions' => ['index']
         ],
         [
             'name' => 'pcs',
             'caption' => 'PCs',
+            'hasBadge' => true,
             'icon' => 'fa fa-laptop',
             'classes' => [
                 'badge' => null,
                 'li' => null
             ],
             'controller' => 'Pcs',
-            'action' => 'index'
+            'actions' => ['index']
         ],
         [
             'name' => 'products',
             'caption' => 'Products',
+            'hasBadge' => true,
             'icon' => 'fa fa-cubes',
             'classes' => [
                 'badge' => null,
                 'li' => 'hidden-xs hidden-sm hidden-md'
             ],
             'controller' => 'Products',
-            'action' => 'index'
+            'actions' => ['index']
+        ],
+        [
+            'name' => 'filters',
+            'caption' => 'Filters',
+            'hasBadge' => false,
+            'icon' => 'fa fa-filter',
+            'classes' => [
+                'badge' => null,
+                'li' => null
+            ],
+            'controller' => 'Filters',
+            'actions' => ['index']
         ]
     ]
 ];

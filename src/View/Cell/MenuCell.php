@@ -38,6 +38,12 @@ class MenuCell extends Cell
         $this->loadModel('Pcs');
         $this->loadModel('Products');
 
-        $this->set('counters', ['active_bids' => $this->Bids->find('active')->count(), 'new_bids' => $this->Bids->find('recent')->count(), 'users' => $this->Users->find('all')->count(), 'pcs' => $this->Pcs->find('all')->count(), 'products' => $this->Products->find('all')->count()]);
+        $this->set('counters', [
+            'active_bids' => $this->Bids->find('active')->count(),
+            'new_bids' => $this->Bids->find('recent')->count(),
+            'users' => $this->Users->find('all')->count(),
+            'pcs' => $this->Pcs->find('all')->count(),
+            'products' => $this->Products->find('all')->count()
+        ]);
     }
 }
