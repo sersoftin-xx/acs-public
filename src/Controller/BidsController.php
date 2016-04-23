@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\I18n\Date;
 
 /**
  * Bids Controller
@@ -127,21 +128,56 @@ class BidsController extends AppController
             'activation_date',
             'expiration_date'
         ]);
-        if (isset($this->request->data['pc_id'])) {
+        if (isset($this->request->data['search_form_pc_id'])
+            && !empty($this->request->data['search_form_pc_id'])
+            && $this->request->data['search_form_pc_id'] != '0'
+        ) {
             $bids->where([
-                'pc_id' => $this->request->query['pc_id']
+                'pc_id' => $this->request->data['search_form_pc_id']
             ]);
         }
-        if (isset($this->request->data['product_id'])) {
+        if (isset($this->request->data['search_form_product_id'])
+            && !empty($this->request->data['search_form_product_id'])
+            && $this->request->data['search_form_product_id'] != '0'
+        ) {
             $bids->where([
-                'product_id' => $this->request->query['product_id']
+                'product_id' => $this->request->data['search_form_product_id']
             ]);
         }
-        if (isset($this->request->data['user_id'])) {
+        if (isset($this->request->data['search_form_user_id'])
+            && !empty($this->request->data['search_form_user_id'])
+            && $this->request->data['search_form_user_id'] != '0'
+        ) {
             $bids->where([
-                'Pcs.user_id' => $this->request->query['user_id']
+                'Pcs.user_id' => $this->request->data['search_form_user_id']
             ]);
         }
+
+        if (isset($this->request->data['search_form_use_activation_date'])
+            && !empty($this->request->data['search_form_use_activation_date']
+            && $this->request->data['search_form_use_activation_date'] === 'on')) {
+            $from = new Date($this->request->data['search_form_activation_date_from']);
+            $to = new Date($this->request->data['search_form_activation_date_to']);
+            $bids->where(
+                function ($exp) use ($from, $to) {
+                    return $exp->between('activation_date', $from, $to);
+                }
+            );
+        }
+//        if (isset($this->request->data['activation_date'])) {
+//            $bids->where([
+//                'activation_date' => Time::createFromFormat('dd.MM.yyyy HH:ii:ss', $this->request->data['activation_date'])
+//            ]);
+//        }
+//        if (isset($this->request->data['expiration_date'])) {
+//            $bids->where([
+//                'expiration_date' => $this->request->data['expiration_date']
+//            ]);
+//        }
+        $pcs = $this->Pcs->find('all');
+        $users = $this->Users->find('all');
+        $this->set('users', $users);
+        $this->set('pcs', $pcs);
         $this->set('bids', $bids);
         $this->set('products', $products);
         $this->render('index');

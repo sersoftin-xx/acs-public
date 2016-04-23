@@ -8,7 +8,7 @@
                 <th>#</th>
                 <th>Product</th>
                 <th>PC name</th>
-                <th class="hidden-xs hidden-sm">PC unique key</th>
+                <th class="hidden-xs hidden-sm hidden-md">PC unique key</th>
                 <th class="hidden-xs">Application date</th>
                 <th>Actions</th>
             </tr>
@@ -19,7 +19,7 @@
                     <td><?= $recent_bid['id'] ?></td>
                     <td><?= $recent_bid['product']['name'] ?></td>
                     <td><?= $recent_bid['pc']['name'] ?></td>
-                    <td class="hidden-xs hidden-sm"><?= $recent_bid['pc']['unique_key'] ?></td>
+                    <td class="hidden-xs hidden-sm hidden-md"><?= $recent_bid['pc']['unique_key'] ?></td>
                     <td class="hidden-xs"><?= $recent_bid['application_date'] ?></td>
                     <td>
                         <div class="btn-group btn-group-xs btn-group-xs-small" role="group">
