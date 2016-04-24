@@ -15,6 +15,11 @@
 }
 
 @media (max-width: 767px) {
+
+    .search-form-label {
+        padding: 5px 0 0 0;
+    }
+
     .text-left-not-xs, .text-center-not-xs, .text-right-not-xs, .text-justify-not-xs {
         text-align: inherit;
     }
@@ -63,6 +68,10 @@
         text-align: inherit;
     }
 
+    .search-button {
+        margin-right: 15px;
+    }
+
     .text-left-md {
         text-align: left;
     }
@@ -83,6 +92,10 @@
 @media (min-width: 1200px) {
     .text-left-not-lg, .text-center-not-lg, .text-right-not-lg, .text-justify-not-lg {
         text-align: inherit;
+    }
+
+    .panel-body {
+        padding: 15px 15px 0 0;
     }
 
     .text-left-lg {
@@ -111,7 +124,7 @@
 }
 
 body {
-    padding-right: 0px !important
+    padding-right: 0 !important
 }
 
 .modal-open {

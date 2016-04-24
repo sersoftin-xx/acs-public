@@ -1,50 +1,70 @@
 <?php $this->assign('username', $username) ?>
 <?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
+<?= $this->Html->css('bootstrap-addon.css', ['block' => true]) ?>
 <?= $this->Html->css('bootstrap-datetimepicker.min.css', ['block' => true]) ?>
 <?= $this->Html->css('daterangepicker.css', ['block' => true]) ?>
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">Search bids</div>
             <div class="panel-body">
-                <form class="form-inline" method="post">
-                    <div class="form-group">
-                        <label class="control-label">Product:</label>
-                        <select name="search_form_product_id" id="search-form-product_id"
-                                data-live-search="true">
-                            <option value="0">All</option>
-                            <?php foreach ($products as $product): ?>
-                                <option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">User:</label>
-                        <select name="search_form_user_id" id="search-form-user-id"
-                                data-live-search="true">
-                            <option value="0">All</option>
-                            <?php foreach ($users as $user): ?>
-                                <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Activation date:</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="checkbox" name="search_form_use_activation_date">
-                            </span>
-                            <div class="form-control" id="search-form-activation-date">
-                                <span></span>
-                                <b class="caret"></b>
-                                <input type="hidden" name="search_form_activation_date_from"
-                                       id="search-form-activation-date-from" value="">
-                                <input type="hidden" name="search_form_activation_date_to"
-                                       id="search-form-activation-date-to" value="">
+                <form class="form-horizontal" method="post">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-xs-3 col-sm-4 col-md-3 search-form-label text-right">
+                                <label for="search-form-product_id" class="control-label">Product:</label>
+                            </div>
+                            <div class="col-xs-9 col-sm-8 col-md-9">
+                                <select class="form-control" name="search_form_product_id" id="search-form-product_id"
+                                        data-live-search="true">
+                                    <option value="0">All</option>
+                                    <?php foreach ($products as $product): ?>
+                                        <option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success pull-right"><span
-                            class="glyphicon glyphicon-search"></span> Search bid
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="col-xs-3 col-sm-4 col-md-2 search-form-label text-right">
+                                <label class="control-label">User:</label>
+                            </div>
+                            <div class="col-xs-9 col-sm-8 col-md-10">
+                                <select class="form-control" name="search_form_user_id" id="search-form-user-id"
+                                        data-live-search="true">
+                                    <option value="0">All</option>
+                                    <?php foreach ($users as $user): ?>
+                                        <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-4 search-form-label text-right">
+                                <label class="control-label hidden-xs">Activation date:</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-8">
+                                <div class="input-group">
+                                <span class="input-group-addon">
+                                    <input type="checkbox" name="search_form_use_activation_date">
+                                </span>
+                                    <div class="form-control" id="search-form-activation-date">
+                                        <span></span>
+                                        <b class="caret hidden-xs"></b>
+                                        <input type="hidden" name="search_form_activation_date_from"
+                                               id="search-form-activation-date-from" value="">
+                                        <input type="hidden" name="search_form_activation_date_to"
+                                               id="search-form-activation-date-to" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success col-xs-12 col-md-1 pull-right search-button"><span
+                            class="glyphicon glyphicon-search hidden-xs hidden-sm"></span>
+                        <span class="visible-xs visible-sm">Search bid</span>
                     </button>
                 </form>
             </div>
@@ -53,9 +73,9 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Product name</th>
-                <th class="hidden-xs">User name</th>
-                <th class="hidden-xs">User PC name</th>
+                <th>Product<span class="hidden-xs"> name</span></th>
+                <th>User name</th>
+                <th class="hidden-xs hidden-sm">User PC name</th>
                 <th class="hidden-xs">Activation date</th>
                 <th class="hidden-xs">Expiration date</th>
                 <th>Actions</th>
@@ -66,8 +86,8 @@
                 <tr<?= $this->Time->isPast($bid['expiration_date']) ? ' class="danger"' : '' ?>>
                     <td><?= $bid['id'] ?></td>
                     <td><?= $bid['product']['name'] ?></td>
-                    <td class="hidden-xs"><?= $bid['username'] ?></td>
-                    <td class="hidden-xs"><?= $bid['pc']['name'] ?></td>
+                    <td><?= $bid['username'] ?></td>
+                    <td class="hidden-xs hidden-sm  "><?= $bid['pc']['name'] ?></td>
                     <td class="hidden-xs"><?= $bid['activation_date'] ?></td>
                     <td class="hidden-xs"><?= $bid['expiration_date'] ?></td>
                     <td>

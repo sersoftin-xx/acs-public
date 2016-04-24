@@ -67,18 +67,6 @@ return [
             ],
             'controller' => 'Products',
             'action' => 'index'
-        ],
-        [
-            'name' => 'filters',
-            'caption' => 'Filters',
-            'hasBadge' => false,
-            'icon' => 'fa fa-filter',
-            'classes' => [
-                'badge' => null,
-                'li' => null
-            ],
-            'controller' => 'Filters',
-            'action' => 'index'
         ]
     ]
 ];

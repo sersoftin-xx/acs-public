@@ -3,18 +3,20 @@
  */
 
 function cb(start, end) {
-    $('#search-form-activation-date').find('span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    $('#search-form-activation-date-from').val(start.format('YYYY-M-D'));
-    $('#search-form-activation-date-to').val(end.format('YYYY-M-D'));
+    $('#search-form-activation-date').find('span').html(start.format('L') + ' - ' + end.format('L'));
+    $('#search-form-activation-date-from').val(start.format());
+    $('#search-form-activation-date-to').val(end.format());
 }
 
-cb(moment().subtract(29, 'days'), moment());
+cb(moment().startOf('day'), moment().endOf('day'));
 
 $('#search-form-activation-date').daterangepicker({
+    autoApply:true,
+    opens: 'center',
     ranges: {
-        'Today': [moment(), moment().add(1, 'days')],
-        'Yesterday': [moment().subtract(1, 'days'), moment()],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment().add(1, 'days')],
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(7, 'days'), moment()],
         'Last 30 Days': [moment().subtract(29, 'days'), moment().add(1, 'days')],
         'This Month': [moment().startOf('month'), moment().endOf('month')],
         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
