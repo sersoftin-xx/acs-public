@@ -155,7 +155,9 @@ class BidsController extends AppController
 
         if (isset($this->request->data['search_form_use_activation_date'])
             && !empty($this->request->data['search_form_use_activation_date']
-            && $this->request->data['search_form_use_activation_date'] === 'on')) {
+                && $this->request->data['search_form_use_activation_date'] === 'on')
+        ) {
+
             $from = new Date($this->request->data['search_form_activation_date_from']);
             $to = new Date($this->request->data['search_form_activation_date_to']);
             $bids->where(
@@ -163,17 +165,8 @@ class BidsController extends AppController
                     return $exp->between('activation_date', $from, $to);
                 }
             );
+            
         }
-//        if (isset($this->request->data['activation_date'])) {
-//            $bids->where([
-//                'activation_date' => Time::createFromFormat('dd.MM.yyyy HH:ii:ss', $this->request->data['activation_date'])
-//            ]);
-//        }
-//        if (isset($this->request->data['expiration_date'])) {
-//            $bids->where([
-//                'expiration_date' => $this->request->data['expiration_date']
-//            ]);
-//        }
         $pcs = $this->Pcs->find('all');
         $users = $this->Users->find('all');
         $this->set('users', $users);

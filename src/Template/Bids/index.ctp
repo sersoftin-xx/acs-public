@@ -1,5 +1,6 @@
 <?php $this->assign('username', $username) ?>
 <?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
+<?= $this->Html->css('bootstrap-datetimepicker.min.css', ['block' => true]) ?>
 <?= $this->Html->css('daterangepicker.css', ['block' => true]) ?>
     <div class="container">
         <div class="panel panel-default">
