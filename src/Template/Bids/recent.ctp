@@ -1,5 +1,6 @@
 <?php $this->assign('username', $username) ?>
 <?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
+<?= $this->Html->css('bootstrap-addon.css', ['block' => true]) ?>
 <?= $this->Html->css('bootstrap-datetimepicker.min.css', ['block' => true]) ?>
     <div class="container">
         <table class="table table-bordered table-hover">
@@ -54,12 +55,12 @@
                                 <div class='input-group date' id='accept-bid-expiration-date-input-group'>
                                     <input id="accept-bid-expiration-date-input" name="bid_expiration_date"
                                            type='text' class="form-control"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="col-sm-1">
+                            <div class="col-xs-1">
                                 <button type="button" class="btn btn-default" onclick="setMaxDate()">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </button>

@@ -16,6 +16,10 @@
 
 @media (max-width: 767px) {
 
+    .search-button {
+        margin-right: 15px;
+    }
+
     .search-form-label {
         padding: 5px 0 0 0;
     }
@@ -44,6 +48,10 @@
 @media (min-width: 768px) and (max-width: 991px) {
     .text-left-not-sm, .text-center-not-sm, .text-right-not-sm, .text-justify-not-sm {
         text-align: inherit;
+    }
+
+    .search-button {
+        margin-right: 15px;
     }
 
     .text-left-sm {
@@ -92,6 +100,11 @@
 @media (min-width: 1200px) {
     .text-left-not-lg, .text-center-not-lg, .text-right-not-lg, .text-justify-not-lg {
         text-align: inherit;
+    }
+
+    .search-button {
+        margin-bottom: 15px;
+        padding-top: -30px;
     }
 
     .panel-body {
