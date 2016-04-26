@@ -50,6 +50,10 @@
         text-align: inherit;
     }
 
+    .panel-body {
+        padding: 15px 15px 0 0;
+    }
+
     .search-button {
         margin-right: 15px;
     }
@@ -74,6 +78,10 @@
 @media (min-width: 992px) and (max-width: 1199px) {
     .text-left-not-md, .text-center-not-md, .text-right-not-md, .text-justify-not-md {
         text-align: inherit;
+    }
+
+    .panel-body {
+        padding: 15px 15px 0 0;
     }
 
     .search-button {
@@ -102,13 +110,8 @@
         text-align: inherit;
     }
 
-    .search-button {
-        margin-bottom: 15px;
-        padding-top: -30px;
-    }
-
     .panel-body {
-        padding: 15px 15px 0 0;
+        padding: 15px 0 0 0;
     }
 
     .text-left-lg {

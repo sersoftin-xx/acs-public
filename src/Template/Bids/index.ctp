@@ -9,7 +9,7 @@
             <div class="panel-heading">Search bids</div>
             <div class="panel-body">
                 <form class="form-horizontal" method="post">
-                    <div class="col-md-3">
+                    <div class="col-sm-4">
                         <div class="form-group">
                             <div class="col-xs-3 col-sm-4 col-md-3 search-form-label text-right">
                                 <label for="search-form-product_id" class="control-label">Product:</label>
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <div class="col-xs-3 col-sm-4 col-md-2 search-form-label text-right">
                                 <label class="control-label">User:</label>
@@ -41,86 +41,49 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <div class="col-xs-12 col-sm-3 search-form-label text-right">
-                                <label class="control-label hidden-xs">Activation date:</label>
-                            </div>
-                            <div class="col-xs-12 col-sm-8">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="input-group date" id="search-form-activation-date-from">
-                                            <input name="search_form_activation_date_from" type="text"
-                                                   class="form-control"/>
-                                                    <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <div class="input-group date" id="search-form-activation-date-to">
-                                            <input name="search_form_activation_date_to" type="text"
-                                                   class="form-control"/>
-                                                    <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div
-                        </div>
-                        <div class="checkbox checkbox-success checkbox-inline">
-                            <input type="checkbox" class="styled" id="search-form-use-date" value="option1" checked="">
-                            <label for="search-form-use-date"></label>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pull-right search-button">
-                        <button type="submit" class="btn btn-success">
-                            <span class="glyphicon glyphicon-search hidden-xs hidden-sm"></span>
+                    <div class="col-xs-6 col-sm-3 col-lg-2 pull-right">
+                        <button type="submit" class="btn btn-success col-xs-12 col-sm-offset-2 col-sm-10">
+                            <span class="glyphicon glyphicon-search hidden-xs"></span>
                             Search bid
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-
-    <table class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Product<span class="hidden-xs"> name</span></th>
-            <th>User name</th>
-            <th class="hidden-xs hidden-sm">User PC name</th>
-            <th class="hidden-xs">Activation date</th>
-            <th class="hidden-xs">Expiration date</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($bids as $bid): ?>
-            <tr<?= $this->Time->isPast($bid['expiration_date']) ? ' class="danger"' : '' ?>>
-                <td><?= $bid['id'] ?></td>
-                <td><?= $bid['product']['name'] ?></td>
-                <td><?= $bid['username'] ?></td>
-                <td class="hidden-xs hidden-sm  "><?= $bid['pc']['name'] ?></td>
-                <td class="hidden-xs"><?= $bid['activation_date'] ?></td>
-                <td class="hidden-xs"><?= $bid['expiration_date'] ?></td>
-                <td>
-                    <div class="btn-group btn-group-xs btn-group-xs-small" role="group">
-                        <button type="button" class="btn btn-warning"
-                                onclick="showEditActiveBidDialog(<?= $bid['id'] ?>);"><span
-                                class="fa fa-pencil-square-o"></span></button>
-                        <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-lock']), ['controller' => 'bids', 'action' => 'block', $bid['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
-                    </div>
-                </td>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Product<span class="hidden-xs"> name</span></th>
+                <th>User name</th>
+                <th class="hidden-xs hidden-sm">User PC name</th>
+                <th class="hidden-xs">Activation date</th>
+                <th class="hidden-xs">Expiration date</th>
+                <th>Actions</th>
             </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+            <?php foreach ($bids as $bid): ?>
+                <tr<?= $this->Time->isPast($bid['expiration_date']) ? ' class="danger"' : '' ?>>
+                    <td><?= $bid['id'] ?></td>
+                    <td><?= $bid['product']['name'] ?></td>
+                    <td><?= $bid['username'] ?></td>
+                    <td class="hidden-xs hidden-sm  "><?= $bid['pc']['name'] ?></td>
+                    <td class="hidden-xs"><?= $bid['activation_date'] ?></td>
+                    <td class="hidden-xs"><?= $bid['expiration_date'] ?></td>
+                    <td>
+                        <div class="btn-group btn-group-xs btn-group-xs-small" role="group">
+                            <button type="button" class="btn btn-warning"
+                                    onclick="showEditActiveBidDialog(<?= $bid['id'] ?>);"><span
+                                    class="fa fa-pencil-square-o"></span></button>
+                            <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-lock']), ['controller' => 'bids', 'action' => 'block', $bid['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
     <div id="edit-active-bid" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
