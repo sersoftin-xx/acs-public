@@ -2,54 +2,16 @@
  * Created by Сергей on 26.12.2015.
  */
 
-// function cb(start, end) {
-//     $('#search-form-activation-date').find('span').html(start.format('L') + ' - ' + end.format('L'));
-//     $('#search-form-activation-date-from').val(start.format());
-//     $('#search-form-activation-date-to').val(end.format());
-// }
-//
-// cb(moment().startOf('day'), moment().endOf('day'));
-//
-// $('#search-form-activation-date').daterangepicker({
-//     autoApply:true,
-//     opens: 'center',
-//     ranges: {
-//         'Today': [moment(), moment()],
-//         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-//         'Last 7 Days': [moment().subtract(7, 'days'), moment()],
-//         'Last 30 Days': [moment().subtract(29, 'days'), moment().add(1, 'days')],
-//         'This Month': [moment().startOf('month'), moment().endOf('month')],
-//         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-//     }
-// }, cb);
-
-var date_from = $('#search-form-activation-date-from');
-var date_to = $('#search-form-activation-date-to');
-date_from.datetimepicker({
-    useCurrent: false,
-    format: 'DD.MM.YYYY',
-    defaultDate: moment()
-});
-date_to.datetimepicker({
-    useCurrent: false,
-    format: 'DD.MM.YYYY',
-    defaultDate: moment()
-});
-
-date_from.on("dp.change", function (e) {
-    date_to.data("DateTimePicker").minDate(e.date);
-});
-date_to.on("dp.change", function (e) {
-    date_from.data("DateTimePicker").maxDate(e.date);
-});
-
 $('#edit-active-bid-product-id-input').selectpicker();
-$('#search-form-product_id').selectpicker();
+$('#search-form-product-id').selectpicker();
 $('#search-form-user-id').selectpicker();
 $('#search-form-pc-id').selectpicker();
 $('#edit-active-bid-expiration-date-input-group').datetimepicker({
     defaultDate: moment().add(1, 'days'),
-    format: 'DD.MM.YYYY HH:mm'
+    format: 'DD.MM.YYYY HH:mm',
+    ignoreReadonly: true,
+    focusOnShow: false,
+    showClose: true
 });
 
 function showEditActiveBidDialog(active_bid_id) {

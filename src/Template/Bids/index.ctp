@@ -1,21 +1,32 @@
 <?php $this->assign('username', $username) ?>
 <?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
-<?= $this->Html->css('awesome-bootstrap-checkbox.css', ['block' => true]) ?>
 <?= $this->Html->css('bootstrap-addon.css', ['block' => true]) ?>
 <?= $this->Html->css('bootstrap-datetimepicker.min.css', ['block' => true]) ?>
-<?= $this->Html->css('daterangepicker.css', ['block' => true]) ?>
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading">Search bids</div>
-            <div class="panel-body">
+            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
+                bids
+            </div>
+            <div class="panel-body panel-collapse collapse" id="search-form">
                 <form class="form-horizontal" method="post">
+                    <div class="col-sm-4 visible-xs">
+                        <div class="form-group">
+                            <div class="col-xs-3 col-sm-4 col-md-3 search-form-label text-right">
+                                <label for="search-form-bid-id" class="control-label">Bid id:</label>
+                            </div>
+                            <div class="col-xs-9 col-sm-8 col-md-9">
+                                <input id="search-form-bid-id" type="number" class="form-control"
+                                       name="search_form_bid_id">
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="col-xs-3 col-sm-4 col-md-3 search-form-label text-right">
-                                <label for="search-form-product_id" class="control-label">Product:</label>
+                                <label for="search-form-product-id" class="control-label">Product:</label>
                             </div>
                             <div class="col-xs-9 col-sm-8 col-md-9">
-                                <select class="form-control" name="search_form_product_id" id="search-form-product_id"
+                                <select class="form-control" name="search_form_product_id" id="search-form-product-id"
                                         data-live-search="true">
                                     <option value="0">All</option>
                                     <?php foreach ($products as $product): ?>
@@ -96,12 +107,12 @@
                           class="form-horizontal bootstrap-form-with-validation" method="post"
                           action="">
                         <div class="form-group">
-                            <div class="col-sm-5 text-right-not-xs">
+                            <div class="col-xs-12 col-sm-5 text-right-not-xs">
                                 <label class="control-label" for="edit-active-bid-product-id-input">Product
                                     name:</label>
                             </div>
-                            <div class="col-sm-5">
-                                <select name="active_bid_product_id" id="edit-active-bid-product-id-input"
+                            <div class="col-xs-12 col-sm-5">
+                                <select class="form-control" name="active_bid_product_id" id="edit-active-bid-product-id-input"
                                         data-live-search="true">
                                     <?php foreach ($products as $product): ?>
                                         <option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
@@ -110,20 +121,22 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-5 text-right-not-xs">
+                            <div class="col-xs-12 col-sm-5 text-right-not-xs">
                                 <label class="control-label" for="edit-active-bid-expiration-date-input">Expiration
                                     date:</label>
                             </div>
-                            <div class="col-sm-5">
-                                <div class='input-group date' id='edit-active-bid-expiration-date-input-group'>
+                            <div class="col-xs-12 col-sm-5">
+                                <div class="input-group date" id="edit-active-bid-expiration-date-input-group">
                                     <input id="edit-active-bid-expiration-date-input"
-                                           name="active_bid_expiration_date" type='text' class="form-control"/>
+                                           name="active_bid_expiration_date" type='text' class="form-control"
+                                           readonly="readonly">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                                 </div>
                             </div>
                         </div>
+
                         <input type="hidden"
                                value="<?= $this->Url->build(['controller' => 'bids', 'action' => 'save']); ?>"
                                id="edit-active-bid-form-action">
