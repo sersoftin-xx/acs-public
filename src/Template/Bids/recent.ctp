@@ -52,9 +52,9 @@
                                     date:</label>
                             </div>
                             <div class="col-sm-5">
-                                <div class='input-group date' id='accept-bid-expiration-date-input-group'>
+                                <div class="input-group date" id="accept-bid-expiration-date-input-group">
                                     <input id="accept-bid-expiration-date-input" name="bid_expiration_date"
-                                           type='text' class="form-control"/>
+                                           type="text" class="form-control" readonly="readonly">
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>

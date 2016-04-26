@@ -6,7 +6,11 @@
 $('#accept-bid-user-id-input').selectpicker();
 $('#accept-bid-expiration-date-input-group').datetimepicker({
     defaultDate: moment().add(1,'days'),
-    format: 'DD.MM.YYYY HH:mm'
+    format: 'DD.MM.YYYY HH:mm',
+    ignoreReadonly: true,
+    focusOnShow: false,
+    showClose: true,
+    minDate: moment()
 });
 function showAcceptBidDialog(bid_id) {
     if (isFinite(bid_id)) {

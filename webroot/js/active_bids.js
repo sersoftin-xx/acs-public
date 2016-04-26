@@ -11,7 +11,8 @@ $('#edit-active-bid-expiration-date-input-group').datetimepicker({
     format: 'DD.MM.YYYY HH:mm',
     ignoreReadonly: true,
     focusOnShow: false,
-    showClose: true
+    showClose: true,
+    minDate: moment()
 });
 
 function showEditActiveBidDialog(active_bid_id) {

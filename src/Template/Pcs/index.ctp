@@ -53,7 +53,7 @@
                             <label class="control-label" for="edit-pc-user-id-input">User name:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select name="pc_user_id" id="edit-pc-user-id-input" data-live-search="true">
+                            <select class="form-control" name="pc_user_id" id="edit-pc-user-id-input" data-live-search="true">
                                 <?php foreach ($users as $user): ?>
                                     <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
                                 <?php endforeach; ?>
