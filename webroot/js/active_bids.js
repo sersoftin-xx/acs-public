@@ -24,18 +24,32 @@ $('#search-form').keydown(function (event) {
 function searchBids() {
     var bid_id = $('#search-form-bid-id').val();
     if (+bid_id > 0) {
-        scrollToBid(bid_id);
+        var bid = $('#bid_' + bid_id);
+        if (bid.length) {
+            scrollToBid(bid);
+        }
+        else {
+            alert('Bid #' + bid_id + ' not found!');
+        }
     }
     else {
         search_form.submit();
     }
 }
 
-function scrollToBid(bid_id) {
-    var bid = $('#bid_' + bid_id);
+function scrollToBid(bid) {
+    var notActive = bid.hasClass('danger');
+    if (notActive)
+        bid.removeClass('danger');
     $('body').animate({
         scrollTop: bid.offset().top
     }, 100);
+    bid.addClass('success');
+    setTimeout(function() {
+        bid.removeClass('success');
+        if (notActive)
+            bid.addClass('danger');
+    }, 1000);
 }
 
 function showEditActiveBidDialog(active_bid_id) {

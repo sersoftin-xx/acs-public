@@ -16,7 +16,7 @@
                                 <label for="search-form-bid-id" class="control-label">Bid id:</label>
                             </div>
                             <div class="col-xs-9 col-sm-7 col-md-8">
-                                <input id="search-form-bid-id" type="number" class="form-control">
+                                <input min="0" id="search-form-bid-id" type="number" class="form-control">
                             </div>
                         </div>
                     </div>

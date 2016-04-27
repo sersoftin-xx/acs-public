@@ -73,7 +73,7 @@ class BidsController extends AppController
             $bid = $this->Bids->patchEntity($bid, [
                 'is_active' => true,
                 'activation_date' => Time::now(),
-                'expiration_date' => Time::parse($this->request->data('bid_expiration_date'))
+                'expiration_date' => Time::parse($this->request->data('bid_expiration_date')),
             ]);
             if ($this->Bids->save($bid)) {
                 $this->Flash->success(__('The bid has been accepted.'));
@@ -211,6 +211,7 @@ class BidsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $bid = $this->Bids->patchEntity($bid, [
                 'product_id' => $this->request->data('active_bid_product_id'),
+                // TODO: исправить баг с датой
                 'expiration_date' => Time::parse($this->request->data('active_bid_expiration_date'))
             ]);
             if ($this->Bids->save($bid)) {
