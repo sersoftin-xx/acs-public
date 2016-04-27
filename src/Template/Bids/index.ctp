@@ -53,10 +53,11 @@
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 pull-right">
-                        <a href="#" class="btn btn-success col-xs-12 col-sm-offset-2 col-sm-10" onclick="searchBids();">
+                        <button type="button" class="btn btn-success col-xs-12 col-sm-offset-2 col-sm-10"
+                                onclick="searchBids();">
                             <span class="glyphicon glyphicon-search hidden-md hidden-xs"></span>
                             Search bid
-                        </a>
+                        </button>
                     </div>
                 </form>
             </div>
