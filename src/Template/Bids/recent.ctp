@@ -47,11 +47,11 @@
                     <form id="accept-bid-form" name="accept_bid" class="form-horizontal bootstrap-form-with-validation"
                           method="post" action="">
                         <div class="form-group">
-                            <div class="col-sm-5 text-right-not-xs">
+                            <div class="col-xs-12 col-sm-4 text-right-not-xs">
                                 <label class="control-label" for="accept-bid-expiration-date-input">Expiration
                                     date:</label>
                             </div>
-                            <div class="col-sm-5">
+                            <div class="col-xs-12 col-sm-6">
                                 <div class="input-group date" id="accept-bid-expiration-date-input-group">
                                     <input id="accept-bid-expiration-date-input" name="bid_expiration_date"
                                            type="text" class="form-control" readonly="readonly">
@@ -60,9 +60,9 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-xs-1">
-                                <button type="button" class="btn btn-default" onclick="setMaxDate()">
-                                    <span class="glyphicon glyphicon-time"></span>
+                            <div id="max-date" class="col-xs-4 col-sm-2 pull-right">
+                                <button type="button" class="btn btn-default pull-right" onclick="setMaxDate()">
+                                    <span class="glyphicon glyphicon-time"></span> Max date
                                 </button>
                             </div>
                         </div>

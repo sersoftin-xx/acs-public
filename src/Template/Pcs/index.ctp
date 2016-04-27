@@ -7,7 +7,6 @@
             <th>#</th>
             <th class="hidden-xs">User name</th>
             <th>PC name</th>
-<!--            <th class="hidden-xs hidden-sm hidden-md">PC unique key</th>-->
             <th class="hidden-xs">Products count</th>
             <th class="hidden-xs">Addition date</th>
             <th>Actions</th>
@@ -19,7 +18,6 @@
                 <td><?= $pc['id'] ?></td>
                 <td class="hidden-xs"><?= $this->Html->link($pc['user_id'] === 0 ? 'UNKNOWN USER' : $pc['user']['name'],['controller' => 'pcs', 'action' => 'user', $pc['user_id']] ) ?></td>
                 <td><?= $pc['name'] ?></td>
-<!--                <td class="hidden-xs hidden-sm hidden-md">--><?//= $pc['unique_key'] ?><!--</td>-->
                 <td class="hidden-xs"><?= $pc['products_count'] ?></td>
                 <td class="hidden-xs"><?= $pc['addition_date'] ?></td>
                 <td>

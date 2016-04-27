@@ -94,6 +94,7 @@ class BidsController extends AppController
         $this->set('recent_bids', $this->Bids->find('recent', [
             'contain' => ['Products', 'Pcs']
         ]));
+        $this->set('isMobile', $this->RequestHandler->isMobile());
         $this->set('_serialize', ['recent_bids']);
     }
 
@@ -173,7 +174,7 @@ class BidsController extends AppController
         $this->set('pcs', $pcs);
         $this->set('bids', $bids);
         $this->set('products', $products);
-        $this->render('index');
+        $this->set('isMobile', $this->RequestHandler->isMobile());
     }
 
     /**
