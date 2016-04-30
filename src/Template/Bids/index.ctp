@@ -65,9 +65,9 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Product<span class="hidden-xs"> name</span></th>
-                <th>User name</th>
-                <th class="hidden-xs hidden-sm">User PC name</th>
+                <th>Product</th>
+                <th>User</th>
+                <th class="hidden-xs hidden-sm">User PC</th>
                 <th class="hidden-xs">Activation date</th>
                 <th class="hidden-xs">Expiration date</th>
                 <th>Actions</th>

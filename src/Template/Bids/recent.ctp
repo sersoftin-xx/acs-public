@@ -51,7 +51,7 @@
                                 <label class="control-label" for="accept-bid-expiration-date-input">Expiration
                                     date:</label>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
+                            <div class="col-xs-12 col-sm-5">
                                 <div class="input-group date" id="accept-bid-expiration-date-input-group">
                                     <input id="accept-bid-expiration-date-input" name="bid_expiration_date"
                                            type="text" class="form-control" readonly="readonly">
@@ -60,8 +60,8 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="max-date" class="col-xs-4 col-sm-2 pull-right">
-                                <button type="button" class="btn btn-default pull-right" onclick="setMaxDate()">
+                            <div id="max-date" class="col-xs-4 col-sm-2">
+                                <button type="button" class="btn btn-default" onclick="setMaxDate()">
                                     <span class="glyphicon glyphicon-time"></span> Max date
                                 </button>
                             </div>
