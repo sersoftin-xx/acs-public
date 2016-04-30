@@ -1,5 +1,53 @@
 <?php $this->assign('username', $username) ?>
+<?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
     <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
+                users
+            </div>
+            <div class="panel-body panel-collapse collapse" id="search-form">
+                <form id="search-form" name="search_form" class="form-horizontal" method="post">
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <div class="col-xs-4 col-sm-4 col-md-5 search-form-label text-right">
+                                <label for="search-form-product-id" class="control-label">Name:</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-7">
+                                <select class="form-control" name="search_form_user_name" id="search-form-user-name"
+                                        data-live-search="true">
+                                    <option value="0">All</option>
+                                    <?php foreach ($users as $user): ?>
+                                        <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <div class="col-xs-4 col-sm-4 col-md-4 search-form-label text-right">
+                                <label class="control-label">Contact:</label>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <select class="form-control" name="search_form_user_contact" id="search-form-user-contact"
+                                        data-live-search="true">
+                                    <option value="0">All</option>
+                                    <?php foreach ($users as $user): ?>
+                                        <option value="<?= $user['id'] ?>"><?= $user['contact'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 pull-right">
+                        <button type="submit" class="btn btn-success col-xs-12 col-sm-offset-2 col-sm-10">
+                            <span class="glyphicon glyphicon-search hidden-md hidden-xs"></span>
+                            Search user
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <button id="add-button" class="btn btn-success pull-right" data-toggle="modal"
                 data-target="#add-user"><span class="fa fa-plus"></span> Add new user
         </button>
@@ -144,4 +192,5 @@
             </div>
         </div>
     </div>
+<?= $this->Html->script('bootstrap-select.min.js', ['block' => true]); ?>
 <?= $this->Html->script('users.js', ['block' => true]); ?>

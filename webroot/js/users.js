@@ -1,6 +1,10 @@
 /**
  * Created by Sergo on 17.12.2015.
  */
+
+$('#search-form-user-name').selectpicker();
+$('#search-form-user-contact').selectpicker();
+
 function showEditUserDialog(user_id) {
     if (isFinite(user_id)) {
         $.get(location.protocol + '//' + window.location.hostname + '/users/get_info/' + user_id + '.json').success(function (data, textStatus, jqXHR) {

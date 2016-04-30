@@ -1,5 +1,4 @@
 <?php $this->assign('username', $username) ?>
-<?php //$this->assign('isMobile', $isMobile) ?>
 <?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
 <?= $this->Html->css('bootstrap-addon.css', ['block' => true]) ?>
 <?= $this->Html->css('bootstrap-datetimepicker.min.css', ['block' => true]) ?>
