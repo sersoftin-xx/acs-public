@@ -2,6 +2,26 @@
 <?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
 <?php $this->assign('isMobile', $isMobile) ?>
 <div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
+            PCs
+        </div>
+        <div class="panel-body panel-collapse collapse" id="search-form">
+            <form id="search-form" name="search_form" class="form-horizontal" method="post">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 text-right-not-xs">
+                            <label for="search-form-query-input" class="control-label">Search by pc name or
+                                user name:</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                            <input class="form-control" type="text" id="search-form-query-input">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -15,10 +35,10 @@
         </thead>
         <tbody>
         <?php foreach ($pcs as $pc): ?>
-            <tr<?= $pc['user_id'] === 0 ? ' class="success"' : '' ?>>
+            <tr<?= $pc['user_id'] === 0 ? ' class="danger"' : '' ?>>
                 <td><?= $pc['id'] ?></td>
                 <td><?= $pc['name'] ?></td>
-                <td class="hidden-xs"><?= $this->Html->link($pc['user_id'] === 0 ? 'UNKNOWN USER' : $pc['user']['name'], ['controller' => 'pcs', 'action' => 'user', $pc['user_id']]) ?></td>
+                <td class="hidden-xs"><?= $pc['user']['name'] ?></td>
                 <td class="hidden-xs"><?= $pc['products_count'] ?></td>
                 <td class="hidden-xs"><?= $pc['addition_date'] ?></td>
                 <td>

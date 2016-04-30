@@ -157,6 +157,5 @@
 
 <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js', ['block' => true]); ?>
 <?= $this->Html->script('bootstrap-datetimepicker.min.js', ['block' => true]); ?>
-<?= $this->Html->script('daterangepicker.js', ['block' => true]); ?>
 <?= $this->Html->script('bootstrap-select.min.js', ['block' => true]); ?>
 <?= $this->Html->script('active_bids.js', ['block' => true]); ?>
