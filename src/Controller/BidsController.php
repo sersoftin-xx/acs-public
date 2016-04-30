@@ -174,7 +174,6 @@ class BidsController extends AppController
         $this->set('pcs', $pcs);
         $this->set('bids', $bids);
         $this->set('products', $products);
-        $this->set('isMobile', $this->RequestHandler->isMobile());
     }
 
     /**
