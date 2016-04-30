@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+//use App\Controller\AppController;
 use Cake\Utility\Text;
 
 /**
@@ -87,6 +87,7 @@ class PcsController extends AppController
             ]);
         $this->set('users', $this->Users->find('all')->select(['id', 'name']));
         $this->set('pcs', $pcs);
+        $this->set('isMobile', $this->RequestHandler->isMobile());
     }
 
     /**
@@ -110,7 +111,7 @@ class PcsController extends AppController
             } else {
                 $this->Flash->error(__('The pc could not be saved. Please, try again.'));
             }
-            return $this->redirect(['action' => 'index']);
+            $this->redirect(['action' => 'index']);
         }
     }
 

@@ -1,12 +1,13 @@
 <?php $this->assign('username', $username) ?>
 <?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
+<?php $this->assign('isMobile', $isMobile) ?>
 <div class="container">
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>#</th>
-            <th class="hidden-xs">User name</th>
-            <th>PC name</th>
+            <th>PC</th>
+            <th class="hidden-xs">User</th>
             <th class="hidden-xs">Products count</th>
             <th class="hidden-xs">Addition date</th>
             <th>Actions</th>
@@ -16,8 +17,8 @@
         <?php foreach ($pcs as $pc): ?>
             <tr<?= $pc['user_id'] === 0 ? ' class="success"' : '' ?>>
                 <td><?= $pc['id'] ?></td>
-                <td class="hidden-xs"><?= $this->Html->link($pc['user_id'] === 0 ? 'UNKNOWN USER' : $pc['user']['name'],['controller' => 'pcs', 'action' => 'user', $pc['user_id']] ) ?></td>
                 <td><?= $pc['name'] ?></td>
+                <td class="hidden-xs"><?= $this->Html->link($pc['user_id'] === 0 ? 'UNKNOWN USER' : $pc['user']['name'], ['controller' => 'pcs', 'action' => 'user', $pc['user_id']]) ?></td>
                 <td class="hidden-xs"><?= $pc['products_count'] ?></td>
                 <td class="hidden-xs"><?= $pc['addition_date'] ?></td>
                 <td>
@@ -26,7 +27,9 @@
                                 onclick="showEditPcDialog(<?= $pc['id'] ?>);"><span
                                 class="fa fa-pencil-square-o"></span></button>
                         <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-lock']), ['controller' => 'pcs', 'action' => 'block', $pc['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
-                        <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'pcs', 'action' => 'delete', $pc['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                        <?php if (!$isMobile): ?>
+                            <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'pcs', 'action' => 'delete', $pc['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                        <?php endif; ?>
                     </div>
                 </td>
             </tr>
@@ -51,7 +54,8 @@
                             <label class="control-label" for="edit-pc-user-id-input">User name:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select class="form-control" name="pc_user_id" id="edit-pc-user-id-input" data-live-search="true">
+                            <select class="form-control" name="pc_user_id" id="edit-pc-user-id-input"
+                                    data-live-search="true">
                                 <?php foreach ($users as $user): ?>
                                     <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
                                 <?php endforeach; ?>
