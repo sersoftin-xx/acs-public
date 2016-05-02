@@ -16,6 +16,10 @@
 
 @media (max-width: 767px) {
 
+    .panel-body {
+        padding: 15px 0 0 0;
+    }
+
     #max-date {
         margin-top: 15px;
     }
@@ -58,10 +62,6 @@
         padding: 15px 15px 0 0;
     }
 
-    .search-button {
-        margin-right: 15px;
-    }
-
     .text-left-sm {
         text-align: left;
     }
@@ -86,10 +86,6 @@
 
     .panel-body {
         padding: 15px 15px 0 0;
-    }
-
-    .search-button {
-        margin-right: 15px;
     }
 
     .text-left-md {
