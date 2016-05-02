@@ -3,6 +3,26 @@
 <?= $this->Html->css('bootstrap-addon.css', ['block' => true]) ?>
 <?= $this->Html->css('bootstrap-datetimepicker.min.css', ['block' => true]) ?>
     <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
+                active bids
+            </div>
+            <div class="panel-body panel-collapse collapse" id="search-form">
+                <form id="search-form" name="search_form" class="form-horizontal" method="post">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-6 col-md-4 text-right-not-xs">
+                                <label for="search-form-query-input" class="control-label">Enter bid id, pc name or product
+                                    name:</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-8">
+                                <input id="search-form-query-input" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <table class="table table-bordered table-hover">
             <thead>
             <tr>

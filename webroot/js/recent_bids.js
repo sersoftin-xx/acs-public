@@ -5,13 +5,28 @@
 
 $('#accept-bid-user-id-input').selectpicker();
 $('#accept-bid-expiration-date-input-group').datetimepicker({
-    defaultDate: moment().add(1,'days'),
+    defaultDate: moment().add(1, 'days'),
     format: 'DD.MM.YYYY HH:mm',
     ignoreReadonly: true,
     focusOnShow: false,
     showClose: true,
     minDate: moment()
 });
+
+$("#search-form-query-input").keyup(function () {
+    var filter = $(this).val();
+    $("tbody tr").each(function () {
+        var table_row = $(this);
+        if ((table_row.find('td').eq(0).html().search(new RegExp(filter, "i")) < 0)
+            && (table_row.find('td').eq(1).html().search(new RegExp(filter, "i")) < 0)
+            && (table_row.find('td').eq(2).html().search(new RegExp(filter, "i")) < 0)) {
+            table_row.fadeOut();
+        } else {
+            table_row.show();
+        }
+    });
+});
+
 function showAcceptBidDialog(bid_id) {
     if (isFinite(bid_id)) {
         $('#accept-bid-caption').text('#' + bid_id);
@@ -23,7 +38,6 @@ function showAcceptBidDialog(bid_id) {
     }
 }
 
-function setMaxDate()
-{
+function setMaxDate() {
     $('#accept-bid-expiration-date-input').val(moment.unix(2147483647).format('DD.MM.YYYY hh:mm'));
 }
