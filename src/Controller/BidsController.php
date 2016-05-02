@@ -93,7 +93,7 @@ class BidsController extends AppController
     {
         $this->set('recent_bids', $this->Bids->find('recent', [
             'contain' => ['Products', 'Pcs']
-        ]));
+        ])->orderDesc('Bids.id'));
         $this->set('isMobile', $this->RequestHandler->isMobile());
         $this->set('_serialize', ['recent_bids']);
     }
@@ -128,46 +128,46 @@ class BidsController extends AppController
             ]),
             'activation_date',
             'expiration_date'
-        ]);
-        if (isset($this->request->data['search_form_pc_id'])
-            && !empty($this->request->data['search_form_pc_id'])
-            && $this->request->data['search_form_pc_id'] != '0'
-        ) {
-            $bids->where([
-                'pc_id' => $this->request->data['search_form_pc_id']
-            ]);
-        }
-        if (isset($this->request->data['search_form_product_id'])
-            && !empty($this->request->data['search_form_product_id'])
-            && $this->request->data['search_form_product_id'] != '0'
-        ) {
-            $bids->where([
-                'product_id' => $this->request->data['search_form_product_id']
-            ]);
-        }
-        if (isset($this->request->data['search_form_user_id'])
-            && !empty($this->request->data['search_form_user_id'])
-            && $this->request->data['search_form_user_id'] != '0'
-        ) {
-            $bids->where([
-                'Pcs.user_id' => $this->request->data['search_form_user_id']
-            ]);
-        }
-
-        if (isset($this->request->data['search_form_use_activation_date'])
-            && !empty($this->request->data['search_form_use_activation_date']
-                && $this->request->data['search_form_use_activation_date'] === 'on')
-        ) {
-
-            $from = new Date($this->request->data['search_form_activation_date_from']);
-            $to = new Date($this->request->data['search_form_activation_date_to']);
-            $bids->where(
-                function ($exp) use ($from, $to) {
-                    return $exp->between('activation_date', $from, $to);
-                }
-            );
-            
-        }
+        ])->orderDesc('Bids.id');
+//        if (isset($this->request->data['search_form_pc_id'])
+//            && !empty($this->request->data['search_form_pc_id'])
+//            && $this->request->data['search_form_pc_id'] != '0'
+//        ) {
+//            $bids->where([
+//                'pc_id' => $this->request->data['search_form_pc_id']
+//            ]);
+//        }
+//        if (isset($this->request->data['search_form_product_id'])
+//            && !empty($this->request->data['search_form_product_id'])
+//            && $this->request->data['search_form_product_id'] != '0'
+//        ) {
+//            $bids->where([
+//                'product_id' => $this->request->data['search_form_product_id']
+//            ]);
+//        }
+//        if (isset($this->request->data['search_form_user_id'])
+//            && !empty($this->request->data['search_form_user_id'])
+//            && $this->request->data['search_form_user_id'] != '0'
+//        ) {
+//            $bids->where([
+//                'Pcs.user_id' => $this->request->data['search_form_user_id']
+//            ]);
+//        }
+//
+//        if (isset($this->request->data['search_form_use_activation_date'])
+//            && !empty($this->request->data['search_form_use_activation_date']
+//                && $this->request->data['search_form_use_activation_date'] === 'on')
+//        ) {
+//
+//            $from = new Date($this->request->data['search_form_activation_date_from']);
+//            $to = new Date($this->request->data['search_form_activation_date_to']);
+//            $bids->where(
+//                function ($exp) use ($from, $to) {
+//                    return $exp->between('activation_date', $from, $to);
+//                }
+//            );
+//
+//        }
         $pcs = $this->Pcs->find('all');
         $users = $this->Users->find('all');
         $this->set('users', $users);

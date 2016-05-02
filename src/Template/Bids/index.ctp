@@ -9,55 +9,14 @@
             </div>
             <div class="panel-body panel-collapse collapse" id="search-form">
                 <form id="search-form" name="search_form" class="form-horizontal" method="post">
-                    <div class="col-sm-4 col-md-3">
+                    <div class="col-xs-12">
                         <div class="form-group">
-                            <div class="col-xs-3 col-sm-5 col-md-4 search-form-label text-right">
-                                <label for="search-form-bid-id" class="control-label">Bid id:</label>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-right-not-xs">
+                                <label for="search-form-query-input" class="control-label">Bid id, product, user, pc name:</label>
                             </div>
-                            <div class="col-xs-9 col-sm-7 col-md-8">
-                                <input id="search-form-bid-id" type="text" class="form-control">
+                            <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+                                <input id="search-form-query-input" type="text" class="form-control">
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-3">
-                        <div class="form-group">
-                            <div class="col-xs-3 col-sm-4 col-md-4 search-form-label text-right">
-                                <label for="search-form-product-id" class="control-label">Product:</label>
-                            </div>
-                            <div class="col-xs-9 col-sm-8 col-md-8">
-                                <select class="form-control" name="search_form_product_id" id="search-form-product-id"
-                                        data-live-search="true">
-                                    <option value="0">All</option>
-                                    <?php foreach ($products as $product): ?>
-                                        <option value="<?= $product['id'] ?>"><?= $product['name'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <div class="form-group">
-                            <div class="col-xs-3 col-sm-4 col-md-2 search-form-label text-right">
-                                <label class="control-label">User:</label>
-                            </div>
-                            <div class="col-xs-9 col-sm-8 col-md-10">
-                                <select class="form-control" name="search_form_user_id" id="search-form-user-id"
-                                        data-live-search="true">
-                                    <option value="0">All</option>
-                                    <?php foreach ($users as $user): ?>
-                                        <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2 pull-right search-button">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-success col-xs-12 col-sm-offset-1 col-sm-10"
-                                    onclick="searchBids();">
-                                <span class="glyphicon glyphicon-search hidden-md hidden-xs"></span>
-                                Search bid
-                            </button>
                         </div>
                     </div>
                 </form>
