@@ -43,6 +43,7 @@ class ProductsController extends AppController
     {
         $this->set('products', $this->Products->find('all'));
         $this->set('_serialize', ['products']);
+        $this->set('username', $this->Auth->user('login'));
     }
 
     /**

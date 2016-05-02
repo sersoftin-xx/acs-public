@@ -46,7 +46,29 @@ class AppController extends Controller
 
         Time::setToStringFormat('dd.MM.yyyy HH:mm:ss');
         Time::setJsonEncodeFormat('dd.MM.yyyy HH:mm');
-        $this->set('username', 'Sergo');
+
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'userModel' => 'Admins',
+                    'Form' => [
+                        'fields' => ['username' => 'login', 'password' => 'password']
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Admins',
+                'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'controller' => 'Bids',
+                'action' => 'recent'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Admins',
+                'action' => 'login',
+            ]
+        ]);
     }
 
     /**

@@ -12,34 +12,6 @@ use Cake\Utility\Text;
  */
 class PcsController extends AppController
 {
-
-    public function user($id = null)
-    {
-        $this->loadModel('Users');
-        $this->loadModel('Bids');
-
-        $bids = $this->Bids->find('all');
-        $pcs = $this->Pcs->find('all', ['contain' => ['Users']])
-            ->select([
-                'id',
-                'user_id',
-                'Users.name',
-                'name',
-                'unique_key',
-                'addition_date',
-                'comment',
-                'products_count' => $bids->select($bids->func()->count('id'))->where([
-                    'pc_id' => $bids->newExpr('Pcs__id'),
-                    'is_active' => true
-                ])
-            ])->where([
-                'user_id' => $id
-            ]);
-        $this->set('users', $this->Users->find('all')->select(['id', 'name']));
-        $this->set('pcs', $pcs);
-        $this->render('index');
-    }
-
     public function block($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -87,6 +59,7 @@ class PcsController extends AppController
         $this->set('users', $this->Users->find('all')->select(['id', 'name']));
         $this->set('pcs', $pcs);
         $this->set('isMobile', $this->RequestHandler->isMobile());
+        $this->set('username', $this->Auth->user('login'));
     }
 
     /**

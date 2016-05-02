@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\I18n\Date;
 
@@ -174,6 +175,7 @@ class BidsController extends AppController
         $this->set('pcs', $pcs);
         $this->set('bids', $bids);
         $this->set('products', $products);
+        $this->set('username', $this->Auth->user('login'));
     }
 
     /**

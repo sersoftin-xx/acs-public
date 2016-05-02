@@ -73,6 +73,7 @@ class UsersController extends AppController
         $this->set('users', $users);
         $this->set('_serialize', ['users']);
         $this->set('isMobile', $this->RequestHandler->isMobile());
+        $this->set('username', $this->Auth->user('login'));
     }
 
     /**
