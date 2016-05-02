@@ -69,3 +69,8 @@ function showEditActiveBidDialog(active_bid_id) {
         console.log('active_bid_id is not a number!');
     }
 }
+
+function setMaxDate()
+{
+    $('#edit-active-bid-expiration-date-input').val(moment.unix(2147483647).format('DD.MM.YYYY hh:mm'));
+}

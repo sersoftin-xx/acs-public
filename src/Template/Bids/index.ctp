@@ -107,7 +107,7 @@
                           class="form-horizontal bootstrap-form-with-validation" method="post"
                           action="">
                         <div class="form-group">
-                            <div class="col-xs-12 col-sm-5 text-right-not-xs">
+                            <div class="col-xs-12 col-sm-4 text-right-not-xs">
                                 <label class="control-label" for="edit-active-bid-product-id-input">Product
                                     name:</label>
                             </div>
@@ -122,7 +122,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-xs-12 col-sm-5 text-right-not-xs">
+                            <div class="col-xs-12 col-sm-4 text-right-not-xs">
                                 <label class="control-label" for="edit-active-bid-expiration-date-input">Expiration
                                     date:</label>
                             </div>
@@ -135,6 +135,11 @@
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                                 </div>
+                            </div>
+                            <div id="max-date" class="col-xs-2 col-sm-2">
+                                <button type="button" class="btn btn-default" onclick="setMaxDate()">
+                                    <span class="glyphicon glyphicon-time"></span> Max date
+                                </button>
                             </div>
                         </div>
 
