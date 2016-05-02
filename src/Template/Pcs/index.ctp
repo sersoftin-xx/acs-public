@@ -63,7 +63,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit PC</h4>
+                <h4 class="modal-title">Edit PC <span id="edit-pc-caption"></span></h4>
             </div>
             <div class="modal-body">
                 <form id="edit-pc-form" name="edit_pc" class="form-horizontal bootstrap-form-with-validation"

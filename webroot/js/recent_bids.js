@@ -14,6 +14,7 @@ $('#accept-bid-expiration-date-input-group').datetimepicker({
 });
 function showAcceptBidDialog(bid_id) {
     if (isFinite(bid_id)) {
+        $('#accept-bid-caption').text('#' + bid_id);
         $('#accept-bid-form').attr('action', $('#accept-bid-form-action').val() + '/' + bid_id);
         $('#accept-bid').modal('show');
     }

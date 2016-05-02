@@ -41,7 +41,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Accept bid</h4>
+                    <h4 class="modal-title">Accept bid <span id="accept-bid-caption"></span></h4>
                 </div>
                 <div class="modal-body">
                     <form id="accept-bid-form" name="accept_bid" class="form-horizontal bootstrap-form-with-validation"

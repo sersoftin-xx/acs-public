@@ -21,6 +21,7 @@ function showEditProductDialog(product_id) {
     if (isFinite(product_id)) {
         $.get(location.protocol + '//' + window.location.hostname + '/products/get_info/' + product_id + '.json').success(function (data, textStatus, jqXHR) {
             var product = data['product'];
+            $('#edit-product-caption').text(product['name'] + ' (#' + product['id'] + ')');
             $('#edit-product-form').attr('action', $('#edit-product-form-action').val() + '/' + product['id']);
             $('#edit-product-name-input').val(product['name']);
             $('#edit-product-hidden-checkbox').prop('checked', product['hidden']);
