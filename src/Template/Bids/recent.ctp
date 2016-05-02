@@ -5,7 +5,7 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
-                active bids
+                recent bids
             </div>
             <div class="panel-body panel-collapse collapse" id="search-form">
                 <form id="search-form" name="search_form" class="form-horizontal" method="post">
