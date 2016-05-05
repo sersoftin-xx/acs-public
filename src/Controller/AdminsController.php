@@ -18,7 +18,6 @@ class AdminsController extends AppController
                 $this->Auth->setUser($user);
                 $this->redirect($this->Auth->redirectUrl());
             }
-            debug($this->request->data());
             $this->set('wrong_password', true);
         }
         $this->viewBuilder()->layout('login');

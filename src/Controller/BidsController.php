@@ -96,7 +96,7 @@ class BidsController extends AppController
             'contain' => ['Products', 'Pcs']
         ])->orderDesc('Bids.id'));
         $this->set('isMobile', $this->RequestHandler->isMobile());
-        $this->set('_serialize', ['recent_bids']);
+        $this->set('username', $this->Auth->user('login'));
     }
 
     /**
