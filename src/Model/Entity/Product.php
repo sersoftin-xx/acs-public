@@ -34,4 +34,9 @@ class Product extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    protected function _getHidden($hidden)
+    {
+        return $hidden ? 'Yes' : 'No';
+    }
 }
