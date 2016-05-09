@@ -1,6 +1,8 @@
 <?php
 namespace App\Model\Entity;
 
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\I18n\Time;
 use Cake\ORM\Entity;
 
 /**
@@ -8,10 +10,12 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
- * @property string $contact
+ * @property string $login
+ * @property string $password
+ * @property int $group_id
+ * @property \App\Model\Entity\Group $group
  * @property \Cake\I18n\Time $addition_date
- * @property string $note
- * @property \App\Model\Entity\Pc[] $pcs
+ * @property \Cake\I18n\Time $edit_date
  */
 class User extends Entity
 {
@@ -29,4 +33,29 @@ class User extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    /**
+     * Fields that are excluded from JSON an array versions of the entity.
+     *
+     * @var array
+     */
+    protected $_hidden = [
+        'password'
+    ];
+
+    /**
+     * @param Time $date
+     * @return string
+     */
+    protected function _getEditDate($date)
+    {
+        if ($date == null)
+            return "Not modified";
+        return $date;
+    }
+
+    protected function _setPassword($password)
+    {
+        return (new DefaultPasswordHasher)->hash($password);
+    }
 }

@@ -1,17 +1,18 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Admin;
+use App\Model\Entity\Group;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Admins Model
+ * Groups Model
  *
+ * @property \Cake\ORM\Association\HasMany $Users
  */
-class AdminsTable extends Table
+class GroupsTable extends Table
 {
 
     /**
@@ -24,9 +25,13 @@ class AdminsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('admins');
-        $this->displayField('id');
+        $this->table('groups');
+        $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->hasMany('Users', [
+            'foreignKey' => 'group_id'
+        ]);
     }
 
     /**
@@ -42,26 +47,12 @@ class AdminsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('login', 'create')
-            ->notEmpty('login');
+            ->allowEmpty('name');
 
         $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->requirePresence('permissions', 'create')
+            ->notEmpty('permissions');
 
         return $validator;
-    }
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->isUnique(['login']));
-        return $rules;
     }
 }

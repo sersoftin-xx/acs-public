@@ -1,17 +1,19 @@
 <?php
 namespace App\Model\Entity;
 
-use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
 /**
- * Admin Entity.
+ * Client Entity.
  *
  * @property int $id
- * @property string $login
- * @property string $password
+ * @property string $name
+ * @property string $contact
+ * @property \Cake\I18n\Time $addition_date
+ * @property string $note
+ * @property \App\Model\Entity\Pc[] $pcs
  */
-class Admin extends Entity
+class Client extends Entity
 {
 
     /**
@@ -27,24 +29,4 @@ class Admin extends Entity
         '*' => true,
         'id' => false,
     ];
-
-    /**
-     * Fields that are excluded from JSON an array versions of the entity.
-     *
-     * @var array
-     */
-    protected $_hidden = [
-        'password'
-    ];
-
-    protected function _getLogin($login)
-    {
-        debug("ASDASDSADASDA");
-        return $login;
-    }
-
-    protected function _setPassword($password)
-    {
-        return (new DefaultPasswordHasher)->hash($password);
-    }
 }

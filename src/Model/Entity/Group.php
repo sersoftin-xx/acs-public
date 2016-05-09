@@ -4,18 +4,13 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Pc Entity.
+ * Group Entity.
  *
  * @property int $id
- * @property int $client_id
- * @property \App\Model\Entity\User $user
  * @property string $name
- * @property string $unique_key
- * @property \Cake\I18n\Time $addition_date
- * @property string $comment
- * @property \App\Model\Entity\Bid[] $bids
+ * @property string $permissions
  */
-class Pc extends Entity
+class Group extends Entity
 {
 
     /**

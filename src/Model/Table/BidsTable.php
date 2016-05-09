@@ -65,6 +65,7 @@ class BidsTable extends Table
 
         $validator
             ->requirePresence('application_date', 'create')
+            ->dateTime('application_date')
             ->notEmpty('application_date');
 
         $validator
@@ -74,10 +75,12 @@ class BidsTable extends Table
 
         $validator
             ->requirePresence('activation_date', 'create')
+            ->dateTime('activation_date')
             ->notEmpty('activation_date');
 
         $validator
             ->requirePresence('expiration_date', 'create')
+            ->dateTime('expiration_date')
             ->notEmpty('expiration_date');
 
         return $validator;

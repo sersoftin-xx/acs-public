@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 text-right-not-xs">
                             <label for="search-form-query-input" class="control-label">Search by pc name or
-                                user name:</label>
+                                client name:</label>
                         </div>
                         <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
                             <input class="form-control" type="text" id="search-form-query-input">
@@ -35,10 +35,10 @@
         </thead>
         <tbody>
         <?php foreach ($pcs as $pc): ?>
-            <tr<?= $pc['user_id'] === 0 ? ' class="danger"' : '' ?>>
+            <tr<?= $pc['client_id'] === 0 ? ' class="danger"' : '' ?>>
                 <td><?= $pc['id'] ?></td>
                 <td><?= $pc['name'] ?></td>
-                <td class="hidden-xs"><?= $pc['user']['name'] ?></td>
+                <td class="hidden-xs"><?= $pc['client']['name'] ?></td>
                 <td class="hidden-xs"><?= $pc['products_count'] ?></td>
                 <td class="hidden-xs"><?= $pc['addition_date'] ?></td>
                 <td>
@@ -71,13 +71,13 @@
                       action="">
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="edit-pc-user-id-input">User name:</label>
+                            <label class="control-label" for="edit-pc-client-id-input">User name:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select class="form-control" name="pc_user_id" id="edit-pc-user-id-input"
+                            <select class="form-control" name="pc_client_id" id="edit-pc-client-id-input"
                                     data-live-search="true">
-                                <?php foreach ($users as $user): ?>
-                                    <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
+                                <?php foreach ($clients as $client): ?>
+                                    <option value="<?= $client['id'] ?>"><?= $client['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

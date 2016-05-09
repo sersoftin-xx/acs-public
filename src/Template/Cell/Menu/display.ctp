@@ -1,3 +1,3 @@
 <ul class="nav navbar-nav">
-    <?= $this->Menu->renderMenu($counters) ?>
+    <?= $this->Menu->renderMenu($type, $counters) ?>
 </ul>

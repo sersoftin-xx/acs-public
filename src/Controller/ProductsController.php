@@ -41,6 +41,7 @@ class ProductsController extends AppController
      */
     public function index()
     {
+        $this->viewBuilder()->layout('admin');
         $this->set('products', $this->Products->find('all'));
         $this->set('username', $this->Auth->user('login'));
     }
@@ -71,10 +72,10 @@ class ProductsController extends AppController
                 } else {
                     $this->Flash->error(__('The product could not be saved. Please, try again.'));
                 }
-                return $this->redirect(['action' => 'index']);
+                $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Failed to upload the product file. Try again.'));
-            return $this->redirect(['action' => 'index']);
+            $this->redirect(['action' => 'index']);
         }
     }
 
@@ -101,7 +102,7 @@ class ProductsController extends AppController
             } else {
                 $this->Flash->error(__('The product could not be saved. Please, try again.'));
             }
-            return $this->redirect(['action' => 'index']);
+            $this->redirect(['action' => 'index']);
         }
     }
 
@@ -129,10 +130,10 @@ class ProductsController extends AppController
                 } else {
                     $this->Flash->error(__('The product could not be updated. Please, try again.'));
                 }
-                return $this->redirect(['action' => 'index']);
+                $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Failed to upload the product file. Try again.'));
-            return $this->redirect(['action' => 'index']);
+            $this->redirect(['action' => 'index']);
         }
     }
 

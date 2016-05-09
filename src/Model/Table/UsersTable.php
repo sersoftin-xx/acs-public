@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property \Cake\ORM\Association\HasMany $Pcs
+ * @property \Cake\ORM\Association\BelongsTo $Groups
  */
 class UsersTable extends Table
 {
@@ -26,13 +26,12 @@ class UsersTable extends Table
         parent::initialize($config);
 
         $this->table('users');
-        $this->displayField('name');
+        $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->hasMany('Pcs', [
-            'foreignKey' => 'user_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true,
+        $this->belongsTo('Groups', [
+            'foreignKey' => 'group_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -45,28 +44,42 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
+            ->integer('id')
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->add('name', 'length', ['rule' => ['lengthBetween', 3, 32]]);
+            ->allowEmpty('name');
 
         $validator
-            ->requirePresence('contact', 'create')
-            ->notEmpty('contact')
-            ->add('contact', 'valid-url', ['rule' => 'url', 'message' => __('Enter valid contact url.')])
-            ->add('contact', 'length', ['rule' => ['lengthBetween', 3, 32], 'message' => __('Contact must be 3-32 chars.')]);
+            ->requirePresence('login', 'create')
+            ->notEmpty('login');
 
         $validator
-            ->requirePresence('addition_date', 'create')
-            ->notEmpty('addition_date');
+            ->requirePresence('password', 'create')
+            ->notEmpty('password');
 
         $validator
-            ->allowEmpty('note')
-            ->add('note', 'length', ['rule' => ['maxLength', 150, 'message' => __('Note must be before 150 chars.')]]);
+            ->dateTime('addition_date')
+            ->allowEmpty('addition_date');
+
+        $validator
+            ->dateTime('edit_date')
+            ->allowEmpty('edit_date');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['login']));
+        $rules->add($rules->existsIn(['group_id'], 'Groups'));
+        return $rules;
     }
 }

@@ -15,12 +15,14 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\I18n\Time;
 
 /**
  * Application Controller
  *
+ * @property \App\Controller\Component\AclComponent Acl
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
@@ -44,29 +46,13 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
-        Time::setToStringFormat('dd.MM.yyyy HH:mm:ss');
+        Time::setToStringFormat([\IntlDateFormatter::MEDIUM, \IntlDateFormatter::SHORT]);
         Time::setJsonEncodeFormat('dd.MM.yyyy HH:mm');
 
-        $this->loadComponent('Auth', [
-            'authenticate' => [
-                'Form' => [
-                    'userModel' => 'Admins',
-                    'fields' => ['username' => 'login', 'password' => 'password']
-                ]
-            ],
-            'loginAction' => [
-                'controller' => 'Admins',
-                'action' => 'login'
-            ],
-            'loginRedirect' => [
-                'controller' => 'Bids',
-                'action' => 'recent'
-            ],
-            'logoutRedirect' => [
-                'controller' => 'Admins',
-                'action' => 'login',
-            ]
-        ]);
+        $this->loadComponent('Auth', Configure::read('auth'));
+        $this->loadComponent('Acl');
+
+        $this->viewBuilder()->layout('user');
     }
 
     /**
@@ -82,5 +68,16 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+
+    public function isAuthorized($user = null)
+    {
+//        if ($this->Acl->check($user, $this->request)) {
+//            return true;
+//        }
+//        $operation = $this->Acl->getOperationName($this->request);
+//        $this->Flash->error("Access to $operation denied!");
+//        return false;
+        return true;
     }
 }

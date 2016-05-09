@@ -7,7 +7,7 @@
  */
 
 return [
-    'menu' => [
+    'users' => [
         [
             'name' => 'active_bids',
             'caption' => 'Active',
@@ -18,7 +18,8 @@ return [
                 'li' => null
             ],
             'controller' => 'Bids',
-            'action' => 'index'
+            'action' => 'active',
+            'finder' => 'active'
         ],
         [
             'name' => 'new_bids',
@@ -30,19 +31,21 @@ return [
                 'li' => null
             ],
             'controller' => 'Bids',
-            'action' => 'recent'
+            'action' => 'recent',
+            'finder' => 'recent'
         ],
         [
-            'name' => 'users',
-            'caption' => 'Users',
+            'name' => 'clients',
+            'caption' => 'Clients',
             'hasBadge' => true,
             'icon' => 'glyphicon glyphicon-user',
             'classes' => [
                 'badge' => null,
                 'li' => null
             ],
-            'controller' => 'Users',
-            'action' => 'index'
+            'controller' => 'Clients',
+            'action' => 'index',
+            'finder' => 'all'
         ],
         [
             'name' => 'pcs',
@@ -54,7 +57,8 @@ return [
                 'li' => null
             ],
             'controller' => 'Pcs',
-            'action' => 'index'
+            'action' => 'index',
+            'finder' => 'all'
         ],
         [
             'name' => 'products',
@@ -66,7 +70,36 @@ return [
                 'li' => 'hidden-xs hidden-sm hidden-md'
             ],
             'controller' => 'Products',
-            'action' => 'index'
+            'action' => 'index',
+            'finder' => 'all'
+        ]
+    ],
+    'administrators' => [
+        [
+            'name' => 'users',
+            'caption' => 'Users',
+            'hasBadge' => true,
+            'icon' => 'fa fa-user',
+            'classes' => [
+                'badge' => null,
+                'li' => null
+            ],
+            'controller' => 'Users',
+            'action' => 'index',
+            'finder' => 'all'
+        ],
+        [
+            'name' => 'products',
+            'caption' => 'Products',
+            'hasBadge' => true,
+            'icon' => 'fa fa-cubes',
+            'classes' => [
+                'badge' => null,
+                'li' => null
+            ],
+            'controller' => 'Products',
+            'action' => 'index',
+            'finder' => 'all'
         ]
     ]
 ];

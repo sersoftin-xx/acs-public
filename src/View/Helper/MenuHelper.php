@@ -20,9 +20,9 @@ class MenuHelper extends Helper
 
     public $helpers = ['Html'];
 
-    public function renderMenu($counters)
+    public function renderMenu($type, $counters)
     {
-        $menuArray = Configure::read('menu');
+        $menuArray = Configure::read($type);
         $menu = '';
         foreach ($menuArray as $menuItem) {
             $itemName = $menuItem['name'];

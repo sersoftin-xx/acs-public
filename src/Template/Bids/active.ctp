@@ -12,7 +12,7 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-right-not-xs">
-                                <label for="search-form-query-input" class="control-label">Bid id, product, user, pc name:</label>
+                                <label for="search-form-query-input" class="control-label">Bid id, product, client, pc name:</label>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
                                 <input id="search-form-query-input" type="text" class="form-control">
@@ -27,7 +27,7 @@
             <tr>
                 <th>#</th>
                 <th>Product</th>
-                <th>User</th>
+                <th>Client</th>
                 <th class="hidden-xs hidden-sm">User PC</th>
                 <th class="hidden-xs">Activation date</th>
                 <th class="hidden-xs">Expiration date</th>
@@ -39,7 +39,7 @@
                 <tr id="bid_<?= $bid['id'] ?>" <?= $this->Time->isPast($bid['expiration_date']) ? ' class="danger"' : '' ?>>
                     <td><?= $bid['id'] ?></td>
                     <td><?= $bid['product']['name'] ?></td>
-                    <td><?= $bid['username'] ?></td>
+                    <td><?= $bid['client_name'] ?></td>
                     <td class="hidden-xs hidden-sm  "><?= $bid['pc']['name'] ?></td>
                     <td class="hidden-xs"><?= $bid['activation_date'] ?></td>
                     <td class="hidden-xs"><?= $bid['expiration_date'] ?></td>

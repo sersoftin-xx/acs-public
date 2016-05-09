@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\I18n\Date;
@@ -9,7 +10,7 @@ use Cake\I18n\Date;
 /**
  * Bids Controller
  *
- * @property \App\Model\Table\UsersTable $Users
+ * @property \App\Model\Table\ClientsTable $Clients
  * @property \App\Model\Table\ProductsTable $Products
  * @property \App\Model\Table\BidsTable $Bids
  * @property \App\Model\Table\PcsTable $Pcs
@@ -37,7 +38,7 @@ class BidsController extends AppController
                 $this->Flash->error(__('The bid could not be blocked. Please, try again.'));
             }
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'active']);
     }
 
     public function reject($id = null)
@@ -104,16 +105,16 @@ class BidsController extends AppController
      *
      * @return void
      */
-    public function index()
+    public function active()
     {
-        $this->loadModel('Users');
+        $this->loadModel('Clients');
         $this->loadModel('Pcs');
         $this->loadModel('Products');
         $products = $this->Products->find('all')->select([
             'id',
             'name'
         ]);
-        $users = $this->Users->find('all');
+        $clients = $this->Clients->find('all');
         $pcs = $this->Pcs->find('all');
         $bids = $this->Bids->find('active', [
             'contain' => ['Pcs', 'Products']
@@ -123,9 +124,9 @@ class BidsController extends AppController
             'Products.name',
             'Pcs.id',
             'Pcs.name',
-            'Pcs.user_id',
-            'username' => $users->select(['name'])->where([
-                'id' => $pcs->newExpr('user_id')
+            'Pcs.client_id',
+            'client_name' => $clients->select(['name'])->where([
+                'id' => $pcs->newExpr('client_id')
             ]),
             'activation_date',
             'expiration_date'
@@ -146,12 +147,12 @@ class BidsController extends AppController
 //                'product_id' => $this->request->data['search_form_product_id']
 //            ]);
 //        }
-//        if (isset($this->request->data['search_form_user_id'])
-//            && !empty($this->request->data['search_form_user_id'])
-//            && $this->request->data['search_form_user_id'] != '0'
+//        if (isset($this->request->data['search_form_client_id'])
+//            && !empty($this->request->data['search_form_client_id'])
+//            && $this->request->data['search_form_client_id'] != '0'
 //        ) {
 //            $bids->where([
-//                'Pcs.user_id' => $this->request->data['search_form_user_id']
+//                'Pcs.client_id' => $this->request->data['search_form_client_id']
 //            ]);
 //        }
 //
@@ -170,8 +171,8 @@ class BidsController extends AppController
 //
 //        }
         $pcs = $this->Pcs->find('all');
-        $users = $this->Users->find('all');
-        $this->set('users', $users);
+        $clients = $this->Clients->find('all');
+        $this->set('clients', $clients);
         $this->set('pcs', $pcs);
         $this->set('bids', $bids);
         $this->set('products', $products);
@@ -190,12 +191,12 @@ class BidsController extends AppController
             $bid = $this->Bids->patchEntity($bid, $this->request->data);
             if ($this->Bids->save($bid)) {
                 $this->Flash->success(__('The bid has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $this->redirect(['action' => 'active']);
             } else {
                 $this->Flash->error(__('The bid could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('bid'));
+        $this->set('bid', $bid);
         $this->set('_serialize', ['bid']);
     }
 
@@ -220,7 +221,7 @@ class BidsController extends AppController
             } else {
                 $this->Flash->error(__('The bid could not be saved. Please, try again.'));
             }
-            return $this->redirect(['action' => 'index']);
+            $this->redirect(['action' => 'active']);
         }
     }
 }

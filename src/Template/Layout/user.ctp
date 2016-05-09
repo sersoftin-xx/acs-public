@@ -52,12 +52,12 @@
             <a class="navbar-brand hidden-sm navbar-link" href="#"><?= \Cake\Core\Configure::read('App.AppName') ?></a>
         </div>
         <div class="collapse navbar-collapse" id="navcol">
-            <?= $this->cell('Menu'); ?>
+            <?= $this->cell('Menu', ['users']); ?>
             <ul class="nav navbar-nav navbar-right">
                 <li role="presentation">
                     <?= $this->Html->link(
                         $this->Html->tag('span', '', ['class' => 'fa fa-sign-out']) . 'Logout',
-                        ['controller' => 'Admins', 'action' => 'logout'],
+                        ['controller' => 'Users', 'action' => 'logout'],
                         ['escape' => false]
                     ); ?></li>
             </ul>

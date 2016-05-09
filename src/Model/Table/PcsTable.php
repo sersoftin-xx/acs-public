@@ -30,8 +30,8 @@ class PcsTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
+        $this->belongsTo('Clients', [
+            'foreignKey' => 'client_id',
             'joinType' => 'LEFT'
         ]);
         $this->hasMany('Bids', [
@@ -83,7 +83,7 @@ class PcsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['client_id'], 'Users'));
         return $rules;
     }
 }

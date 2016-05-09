@@ -1,7 +1,7 @@
 /**
  * Created by Sergo on 17.12.2015.
  */
-$('#edit-pc-user-id-input').selectpicker();
+$('#edit-pc-client-id-input').selectpicker();
 $("#search-form-query-input").keyup(function () {
     var filter = $(this).val();
     $("tbody tr").each(function () {
@@ -21,9 +21,9 @@ function showEditPcDialog(pc_id) {
             var pc = data['pc'];
             $('#edit-pc-caption').text(pc['name'] + ' (#' + pc['id'] + ')');
             $('#edit-pc-form').attr('action', $('#edit-pc-form-action').val() + '/' + pc['id']);
-            var user_selector = $('#edit-pc-user-id-input');
-            user_selector.val(pc['user_id']);
-            user_selector.selectpicker('refresh');
+            var client_selector = $('#edit-pc-client-id-input');
+            client_selector.val(pc['client_id']);
+            client_selector.selectpicker('refresh');
             $('#edit-pc-name-input').val(pc['name']);
             $('#edit-pc-comment-textarea').val(pc['comment']);
             $('#edit-pc').modal('show');

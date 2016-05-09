@@ -7,7 +7,7 @@ use Cake\Utility\Text;
  * Pcs Controller
  *
  * @property \App\Model\Table\PcsTable $Pcs
- * @property \App\Model\Table\UsersTable $Users
+ * @property \App\Model\Table\ClientsTable $Clients
  * @property \App\Model\Table\BidsTable $Bids
  */
 class PcsController extends AppController
@@ -38,15 +38,15 @@ class PcsController extends AppController
      */
     public function index()
     {
-        $this->loadModel('Users');
+        $this->loadModel('Clients');
         $this->loadModel('Bids');
 
         $bids = $this->Bids->find('all');
-        $pcs = $this->Pcs->find('all', ['contain' => ['Users']])
+        $pcs = $this->Pcs->find('all', ['contain' => ['Clients']])
             ->select([
                 'id',
-                'user_id',
-                'Users.name',
+                'client_id',
+                'Clients.name',
                 'name',
                 'unique_key',
                 'addition_date',
@@ -56,7 +56,7 @@ class PcsController extends AppController
                     'is_active' => true
                 ])
             ]);
-        $this->set('users', $this->Users->find('all')->select(['id', 'name']));
+        $this->set('clients', $this->Clients->find('all')->select(['id', 'name']));
         $this->set('pcs', $pcs);
         $this->set('isMobile', $this->RequestHandler->isMobile());
         $this->set('username', $this->Auth->user('login'));
@@ -74,7 +74,7 @@ class PcsController extends AppController
         $pc = $this->Pcs->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $pc = $this->Pcs->patchEntity($pc, [
-                'user_id' => $this->request->data('pc_user_id'),
+                'client_id' => $this->request->data('pc_client_id'),
                 'name' => $this->request->data('pc_name'),
                 'comment' => $this->request->data('pc_comment')
             ]);

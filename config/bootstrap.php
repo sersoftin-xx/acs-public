@@ -202,3 +202,5 @@ DispatcherFactory::add('ControllerFactory');
 Type::build('date')->useLocaleParser();
 Type::build('datetime')->useLocaleParser();
 Configure::load('menu', 'default');
+Configure::load('auth', 'default');
+Configure::load('all_permissions', 'default');
