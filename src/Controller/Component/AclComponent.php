@@ -32,8 +32,6 @@ class AclComponent extends Component
         $groups = TableRegistry::get('Groups');
         $user_group = $groups->get($user['group_id']);
         $operation = $this->getOperationName($request);
-        debug($user_group->permissions);
-//        return in_array($operation, $user_group->permissions);
-    return true;
+        return in_array($operation, $user_group->permissions);
     }
 }

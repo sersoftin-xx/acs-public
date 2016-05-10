@@ -31,16 +31,6 @@ class Group extends Entity
         'id' => false,
     ];
 
-    /*protected function _setPermissions($permissions)
-    {
-        return implode(';', $permissions);
-    }
-
-    protected function _getPermissions($permissions)
-    {
-        return explode(';', $permissions);
-    }*/
-
     /**
      * @param Time $date
      * @return string
