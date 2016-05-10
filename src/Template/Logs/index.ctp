@@ -19,6 +19,9 @@
                 </form>
             </div>
         </div>
+        <button id="add-button" class="btn btn-danger pull-right" data-toggle="modal"
+                data-target="#add-group"><span class="fa fa-eraser"></span> Clear logs
+        </button>
         <table class="table table-bordered">
             <thead>
             <tr>

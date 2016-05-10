@@ -35,19 +35,6 @@ return [
             'finder' => 'recent'
         ],
         [
-            'name' => 'clients',
-            'caption' => 'Clients',
-            'hasBadge' => true,
-            'icon' => 'glyphicon glyphicon-user',
-            'classes' => [
-                'badge' => null,
-                'li' => null
-            ],
-            'controller' => 'Clients',
-            'action' => 'index',
-            'finder' => 'all'
-        ],
-        [
             'name' => 'pcs',
             'caption' => 'PCs',
             'hasBadge' => true,
@@ -57,6 +44,19 @@ return [
                 'li' => null
             ],
             'controller' => 'Pcs',
+            'action' => 'index',
+            'finder' => 'all'
+        ],
+        [
+            'name' => 'clients',
+            'caption' => 'Clients',
+            'hasBadge' => true,
+            'icon' => 'glyphicon glyphicon-user',
+            'classes' => [
+                'badge' => null,
+                'li' => null
+            ],
+            'controller' => 'Clients',
             'action' => 'index',
             'finder' => 'all'
         ]
