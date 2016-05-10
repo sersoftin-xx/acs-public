@@ -19,6 +19,7 @@ class GroupsController extends AppController
      */
     public function index()
     {
+        $this->log('asdasd', 'notice');
         $groups = $this->Groups->find('all');
         $permissions = Configure::read('permissions');
         $this->set(compact('groups'));

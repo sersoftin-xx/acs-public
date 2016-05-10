@@ -113,6 +113,19 @@ return [
             'controller' => 'Products',
             'action' => 'index',
             'finder' => 'all'
+        ],
+        [
+            'name' => 'logs',
+            'caption' => 'Logs',
+            'hasBadge' => true,
+            'icon' => 'fa fa-history',
+            'classes' => [
+                'badge' => null,
+                'li' => null
+            ],
+            'controller' => 'Logs',
+            'action' => 'index',
+            'finder' => 'all'
         ]
     ]
 ];

@@ -64,6 +64,14 @@
             <p class="navbar-text navbar-right show hidden-xs hidden-sm">
                 <strong>Hello, <?= $this->fetch('username') ?>!</strong>
             </p>
+            <ul class="nav navbar-nav navbar-right">
+                <li role="presentation">
+                    <?= $this->Html->link(
+                        $this->Html->tag('span', '', ['class' => 'fa fa-user-md']) . ' Admin area',
+                        ['controller' => 'Logs', 'action' => 'index'],
+                        ['escape' => false]
+                    ); ?></li>
+            </ul>
         </div>
     </div>
 </nav>
