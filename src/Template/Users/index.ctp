@@ -2,25 +2,6 @@
 <?= $this->Html->css('bootstrap-select.min.css', ['block' => true]) ?>
 <?php $this->assign('isMobile', $isMobile) ?>
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
-            users
-        </div>
-        <div class="panel-body panel-collapse collapse" id="search-form">
-            <form id="search-form" name="search_form" class="form-horizontal" method="post">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 text-right-not-xs">
-                            <label for="search-form-query-input" class="control-label">Search by name or login:</label>
-                        </div>
-                        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-                            <input class="form-control" type="text" id="search-form-query-input">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
     <button id="add-button" class="btn btn-success pull-right" data-toggle="modal"
             data-target="#add-user"><span class="fa fa-plus"></span> Add new user
     </button>

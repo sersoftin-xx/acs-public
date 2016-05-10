@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
+use Cake\I18n\Time;
 use Cake\ORM\Entity;
 
 /**
@@ -8,7 +9,10 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
- * @property string $permissions
+ * @property array $permissions
+ * @property \Cake\I18n\Time $addition_date
+ * @property \Cake\I18n\Time $edit_date
+ * @property \App\Model\Entity\User[] $users
  */
 class Group extends Entity
 {
@@ -26,4 +30,25 @@ class Group extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    /*protected function _setPermissions($permissions)
+    {
+        return implode(';', $permissions);
+    }
+
+    protected function _getPermissions($permissions)
+    {
+        return explode(';', $permissions);
+    }*/
+
+    /**
+     * @param Time $date
+     * @return string
+     */
+    protected function _getEditDate($date)
+    {
+        if ($date == null)
+            return "Not modified";
+        return $date;
+    }
 }

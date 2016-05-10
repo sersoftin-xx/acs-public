@@ -72,12 +72,11 @@ class AppController extends Controller
 
     public function isAuthorized($user = null)
     {
-//        if ($this->Acl->check($user, $this->request)) {
-//            return true;
-//        }
-//        $operation = $this->Acl->getOperationName($this->request);
-//        $this->Flash->error("Access to $operation denied!");
-//        return false;
-        return true;
+        if ($this->Acl->check($user, $this->request)) {
+            return true;
+        }
+        $operation = $this->Acl->getOperationName($this->request);
+        $this->Flash->error("Access to $operation denied!");
+        return false;
     }
 }

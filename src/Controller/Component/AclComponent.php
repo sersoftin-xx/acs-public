@@ -24,15 +24,16 @@ class AclComponent extends Component
     {
         $controller = $request->params['controller'];
         $action = $request->params['action'];
-        return Inflector::underscore("$controller/$action");
+        return "$controller/$action";
     }
 
     public function check($user, Request $request)
     {
         $groups = TableRegistry::get('Groups');
         $user_group = $groups->get($user['group_id']);
-        $permissions = explode(';', $user_group->permissions);
         $operation = $this->getOperationName($request);
-        return in_array($operation, $permissions);
+        debug($user_group->permissions);
+//        return in_array($operation, $user_group->permissions);
+    return true;
     }
 }

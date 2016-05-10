@@ -6,6 +6,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Database\Schema\Table as Schema;
 
 /**
  * Groups Model
@@ -14,6 +15,12 @@ use Cake\Validation\Validator;
  */
 class GroupsTable extends Table
 {
+
+    protected function _initializeSchema(Schema $schema)
+    {
+        $schema->columnType('permissions', 'array');
+        return $schema;
+    }
 
     /**
      * Initialize method
@@ -52,6 +59,14 @@ class GroupsTable extends Table
         $validator
             ->requirePresence('permissions', 'create')
             ->notEmpty('permissions');
+
+        $validator
+            ->dateTime('addition_date')
+            ->allowEmpty('addition_date');
+
+        $validator
+            ->dateTime('edit_date')
+            ->allowEmpty('edit_date');
 
         return $validator;
     }

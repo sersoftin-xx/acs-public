@@ -89,6 +89,19 @@ return [
             'finder' => 'all'
         ],
         [
+            'name' => 'groups',
+            'caption' => 'Groups',
+            'hasBadge' => true,
+            'icon' => 'fa fa-users',
+            'classes' => [
+                'badge' => null,
+                'li' => null
+            ],
+            'controller' => 'Groups',
+            'action' => 'index',
+            'finder' => 'all'
+        ],
+        [
             'name' => 'products',
             'caption' => 'Products',
             'hasBadge' => true,
