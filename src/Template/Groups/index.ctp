@@ -118,10 +118,11 @@
                             <select multiple  class="form-control" name="group_permissions[]" id="add-group-group-permissions-input"
                                     data-live-search="true">
                                 <?php foreach ($permissions as $controller=>$actions): ?>
-                                <optgroup label="<?= $controller ?>"
-                                    <?php foreach ($actions as $action): ?>
-                                        <option value="<?= "$controller/$action" ?>"><?= $action ?></option>
-                                    <?php endforeach; ?>
+                                    <optgroup label="<?= $controller ?>">
+                                        <?php foreach ($actions as $action): ?>
+                                            <option value="<?= "$controller/$action" ?>"><?= $action ?></option>
+                                        <?php endforeach; ?>
+                                    </optgroup>
                                 <?php endforeach; ?>
                             </select>
                         </div>
