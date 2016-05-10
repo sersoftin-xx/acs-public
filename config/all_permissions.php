@@ -44,7 +44,18 @@ return [
         'Users' => [
             'index',
             'login',
-            'logout'
+            'logout',
+            'add',
+            'save',
+            'resetPassword',
+            'delete',
+            'getInfo'
+        ],
+        'Groups' => [
+            'index',
+            'getInfo',
+            'add',
+            'save'
         ]
     ]
 ];
