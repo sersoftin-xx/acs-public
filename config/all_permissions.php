@@ -56,6 +56,10 @@ return [
             'getInfo',
             'add',
             'save'
+        ],
+        'Logs' => [
+            'index',
+            'clear'
         ]
     ]
 ];

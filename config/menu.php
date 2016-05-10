@@ -59,19 +59,6 @@ return [
             'controller' => 'Pcs',
             'action' => 'index',
             'finder' => 'all'
-        ],
-        [
-            'name' => 'products',
-            'caption' => 'Products',
-            'hasBadge' => true,
-            'icon' => 'fa fa-cubes',
-            'classes' => [
-                'badge' => null,
-                'li' => 'hidden-xs hidden-sm hidden-md'
-            ],
-            'controller' => 'Products',
-            'action' => 'index',
-            'finder' => 'all'
         ]
     ],
     'administrators' => [
