@@ -32,7 +32,7 @@ class GroupsController extends AppController
     {
         $group = $this->Groups->get($id);
         $this->set('group', $group);
-        $this->set('_serialize', ['group']);
+        $this->set('_serialize', ['group', 'permissions']);
     }
 
     public function add()
@@ -48,6 +48,24 @@ class GroupsController extends AppController
                 $this->Flash->success(__('The user has been saved.'));
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+            $this->redirect(['action' => 'index']);
+        }
+    }
+
+    public function save($id = null)
+    {
+        $group = $this->Groups->get($id);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $group = $this->Groups->patchEntity($group, [
+                'name' => $this->request->data('group_name'),
+                'permissions' => $this->request->data('group_permissions'),
+                'edit_date' => Time::now()
+            ]);
+            if ($this->Groups->save($group)) {
+                $this->Flash->success(__('The group has been saved.'));
+            } else {
+                $this->Flash->error(__('The group could not be saved. Please, try again.'));
             }
             $this->redirect(['action' => 'index']);
         }

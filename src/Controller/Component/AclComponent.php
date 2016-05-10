@@ -33,5 +33,6 @@ class AclComponent extends Component
         $user_group = $groups->get($user['group_id']);
         $operation = $this->getOperationName($request);
         return in_array($operation, $user_group->permissions);
+//        return true;
     }
 }
