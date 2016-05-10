@@ -19,13 +19,12 @@
                 </form>
             </div>
         </div>
-        <button id="add-button" class="btn btn-danger pull-right" data-toggle="modal"
-                data-target="#add-group"><span class="fa fa-eraser"></span> Clear logs
-        </button>
+        <a id="add-button" class="btn btn-danger pull-right"
+           href="<?= $this->Url->build(['controller' => 'Logs', 'action' => 'clear']); ?>"><span
+                class="fa fa-eraser"></span> Clear logs</a>
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th class="hidden-xs hidden-sm">#</th>
                 <th class="col-sm-9 col-md-8">Message</th>
                 <th class="hidden-xs hidden-sm">Level</th>
                 <th class="hidden-xs">Fire date</th>
@@ -34,7 +33,6 @@
             <tbody>
             <?php foreach ($logs as $log): ?>
                 <tr>
-                    <td class="hidden-xs hidden-sm"><?= $log['id'] ?></td>
                     <td class="col-sm-9 col-md-8 col-lg-9"><?= $log['message'] ?></td>
                     <td class="hidden-xs hidden-sm"><?= $log['level'] ?></td>
                     <td class="hidden-xs"><?= $log['date'] ?></td>
