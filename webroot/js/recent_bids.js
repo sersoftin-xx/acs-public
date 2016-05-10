@@ -5,12 +5,11 @@
 
 $('#accept-bid-user-id-input').selectpicker();
 $('#accept-bid-expiration-date-input-group').datetimepicker({
-    defaultDate: moment().add(1, 'days'),
     format: 'DD.MM.YYYY HH:mm',
     ignoreReadonly: true,
     focusOnShow: false,
     showClose: true,
-    minDate: moment()
+    defaultDate: moment().add(2, 'hours')
 });
 
 $("#search-form-query-input").keyup(function () {
