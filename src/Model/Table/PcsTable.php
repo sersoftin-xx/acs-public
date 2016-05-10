@@ -83,7 +83,7 @@ class PcsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['client_id'], 'Users'));
+        $rules->add($rules->existsIn(['client_id'], 'Clients'));
         return $rules;
     }
 }
