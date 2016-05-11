@@ -236,8 +236,6 @@ class UploadBehavior extends Behavior
         $file = new File($this->_config['root'] . $entity->$field, false);
 
         if ($file->exists()) {
-//            $folder = $file->folder();
-//            $folder->delete();
             $file->delete();
             return true;
         }
