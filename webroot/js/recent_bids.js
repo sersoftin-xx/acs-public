@@ -2,10 +2,11 @@
  * Created by Sergo on 13.12.2015.
  */
 
+var defaultDateFormat = 'DD.MM.YYYY HH:mm';
 
 $('#accept-bid-user-id-input').selectpicker();
 $('#accept-bid-expiration-date-input-group').datetimepicker({
-    format: 'DD.MM.YYYY HH:mm',
+    format: defaultDateFormat,
     ignoreReadonly: true,
     focusOnShow: false,
     showClose: true,
@@ -38,5 +39,5 @@ function showAcceptBidDialog(bid_id) {
 }
 
 function setMaxDate() {
-    $('#accept-bid-expiration-date-input').val(moment.unix(2147483647).format('DD.MM.YYYY hh:mm'));
+    $('#accept-bid-expiration-date-input').val(moment.unix(2147483647).format(defaultDateFormat));
 }

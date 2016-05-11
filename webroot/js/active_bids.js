@@ -2,13 +2,15 @@
  * Created by Сергей on 26.12.2015.
  */
 
+var defaultDateFormat = 'DD.MM.YYYY HH:mm';
+
 $('#edit-active-bid-product-id-input').selectpicker();
 $('#search-form-product-id').selectpicker();
 $('#search-form-user-id').selectpicker();
 $('#search-form-pc-id').selectpicker();
 $('#edit-active-bid-expiration-date-input-group').datetimepicker({
     defaultDate: moment().add(1, 'days'),
-    format: 'DD.MM.YYYY HH:mm',
+    format: defaultDateFormat,
     ignoreReadonly: true,
     focusOnShow: false,
     showClose: true,
@@ -39,7 +41,7 @@ function showEditActiveBidDialog(active_bid_id) {
             var product_selector = $('#edit-active-bid-product-id-input');
             product_selector.val(bid['product_id']);
             product_selector.selectpicker('refresh');
-            $('#edit-active-bid-expiration-date-input').val(bid['expiration_date']);
+            $('#edit-active-bid-expiration-date-input').val(moment(bid['expiration_date']).format(defaultDateFormat));
             $('#edit-active-bid').modal('show');
         });
     }
@@ -49,5 +51,5 @@ function showEditActiveBidDialog(active_bid_id) {
 }
 
 function setMaxDate() {
-    $('#edit-active-bid-expiration-date-input').val(moment.unix(2147483647).format('DD.MM.YYYY hh:mm'));
+    $('#edit-active-bid-expiration-date-input').val(moment.unix(2147483647).format(defaultDateFormat));
 }
