@@ -11,28 +11,28 @@
     <?= $this->Html->css('main.css'); ?>
     <?= $this->fetch('css'); ?>
 
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '57x57', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-57x57.png']); ?>
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '60x60', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-60x60.png']); ?>
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '72x72', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-72x72.png']); ?>
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '76x76', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-76x76.png']); ?>
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '114x114', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-114x114.png']); ?>
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '120x120', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-120x120.png']); ?>
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '144x144', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-144x144.png']); ?>
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '152x152', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-152x152.png']); ?>
-    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '180x180', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'apple-touch-icon-180x180.png']); ?>
-    <?= $this->Html->meta(['rel' => 'icon', 'sizes' => '192x192', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'android-chrome-192x192.png']); ?>
-    <?= $this->Html->meta(['rel' => 'icon', 'sizes' => '96x96', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'favicon-96x96.png']); ?>
-    <?= $this->Html->meta(['rel' => 'icon', 'sizes' => '16x16', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'favicon-16x16.png']); ?>
-    <?= $this->Html->meta(['rel' => 'manifest', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'manifest.json']); ?>
-    <?= $this->Html->meta(['rel' => 'mask-icon', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'safari-pinned-tab.svg', 'color' => '#5bbad5']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '57x57', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-57x57.png']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '60x60', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-60x60.png']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '72x72', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-72x72.png']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '76x76', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-76x76.png']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '114x114', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-114x114.png']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '120x120', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-120x120.png']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '144x144', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-144x144.png']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '152x152', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-152x152.png']); ?>
+    <?= $this->Html->meta(['rel' => 'apple-touch-icon', 'sizes' => '180x180', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'apple-touch-icon-180x180.png']); ?>
+    <?= $this->Html->meta(['rel' => 'icon', 'sizes' => '192x192', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'android-chrome-192x192.png']); ?>
+    <?= $this->Html->meta(['rel' => 'icon', 'sizes' => '96x96', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'favicon-96x96.png']); ?>
+    <?= $this->Html->meta(['rel' => 'icon', 'sizes' => '16x16', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'favicon-16x16.png']); ?>
+    <?= $this->Html->meta(['rel' => 'manifest', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'manifest.json']); ?>
+    <?= $this->Html->meta(['rel' => 'mask-icon', 'link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'safari-pinned-tab.svg', 'color' => '#5bbad5']); ?>
 
 
-    <?= $this->Html->meta(['link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . DS . 'favicon.ico']); ?>
+    <?= $this->Html->meta(['link' => \Cake\Core\Configure::read('App.iconsBaseUrl') . 'favicon.ico']); ?>
     <?= $this->Html->meta('apple-mobile-web-app-title', 'ACS Panel'); ?>
     <?= $this->Html->meta('application-name', 'ACS Panel'); ?>
     <?= $this->Html->meta('msapplication-TileColor', '#00aba9'); ?>
-    <?= $this->Html->meta('msapplication-TileImage', '/img/icons/mstile-144x144.png'); ?>
-    <?= $this->Html->meta('msapplication-config', '/img/icons/browserconfig.xml'); ?>
+    <?= $this->Html->meta('msapplication-TileImage', \Cake\Core\Configure::read('App.iconsBaseUrl') . 'mstile-144x144.png'); ?>
+    <?= $this->Html->meta('msapplication-config', \Cake\Core\Configure::read('App.iconsBaseUrl') . 'browserconfig.xml'); ?>
     <?= $this->Html->meta('theme-color', '#ffffff'); ?>
 </head>
 
