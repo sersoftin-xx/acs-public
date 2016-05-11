@@ -57,7 +57,7 @@ class ProductsController extends AppController
         if ($this->request->is('post')) {
             if (is_uploaded_file($this->request->data('product_file')['tmp_name'])) {
                 $product_data = [
-                    'name' => $this->request->data['product_name'],
+                    'name' => $this->request->data('product_name'),
                     'product_file_upload' => $this->request->data('product_file'),
                     'download_name' => $this->request->data('product_download_name'),
                     'hidden' => isset($this->request->data['product_hidden']),
@@ -91,10 +91,10 @@ class ProductsController extends AppController
         $product = $this->Products->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product_data = [
-                'name' => $this->request->data['product_name'],
+                'name' => $this->request->data('product_name'),
                 'hidden' => isset($this->request->data['product_hidden']),
-                'download_name' => $this->request->data['product_download_name'],
-                'description' => $this->request->data['product_description']
+                'download_name' => $this->request->data('product_download_name'),
+                'description' => $this->request->data('product_description')
             ];
             $product = $this->Products->patchEntity($product, $product_data);
             if ($this->Products->save($product)) {
@@ -123,7 +123,6 @@ class ProductsController extends AppController
                     'update_date' => Time::now(),
                     'version' => $product['version'] + 1
                 ];
-                debug($product_data);
                 $product = $this->Products->patchEntity($product, $product_data);
                 if ($this->Products->save($product)) {
                     $this->Flash->success(__('The product has been updated.'));
@@ -131,8 +130,9 @@ class ProductsController extends AppController
                     $this->Flash->error(__('The product could not be updated. Please, try again.'));
                 }
                 $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('Failed to upload the product file. Try again.'));
             }
-            $this->Flash->error(__('Failed to upload the product file. Try again.'));
             $this->redirect(['action' => 'index']);
         }
     }

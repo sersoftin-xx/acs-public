@@ -35,8 +35,12 @@ class Product extends Entity
         'id' => false,
     ];
 
-    protected function _getHidden($hidden)
+    protected $_virtual = [
+        'is_hidden'
+    ];
+
+    protected function _getIsHidden()
     {
-        return $hidden ? 'Yes' : 'No';
+        return $this->_properties['hidden'] ? 'Yes' : 'No';
     }
 }
