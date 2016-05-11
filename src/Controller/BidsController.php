@@ -1,11 +1,8 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
 use Cake\Core\Configure;
-use Cake\Event\Event;
 use Cake\I18n\Time;
-use Cake\I18n\Date;
 
 /**
  * Bids Controller

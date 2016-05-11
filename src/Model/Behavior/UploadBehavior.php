@@ -160,6 +160,7 @@ class UploadBehavior extends Behavior
 
             return $message;
         }
+        return null;
     }
 
     /**

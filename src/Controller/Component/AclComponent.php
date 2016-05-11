@@ -2,10 +2,8 @@
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
-use Cake\Controller\ComponentRegistry;
 use Cake\Network\Request;
 use Cake\ORM\TableRegistry;
-use Cake\Utility\Inflector;
 
 /**
  * Acl component
@@ -33,6 +31,5 @@ class AclComponent extends Component
         $user_group = $groups->get($user['group_id']);
         $operation = $this->getOperationName($request);
         return in_array($operation, $user_group->permissions);
-//        return true;
     }
 }
