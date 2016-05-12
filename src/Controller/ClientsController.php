@@ -34,18 +34,30 @@ class ClientsController extends AppController
 
     public function getInfo($id = null)
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о клиенте #:client_id.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+            'client_id' => $id
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $client = $this->Clients->get($id);
         $this->set('client', $client);
         $this->set('_serialize', ['client']);
     }
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список клиентов.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $this->loadModel('Pcs');
         $this->loadModel('Bids');
         $pcs = $this->Pcs->find('all');
@@ -74,11 +86,6 @@ class ClientsController extends AppController
         $this->set('username', $this->Auth->user('login'));
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $client = $this->Clients->newEntity();
@@ -98,13 +105,6 @@ class ClientsController extends AppController
         }
     }
 
-    /**
-     * Save method
-     *
-     * @param string|null $id client id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function save($id = null)
     {
         $client = $this->Clients->get($id);
@@ -123,13 +123,6 @@ class ClientsController extends AppController
         }
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

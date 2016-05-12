@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Cake\Core\Configure;
 use Cake\I18n\Time;
+use Cake\Utility\Text;
 
 /**
  * Groups Controller
@@ -18,7 +19,14 @@ class GroupsController extends AppController
      */
     public function index()
     {
-        $this->log('asdasd', 'notice');
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список групп.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $groups = $this->Groups->find('all');
         $permissions = Configure::read('permissions');
         $this->set(compact('groups'));
@@ -30,6 +38,15 @@ class GroupsController extends AppController
 
     public function getInfo($id = null)
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о группе #:group_id.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+            'group_id' => $id
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $group = $this->Groups->get($id);
         $this->set('group', $group);
         $this->set('_serialize', ['group', 'permissions']);

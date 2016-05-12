@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Cake\I18n\Time;
+use Cake\Utility\Text;
 
 /**
  * Products Controller
@@ -11,11 +12,17 @@ use Cake\I18n\Time;
 class ProductsController extends AppController
 {
 
-    /**
-     * @param null $id
-     */
     public function getInfo($id = null)
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о продукте #:products.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+            'products' => $id
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $product = $this->Products->get($id);
         $this->set('product', $product);
         $this->set('_serialize', ['product']);
@@ -33,23 +40,21 @@ class ProductsController extends AppController
         return $this->response;
     }
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список продуктов.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $this->viewBuilder()->layout('admin');
         $this->set('products', $this->Products->find('all'));
         $this->set('username', $this->Auth->user('login'));
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $product = $this->Products->newEntity();
@@ -78,13 +83,6 @@ class ProductsController extends AppController
         }
     }
 
-    /**
-     * Save method
-     *
-     * @param string|null $id Product id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function save($id = null)
     {
         $product = $this->Products->get($id);
@@ -105,13 +103,6 @@ class ProductsController extends AppController
         }
     }
 
-    /**
-     * Update method
-     *
-     * @param string|null $id Product id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function update($id = null)
     {
         $product = $this->Products->get($id);
@@ -136,13 +127,6 @@ class ProductsController extends AppController
         }
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Product id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

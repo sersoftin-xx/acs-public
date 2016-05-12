@@ -26,18 +26,30 @@ class PcsController extends AppController
 
     public function getInfo($id = null)
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о компьютере #:pc_id.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+            'pc_id' => $id
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $pc = $this->Pcs->get($id);
         $this->set('pc', $pc);
         $this->set('_serialize', ['pc']);
     }
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список компьютеров.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $this->loadModel('Clients');
         $this->loadModel('Bids');
 
@@ -62,13 +74,6 @@ class PcsController extends AppController
         $this->set('username', $this->Auth->user('login'));
     }
 
-    /**
-     * Save method
-     *
-     * @param string|null $id Pc id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function save($id = null)
     {
         $pc = $this->Pcs->get($id);
@@ -87,13 +92,6 @@ class PcsController extends AppController
         }
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Pc id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

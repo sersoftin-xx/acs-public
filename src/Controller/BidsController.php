@@ -18,6 +18,15 @@ class BidsController extends AppController
 
     public function getInfo($id = null)
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о заявке #:bid_id.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+            'bid_id' => $id
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $bid = $this->Bids->get($id);
         $this->set('bid', $bid);
         $this->set('_serialize', ['bid']);

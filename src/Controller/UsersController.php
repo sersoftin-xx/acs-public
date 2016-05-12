@@ -82,6 +82,15 @@ class UsersController extends AppController
 
     public function getInfo($id = null)
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о пользователе #:user_id.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+            'user_id' => $id
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $user = $this->Users->get($id);
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
@@ -89,6 +98,14 @@ class UsersController extends AppController
 
     public function index()
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список пользователей.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $users = $this->Users->find('all', [
             'contain' => ['Groups']
         ]);
