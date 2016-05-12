@@ -3,16 +3,16 @@
 <?php $this->assign('isMobile', $isMobile) ?>
 <div class="container">
     <button id="add-button" class="btn btn-success pull-right" data-toggle="modal"
-            data-target="#add-group"><span class="fa fa-plus"></span> Add new group
+            data-target="#add-group"><span class="fa fa-plus"></span> Добавление группы
     </button>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Addition date</th>
-            <th>Edit date</th>
-            <th>Actions</th>
+            <th>Имя</th>
+            <th>Дата добавления</th>
+            <th>Дата изменения</th>
+            <th>Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -41,7 +41,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit group <span id="edit-group-caption"></span></h4>
+                <h4 class="modal-title">Редактирование группы <span id="edit-group-caption"></span></h4>
             </div>
             <div class="modal-body">
                 <form id="edit-group-form" name="edit_group" class="form-horizontal bootstrap-form-with-validation"
@@ -49,7 +49,7 @@
                       action="">
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="edit-group-name-input">Name:</label>
+                            <label class="control-label" for="edit-group-name-input">Имя:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="group_name" id="edit-group-name-input"
@@ -58,7 +58,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="edit-group-group-permissions-input">Permissions:</label>
+                            <label class="control-label" for="edit-group-group-permissions-input">Права:</label>
                         </div>
                         <div class="col-sm-5">
                             <select multiple  class="form-control" name="group_permissions[]" id="edit-group-group-permissions-input"
@@ -80,10 +80,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="edit_group.submit();"><span
-                        class="glyphicon glyphicon-plus"></span> Save
+                        class="glyphicon glyphicon-plus"></span> Сохранить
                 </button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                    Close
+                    Закрыть
                 </button>
             </div>
         </div>
@@ -95,7 +95,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add group</h4>
+                <h4 class="modal-title">Добавление группы</h4>
             </div>
             <div class="modal-body">
                 <form id="add-group-form" name="add_group" class="form-horizontal bootstrap-form-with-validation"
@@ -103,7 +103,7 @@
                       action="<?= $this->Url->build(['controller' => 'Groups', 'action' => 'add']); ?>">
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="add-group-name-input">Name:</label>
+                            <label class="control-label" for="add-group-name-input">Имя:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="group_name" id="add-group-name-input"
@@ -112,7 +112,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="add-group-group-permissions-input">Permissions:</label>
+                            <label class="control-label" for="add-group-group-permissions-input">Права:</label>
                         </div>
                         <div class="col-sm-5">
                             <select multiple  class="form-control" name="group_permissions[]" id="add-group-group-permissions-input"
@@ -131,10 +131,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="add_group.submit();"><span
-                        class="glyphicon glyphicon-plus"></span> Add
+                        class="glyphicon glyphicon-plus"></span> Добавить
                 </button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                    Close
+                    Закрыть
                 </button>
             </div>
         </div>

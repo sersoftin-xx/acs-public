@@ -56,18 +56,18 @@
             <ul class="nav navbar-nav navbar-right">
                 <li role="presentation">
                     <?= $this->Html->link(
-                        $this->Html->tag('span', '', ['class' => 'fa fa-sign-out']) . 'Logout',
+                        $this->Html->tag('span', '', ['class' => 'fa fa-sign-out']) . ' Выход',
                         ['controller' => 'Users', 'action' => 'logout'],
                         ['escape' => false]
                     ); ?></li>
             </ul>
             <p class="navbar-text navbar-right show hidden-xs hidden-sm">
-                <strong>Hello, <?= $this->fetch('username') ?>!</strong>
+                <strong>Привет, <?= $this->fetch('username') ?>!</strong>
             </p>
             <ul class="nav navbar-nav navbar-right">
                 <li role="presentation">
                     <?= $this->Html->link(
-                        $this->Html->tag('span', '', ['class' => 'fa fa-user']) . ' User area',
+                        $this->Html->tag('span', '', ['class' => 'fa fa-user']) . ' Зона пользователя',
                         ['controller' => 'Bids', 'action' => 'recent'],
                         ['escape' => false]
                     ); ?></li>

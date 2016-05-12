@@ -47,7 +47,6 @@ class AppController extends Controller
         $this->loadComponent('Flash');
 
         Time::setToStringFormat([\IntlDateFormatter::MEDIUM, \IntlDateFormatter::SHORT]);
-//        Time::setJsonEncodeFormat('dd.MM.yyyy HH:mm');
 
         $this->loadComponent('Auth', Configure::read('auth'));
         $this->loadComponent('Acl');

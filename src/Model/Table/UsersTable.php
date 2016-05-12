@@ -58,9 +58,9 @@ class UsersTable extends Table
             ->requirePresence('login', 'create')
             ->add('login', 'length', [
                 'rule' => [
-                    'lengthBetween', 6, 32
+                    'lengthBetween', 6, 16
                 ],
-                'message' => __('Login must be 6-32 chars.')
+                'message' => __('Login must be 6-16 chars.')
             ])
             ->notEmpty('login');
 

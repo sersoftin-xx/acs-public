@@ -38,7 +38,7 @@ class Group extends Entity
     protected function _getEditDate($date)
     {
         if ($date == null)
-            return "Not modified";
+            return "Не изменено";
         return $date;
     }
 }

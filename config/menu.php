@@ -10,7 +10,7 @@ return [
     'users' => [
         [
             'name' => 'active_bids',
-            'caption' => 'Active',
+            'caption' => 'Активные',
             'hasBadge' => true,
             'icon' => 'fa fa-check-square-o',
             'classes' => [
@@ -23,7 +23,7 @@ return [
         ],
         [
             'name' => 'new_bids',
-            'caption' => 'Bids',
+            'caption' => 'Заявки',
             'hasBadge' => true,
             'icon' => 'glyphicon glyphicon-asterisk',
             'classes' => [
@@ -36,7 +36,7 @@ return [
         ],
         [
             'name' => 'pcs',
-            'caption' => 'PCs',
+            'caption' => 'Компьютеры',
             'hasBadge' => true,
             'icon' => 'fa fa-laptop',
             'classes' => [
@@ -49,7 +49,7 @@ return [
         ],
         [
             'name' => 'clients',
-            'caption' => 'Clients',
+            'caption' => 'Клиенты',
             'hasBadge' => true,
             'icon' => 'glyphicon glyphicon-user',
             'classes' => [
@@ -64,7 +64,7 @@ return [
     'administrators' => [
         [
             'name' => 'users',
-            'caption' => 'Users',
+            'caption' => 'Пользователи',
             'hasBadge' => true,
             'icon' => 'fa fa-user',
             'classes' => [
@@ -77,7 +77,7 @@ return [
         ],
         [
             'name' => 'groups',
-            'caption' => 'Groups',
+            'caption' => 'Группы',
             'hasBadge' => true,
             'icon' => 'fa fa-users',
             'classes' => [
@@ -90,7 +90,7 @@ return [
         ],
         [
             'name' => 'products',
-            'caption' => 'Products',
+            'caption' => 'Продукты',
             'hasBadge' => true,
             'icon' => 'fa fa-cubes',
             'classes' => [
@@ -103,7 +103,7 @@ return [
         ],
         [
             'name' => 'logs',
-            'caption' => 'Logs',
+            'caption' => 'Логи',
             'hasBadge' => true,
             'icon' => 'fa fa-history',
             'classes' => [

@@ -3,18 +3,18 @@
 <?php $this->assign('isMobile', $isMobile) ?>
 <div class="container">
     <button id="add-button" class="btn btn-success pull-right" data-toggle="modal"
-            data-target="#add-user"><span class="fa fa-plus"></span> Add new user
+            data-target="#add-user"><span class="fa fa-plus"></span> Добавить пользователя
     </button>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Login</th>
-            <th class="hidden-xs">Group</th>
-            <th class="hidden-xs">Addition date</th>
-            <th class="hidden-xs">Edit date</th>
-            <th>Actions</th>
+            <th>Имя</th>
+            <th>Логин</th>
+            <th class="hidden-xs">Группа</th>
+            <th class="hidden-xs">Дата добавления</th>
+            <th class="hidden-xs">Дата изменения</th>
+            <th>Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit user <span id="edit-user-caption"></span></h4>
+                <h4 class="modal-title">Редактирование пользователя <span id="edit-user-caption"></span></h4>
             </div>
             <div class="modal-body">
                 <form id="edit-user-form" name="edit_user" class="form-horizontal bootstrap-form-with-validation"
@@ -56,7 +56,7 @@
                       action="">
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="edit-user-name-input">Name:</label>
+                            <label class="control-label" for="edit-user-name-input">Имя:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="user_name" id="edit-user-name-input"
@@ -65,7 +65,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="edit-user-login-input">Login:</label>
+                            <label class="control-label" for="edit-user-login-input">Логин:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="user_login" id="edit-user-login-input"
@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="edit-user-group-id-input">Group:</label>
+                            <label class="control-label" for="edit-user-group-id-input">Группа:</label>
                         </div>
                         <div class="col-sm-5">
                             <select class="form-control" name="user_group_id" id="edit-user-group-id-input"
@@ -92,10 +92,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="edit_user.submit();"><span
-                        class="glyphicon glyphicon-floppy-save"></span> Save
+                        class="glyphicon glyphicon-floppy-save"></span> Сохранить
                 </button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                    Close
+                    Закрыть
                 </button>
             </div>
         </div>
@@ -107,7 +107,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add user</h4>
+                <h4 class="modal-title">Добавление пользователя</h4>
             </div>
             <div class="modal-body">
                 <form id="add-user-form" name="add_user" class="form-horizontal bootstrap-form-with-validation"
@@ -115,7 +115,7 @@
                       action="<?= $this->Url->build(['controller' => 'Users', 'action' => 'add']); ?>">
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="add-user-name-input">Name:</label>
+                            <label class="control-label" for="add-user-name-input">Имя:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="user_name" id="add-user-name-input"
@@ -124,7 +124,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="add-user-login-input">Login:</label>
+                            <label class="control-label" for="add-user-login-input">Логин:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="user_login" id="add-user-login-input"
@@ -133,7 +133,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="add-user-password-input">Password:</label>
+                            <label class="control-label" for="add-user-password-input">Пароль:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="user_password" id="add-user-password-input"
@@ -142,7 +142,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="add-user-group-id-input">Group:</label>
+                            <label class="control-label" for="add-user-group-id-input">Группа:</label>
                         </div>
                         <div class="col-sm-5">
                             <select class="form-control" name="user_group_id" id="add-user-group-id-input"
@@ -157,10 +157,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="add_user.submit();"><span
-                        class="glyphicon glyphicon-plus"></span> Add
+                        class="glyphicon glyphicon-plus"></span> Добавить
                 </button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                    Close
+                    Закрыть
                 </button>
             </div>
         </div>
@@ -172,7 +172,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Reset password for user <span id="reset-password-user-caption"></span></h4>
+                <h4 class="modal-title">Сброс пароля пользователя <span id="reset-password-user-caption"></span></h4>
             </div>
             <div class="modal-body">
                 <form id="reset-password-user-form" name="reset_password"
@@ -181,7 +181,7 @@
                       action="">
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="reset-password-user-password-input">New password:</label>
+                            <label class="control-label" for="reset-password-user-password-input">Новый пароль:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="user_password"
@@ -196,10 +196,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="reset_password.submit();"><span
-                        class="fa fa-undo"></span> Reset
+                        class="fa fa-undo"></span> Сбросить
                 </button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                    Close
+                    Закрыть
                 </button>
             </div>
         </div>

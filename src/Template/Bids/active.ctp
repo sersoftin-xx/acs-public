@@ -4,17 +4,16 @@
 <?= $this->Html->css('bootstrap-datetimepicker.min.css', ['block' => true]) ?>
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
-                active bids
+            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Поиск активных заявок
             </div>
             <div class="panel-body panel-collapse collapse" id="search-form">
                 <form id="search-form" name="search_form" class="form-horizontal" method="post">
                     <div class="col-xs-12">
                         <div class="form-group">
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-right-not-xs">
-                                <label for="search-form-query-input" class="control-label">Bid id, product, client, pc name:</label>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-right-not-xs">
+                                <label for="search-form-query-input" class="control-label">Номер заявки, продукт, клиент, компьютер:</label>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+                            <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
                                 <input id="search-form-query-input" type="text" class="form-control">
                             </div>
                         </div>
@@ -26,12 +25,12 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Product</th>
-                <th>Client</th>
-                <th class="hidden-xs hidden-sm">User PC</th>
-                <th class="hidden-xs">Activation date</th>
-                <th class="hidden-xs">Expiration date</th>
-                <th>Actions</th>
+                <th>Продукт</th>
+                <th>Клиент</th>
+                <th class="hidden-xs hidden-sm">Компьютер</th>
+                <th class="hidden-xs">Дата активации</th>
+                <th class="hidden-xs">Дата истечения</th>
+                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -61,7 +60,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit active bid <span id="edit-active-bid-caption"></span></h4>
+                    <h4 class="modal-title">Редактирование активной заявки <span id="edit-active-bid-caption"></span></h4>
                 </div>
                 <div class="modal-body">
                     <form id="edit-active-bid-form" name="edit_active_bid"
@@ -69,8 +68,7 @@
                           action="">
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-4 text-right-not-xs">
-                                <label class="control-label" for="edit-active-bid-product-id-input">Product
-                                    name:</label>
+                                <label class="control-label" for="edit-active-bid-product-id-input">Имя продукта:</label>
                             </div>
                             <div class="col-xs-12 col-sm-5">
                                 <select class="form-control" name="active_bid_product_id"
@@ -84,8 +82,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-4 text-right-not-xs">
-                                <label class="control-label" for="edit-active-bid-expiration-date-input">Expiration
-                                    date:</label>
+                                <label class="control-label" for="edit-active-bid-expiration-date-input">Дата истечения:</label>
                             </div>
                             <div class="col-xs-12 col-sm-5">
                                 <div class="input-group date" id="edit-active-bid-expiration-date-input-group">
@@ -99,7 +96,7 @@
                             </div>
                             <div id="max-date" class="col-xs-2 col-sm-2">
                                 <button type="button" class="btn btn-default" onclick="setMaxDate()">
-                                    <span class="glyphicon glyphicon-time"></span> Max date
+                                    <span class="glyphicon glyphicon-time"></span> Макс. дата
                                 </button>
                             </div>
                         </div>
@@ -111,10 +108,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="edit_active_bid.submit();"><span
-                            class="glyphicon glyphicon-floppy-save"></span> Save
+                            class="glyphicon glyphicon-floppy-save"></span> Сохранить
                     </button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                        Close
+                        Закрыть
                     </button>
                 </div>
             </div>

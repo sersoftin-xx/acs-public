@@ -3,16 +3,14 @@
 <?php $this->assign('isMobile', $isMobile) ?>
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
-                clients
+            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Поиск клиентов
             </div>
             <div class="panel-body panel-collapse collapse" id="search-form">
                 <form id="search-form" name="search_form" class="form-horizontal" method="post">
                     <div class="col-xs-12">
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 text-right-not-xs">
-                                <label for="search-form-query-input" class="control-label">Search by client name or
-                                    contact:</label>
+                                <label for="search-form-query-input" class="control-label">Имя клиента или контакт:</label>
                             </div>
                             <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
                                 <input class="form-control" type="text" id="search-form-query-input">
@@ -23,18 +21,18 @@
             </div>
         </div>
         <button id="add-button" class="btn btn-success pull-right" data-toggle="modal"
-                data-target="#add-client"><span class="fa fa-plus"></span> Add new client
+                data-target="#add-client"><span class="fa fa-plus"></span> Добавить клиента
         </button>
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th class="hidden-xs hidden-sm">PCs count</th>
-                <th class="hidden-xs hidden-sm">Products count</th>
-                <th class="hidden-xs">Contact</th>
-                <th class="hidden-xs">Addition date</th>
-                <th>Actions</th>
+                <th>Имя</th>
+                <th class="hidden-xs hidden-sm">Количество компьютеров</th>
+                <th class="hidden-xs hidden-sm">Количество продуктов</th>
+                <th class="hidden-xs">Контакт</th>
+                <th class="hidden-xs">Дата добавления</th>
+                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -69,7 +67,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit client <span id="edit-client-caption"></span></h4>
+                    <h4 class="modal-title">Редактирование клиента <span id="edit-client-caption"></span></h4>
                 </div>
                 <div class="modal-body">
                     <form id="edit-client-form" name="edit_client" class="form-horizontal bootstrap-form-with-validation"
@@ -77,7 +75,7 @@
                           action="">
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label" for="edit-client-name-input">User name:</label>
+                                <label class="control-label" for="edit-client-name-input">Имя:</label>
                             </div>
                             <div class="col-sm-5">
                                 <input class="form-control" type="text" name="client_name" id="edit-client-name-input"
@@ -86,7 +84,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label" for="edit-client-contact-input">Contact:</label>
+                                <label class="control-label" for="edit-client-contact-input">Контакт:</label>
                             </div>
                             <div class="col-sm-5">
                                 <input class="form-control" type="text" name="client_contact" id="edit-client-contact-input"
@@ -95,7 +93,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label for="edit-client-note-textarea">Note:</label>
+                                <label for="edit-client-note-textarea">Записка:</label>
                             </div>
                             <div class="col-sm-5">
                             <textarea name="client_note" class="form-control" rows="5"
@@ -109,10 +107,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="edit_client.submit();"><span
-                            class="glyphicon glyphicon-floppy-save"></span> Save
+                            class="glyphicon glyphicon-floppy-save"></span> Сохранить
                     </button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                        Close
+                        Закрыть
                     </button>
                 </div>
             </div>
@@ -124,14 +122,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add client</h4>
+                    <h4 class="modal-title">Добавление клиента</h4>
                 </div>
                 <div class="modal-body">
                     <form name="add_client" class="form-horizontal bootstrap-form-with-validation" method="post"
                           action="<?= $this->Url->build(['controller' => 'clients', 'action' => 'add']); ?>">
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label" for="add-client-name-input">Name:</label>
+                                <label class="control-label" for="add-client-name-input">Имя:</label>
                             </div>
                             <div class="col-sm-5">
                                 <input class="form-control" type="text" name="client_name" id="add-client-name-input"
@@ -140,7 +138,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label" for="add-client-contact-input">Contact:</label>
+                                <label class="control-label" for="add-client-contact-input">Контакт:</label>
                             </div>
                             <div class="col-sm-5">
                                 <input class="form-control" type="text" name="client_contact" id="add-client-contact-input"
@@ -149,7 +147,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label for="add-client-note-textarea">Note:</label>
+                                <label for="add-client-note-textarea">Записка:</label>
                             </div>
                             <div class="col-sm-5">
                             <textarea name="client_note" class="form-control" rows="5"
@@ -160,10 +158,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" onclick="add_client.submit();"><span
-                            class="glyphicon glyphicon-plus"></span> Add
+                            class="glyphicon glyphicon-plus"></span> Добавить
                     </button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                        Close
+                        Закрыть
                     </button>
                 </div>
             </div>

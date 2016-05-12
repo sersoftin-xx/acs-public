@@ -4,16 +4,15 @@
 <?= $this->Html->css('bootstrap-datetimepicker.min.css', ['block' => true]) ?>
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
-                recent bids
+            <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Поиск
+                недавних заявок
             </div>
             <div class="panel-body panel-collapse collapse" id="search-form">
                 <form id="search-form" name="search_form" class="form-horizontal" method="post">
                     <div class="col-xs-12">
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-6 col-md-4 text-right-not-xs">
-                                <label for="search-form-query-input" class="control-label">Enter bid id, pc name or product
-                                    name:</label>
+                                <label for="search-form-query-input" class="control-label">Номер заявки, имя компьютера, имя продукта:</label>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-8">
                                 <input id="search-form-query-input" type="text" class="form-control">
@@ -27,11 +26,11 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Product</th>
-                <th>PC name</th>
-                <th class="hidden-xs hidden-sm hidden-md">PC unique key</th>
-                <th class="hidden-xs">Application date</th>
-                <th>Actions</th>
+                <th>Продукт</th>
+                <th>Имя компьютера</th>
+                <th class="hidden-xs hidden-sm hidden-md">Уникальный ключ компьютера</th>
+                <th class="hidden-xs">Дата подачи</th>
+                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -61,15 +60,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Accept bid <span id="accept-bid-caption"></span></h4>
+                    <h4 class="modal-title">Принятие заявки <span id="accept-bid-caption"></span></h4>
                 </div>
                 <div class="modal-body">
                     <form id="accept-bid-form" name="accept_bid" class="form-horizontal bootstrap-form-with-validation"
                           method="post" action="">
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-4 text-right-not-xs">
-                                <label class="control-label" for="accept-bid-expiration-date-input">Expiration
-                                    date:</label>
+                                <label class="control-label" for="accept-bid-expiration-date-input">Дата истечения:</label>
                             </div>
                             <div class="col-xs-12 col-sm-5">
                                 <div class="input-group date" id="accept-bid-expiration-date-input-group">
@@ -82,7 +80,7 @@
                             </div>
                             <div id="max-date" class="col-xs-4 col-sm-2">
                                 <button type="button" class="btn btn-default" onclick="setMaxDate()">
-                                    <span class="glyphicon glyphicon-time"></span> Max date
+                                    <span class="glyphicon glyphicon-time"></span> Макс. дата
                                 </button>
                             </div>
                         </div>
@@ -93,10 +91,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" onclick="accept_bid.submit();"><span
-                            class="fa fa-check"></span> Accept
+                            class="fa fa-check"></span> Принять
                     </button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                        Close
+                        Закрыть
                     </button>
                 </div>
             </div>

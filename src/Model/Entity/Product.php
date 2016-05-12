@@ -41,6 +41,6 @@ class Product extends Entity
 
     protected function _getIsHidden()
     {
-        return $this->_properties['hidden'] ? 'Yes' : 'No';
+        return $this->_properties['hidden'] ? 'Да' : 'Нет';
     }
 }

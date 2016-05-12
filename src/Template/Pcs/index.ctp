@@ -3,16 +3,14 @@
 <?php $this->assign('isMobile', $isMobile) ?>
 <div class="container">
     <div class="panel panel-default">
-        <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Search
-            PCs
+        <div class="panel-heading" data-toggle="collapse" data-target="#search-form" style="cursor: pointer">Поиск компьютеров
         </div>
         <div class="panel-body panel-collapse collapse" id="search-form">
             <form id="search-form" name="search_form" class="form-horizontal" method="post">
                 <div class="col-xs-12">
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 text-right-not-xs">
-                            <label for="search-form-query-input" class="control-label">Search by pc name or
-                                client name:</label>
+                            <label for="search-form-query-input" class="control-label">Имя компьютера или имя клиента:</label>
                         </div>
                         <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
                             <input class="form-control" type="text" id="search-form-query-input">
@@ -26,11 +24,11 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>PC</th>
-            <th class="hidden-xs">User</th>
-            <th class="hidden-xs">Products count</th>
-            <th class="hidden-xs">Addition date</th>
-            <th>Actions</th>
+            <th>Имя компьютера</th>
+            <th class="hidden-xs">Имя клиента</th>
+            <th class="hidden-xs">Количество продуктов</th>
+            <th class="hidden-xs">Дата добавления</th>
+            <th>Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -63,7 +61,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit PC <span id="edit-pc-caption"></span></h4>
+                <h4 class="modal-title">Редактирование компьютера <span id="edit-pc-caption"></span></h4>
             </div>
             <div class="modal-body">
                 <form id="edit-pc-form" name="edit_pc" class="form-horizontal bootstrap-form-with-validation"
@@ -71,7 +69,7 @@
                       action="">
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="edit-pc-client-id-input">User name:</label>
+                            <label class="control-label" for="edit-pc-client-id-input">Имя клиента:</label>
                         </div>
                         <div class="col-sm-5">
                             <select class="form-control" name="pc_client_id" id="edit-pc-client-id-input"
@@ -84,7 +82,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label class="control-label" for="edit-pc-name-input">PC name:</label>
+                            <label class="control-label" for="edit-pc-name-input">Имя компьютера:</label>
                         </div>
                         <div class="col-sm-5">
                             <input class="form-control" type="text" name="pc_name" id="edit-pc-name-input"
@@ -93,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-5 text-right-not-xs">
-                            <label for="edit-pc-comment-textarea">Comment:</label>
+                            <label for="edit-pc-comment-textarea">Комментарий:</label>
                         </div>
                         <div class="col-sm-5">
                             <textarea name="pc_comment" class="form-control" rows="5"
@@ -106,10 +104,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="edit_pc.submit();"><span
-                        class="glyphicon glyphicon-floppy-save"></span> Save
+                        class="glyphicon glyphicon-floppy-save"></span> Сохранить
                 </button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                    Close
+                    Закрыть
                 </button>
             </div>
         </div>
