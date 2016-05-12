@@ -46,15 +46,33 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('name');
+            ->allowEmpty('name')
+            ->add('name', 'maxLength', [
+                'rule' => [
+                    'maxLength', 64
+                ],
+                'message' => 'Name max len 64 characters'
+            ]);
 
         $validator
             ->requirePresence('login', 'create')
+            ->add('login', 'length', [
+                'rule' => [
+                    'lengthBetween', 6, 32
+                ],
+                'message' => __('Login must be 6-32 chars.')
+            ])
             ->notEmpty('login');
 
         $validator
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->notEmpty('password')
+            ->add('name', 'minLength', [
+                'rule' => [
+                    'minLength', 12
+                ],
+                'message' => 'The password must be longer than 12 characters.'
+            ]);
 
         $validator
             ->dateTime('addition_date')

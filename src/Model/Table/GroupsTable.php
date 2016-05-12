@@ -51,7 +51,14 @@ class GroupsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('name');
+            ->requirePresence('name', 'create')
+            ->notEmpty('name')
+            ->add('name', 'length', [
+                'rule' => [
+                    'lengthBetween', 4, 32
+                ],
+                'message' => __('Group name must be 4-32 chars.')
+            ]);
 
         $validator
             ->requirePresence('permissions', 'create')
