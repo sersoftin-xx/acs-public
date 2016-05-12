@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Cake\Core\Configure;
 use Cake\I18n\Time;
+use Cake\Utility\Text;
 
 /**
  * Bids Controller
@@ -30,9 +31,27 @@ class BidsController extends AppController
                 'is_active' => false
             ]);
             if ($this->Bids->save($bid)) {
-                $this->Flash->success(__('The bid has been blocked.'));
+                $this->log(Text::insert('Пользователь :user_name (:client_ip). Заявка (#:bid_id) была заблокирована успешно.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'client_ip' => $this->request->clientIp(),
+                    'bid_id' => $id
+                ]), 'notice', [
+                    'scope' => [
+                        'activations'
+                    ]
+                ]);
+                $this->Flash->success(__('Заявка была заблокирована успешно.'));
             } else {
-                $this->Flash->error(__('The bid could not be blocked. Please, try again.'));
+                $this->log(Text::insert('Пользователь :user_name (:client_ip). Заявка (#:bid_id) не может быть заблокирована. Пожалуйста, попробуйте позже.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'client_ip' => $this->request->clientIp(),
+                    'bid_id' => $id
+                ]), 'error', [
+                    'scope' => [
+                        'activations'
+                    ]
+                ]);
+                $this->Flash->error('Заявка не может быть заблокирована. Пожалуйста, попробуйте позже.');
             }
         }
         return $this->redirect(['action' => 'active']);
@@ -53,14 +72,52 @@ class BidsController extends AppController
                 $this->loadModel('Pcs');
                 $pc = $this->Pcs->get($bid['pc_id']);
                 if ($this->Pcs->delete($pc)) {
-                    $this->Flash->success(__('PC for this bid has been deleted.'));
+                    $this->log(Text::insert('Пользователь :user_name (:client_ip). Компьютер (:pc_id) для этой заявки (#:bid_id) был удален.', [
+                        'user_name' => $this->Auth->user('name'),
+                        'client_ip' => $this->request->clientIp(),
+                        'pc_id' => $bid['pc_id'],
+                        'bid_id' => $id
+                    ]), 'notice', [
+                        'scope' => [
+                            'activations'
+                        ]
+                    ]);
+                    $this->Flash->success('Компьютер для этой заявки был удален');
                 } else {
-                    $this->Flash->error(__('PC for this bid could not be deleted. Please, try again.'));
+                    $this->log(Text::insert('Пользователь :user_name (:client_ip). Компьютер (:pc_id) для этой заявки (#:bid_id) не мможет быть удален.', [
+                        'user_name' => $this->Auth->user('name'),
+                        'client_ip' => $this->request->clientIp(),
+                        'pc_id' => $bid['pc_id'],
+                        'bid_id' => $id
+                    ]), 'error', [
+                        'scope' => [
+                            'activations'
+                        ]
+                    ]);
+                    $this->Flash->error('Компьютер для этой заявки не мможет быть удален.');
                 }
             }
-            $this->Flash->success(__('The bid has been rejected.'));
+            $this->log(Text::insert('Пользователь :user_name (:client_ip). Заявка (#:bid_id) была отклонена успешно.', [
+                'user_name' => $this->Auth->user('name'),
+                'client_ip' => $this->request->clientIp(),
+                'bid_id' => $id
+            ]), 'notice', [
+                'scope' => [
+                    'activations'
+                ]
+            ]);
+            $this->Flash->success('Заявка была отклонена успешно.');
         } else {
-            $this->Flash->error(__('The bid could not be rejected. Please, try again.'));
+            $this->log(Text::insert('Пользователь :user_name (:client_ip). Заявка (#:bid_id) не может быть отклонена. Пожалуйста, попробуйте позже.', [
+                'user_name' => $this->Auth->user('name'),
+                'client_ip' => $this->request->clientIp(),
+                'bid_id' => $id
+            ]), 'error', [
+                'scope' => [
+                    'activations'
+                ]
+            ]);
+            $this->Flash->error('Заявка не может быть отклонена. Пожалуйста, попробуйте позже.');
         }
         return $this->redirect(['action' => 'recent']);
     }
@@ -75,9 +132,27 @@ class BidsController extends AppController
                 'expiration_date' => Time::parse($this->request->data('bid_expiration_date')),
             ]);
             if ($this->Bids->save($bid)) {
-                $this->Flash->success(__('The bid has been accepted.'));
+                $this->log(Text::insert('Пользователь :user_name (:client_ip). Заявка (#:bid_id) была принята успешно.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'client_ip' => $this->request->clientIp(),
+                    'bid_id' => $id
+                ]), 'notice', [
+                    'scope' => [
+                        'activations'
+                    ]
+                ]);
+                $this->Flash->success('Заявка была принята успешно.');
             } else {
-                $this->Flash->error(__('The bid could not be accepted. Please, try again.'));
+                $this->log(Text::insert('Пользователь :user_name (:client_ip). Заявка (#:bid_id) не может быть принята. Пожалуйста, попробуйте позже.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'client_ip' => $this->request->clientIp(),
+                    'bid_id' => $id
+                ]), 'error', [
+                    'scope' => [
+                        'activations'
+                    ]
+                ]);
+                $this->Flash->error('Заявка не может быть принята. Пожалуйста, попробуйте позже.');
             }
         }
         return $this->redirect(['action' => 'recent']);
@@ -90,6 +165,14 @@ class BidsController extends AppController
      */
     public function recent()
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список неактивированных заявок.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
         $this->set('recent_bids', $this->Bids->find('recent', [
             'contain' => ['Products', 'Pcs']
         ])->orderDesc('Bids.id'));
@@ -104,6 +187,15 @@ class BidsController extends AppController
      */
     public function active()
     {
+        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список активированных заявок.', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp(),
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
+
         $this->loadModel('Clients');
         $this->loadModel('Pcs');
         $this->loadModel('Products');
@@ -128,45 +220,6 @@ class BidsController extends AppController
             'activation_date',
             'expiration_date'
         ])->orderDesc('Bids.id');
-//        if (isset($this->request->data['search_form_pc_id'])
-//            && !empty($this->request->data['search_form_pc_id'])
-//            && $this->request->data['search_form_pc_id'] != '0'
-//        ) {
-//            $bids->where([
-//                'pc_id' => $this->request->data['search_form_pc_id']
-//            ]);
-//        }
-//        if (isset($this->request->data['search_form_product_id'])
-//            && !empty($this->request->data['search_form_product_id'])
-//            && $this->request->data['search_form_product_id'] != '0'
-//        ) {
-//            $bids->where([
-//                'product_id' => $this->request->data['search_form_product_id']
-//            ]);
-//        }
-//        if (isset($this->request->data['search_form_client_id'])
-//            && !empty($this->request->data['search_form_client_id'])
-//            && $this->request->data['search_form_client_id'] != '0'
-//        ) {
-//            $bids->where([
-//                'Pcs.client_id' => $this->request->data['search_form_client_id']
-//            ]);
-//        }
-//
-//        if (isset($this->request->data['search_form_use_activation_date'])
-//            && !empty($this->request->data['search_form_use_activation_date']
-//                && $this->request->data['search_form_use_activation_date'] === 'on')
-//        ) {
-//
-//            $from = new Date($this->request->data['search_form_activation_date_from']);
-//            $to = new Date($this->request->data['search_form_activation_date_to']);
-//            $bids->where(
-//                function ($exp) use ($from, $to) {
-//                    return $exp->between('activation_date', $from, $to);
-//                }
-//            );
-//
-//        }
         $pcs = $this->Pcs->find('all');
         $clients = $this->Clients->find('all');
         $this->set('clients', $clients);
@@ -176,49 +229,38 @@ class BidsController extends AppController
         $this->set('username', $this->Auth->user('login'));
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $bid = $this->Bids->newEntity();
-        if ($this->request->is('post')) {
-            $bid = $this->Bids->patchEntity($bid, $this->request->data);
-            if ($this->Bids->save($bid)) {
-                $this->Flash->success(__('The bid has been saved.'));
-                $this->redirect(['action' => 'active']);
-            } else {
-                $this->Flash->error(__('The bid could not be saved. Please, try again.'));
-            }
-        }
-        $this->set('bid', $bid);
-        $this->set('_serialize', ['bid']);
-    }
-
-    /**
-     * Save method
-     *
-     * @param string|null $id Bid id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function save($id = null)
     {
         $bid = $this->Bids->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $bid = $this->Bids->patchEntity($bid, [
                 'product_id' => $this->request->data('active_bid_product_id'),
-                // TODO: исправить баг с датой
                 'expiration_date' => Time::parse($this->request->data('active_bid_expiration_date'))
             ]);
             if ($this->Bids->save($bid)) {
-                $this->Flash->success(__('The bid has been saved.'));
+                $this->log(Text::insert('Пользователь :user_name (:client_ip). Заявка (#:bid_id) была сохранена успешно.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'client_ip' => $this->request->clientIp(),
+                    'bid_id' => $id
+                ]), 'notice', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->success('Заявка была успешно сохранена.');
             } else {
-                $this->Flash->error(__('The bid could not be saved. Please, try again.'));
+                $this->log(Text::insert('Пользователь :user_name (:client_ip). Заявка (#:bid_id) не может быть сохранена. Пожалуйста, попробуйте позже.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'client_ip' => $this->request->clientIp(),
+                    'bid_id' => $id
+                ]), 'error', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->error('Заявка не может быть сохранена. Пожалуйта, попробуйте позже.');
             }
-            $this->redirect(['action' => 'active']);
         }
+        return $this->redirect(['action' => 'active']);
     }
 }
