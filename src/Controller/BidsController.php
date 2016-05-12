@@ -49,7 +49,7 @@ class BidsController extends AppController
                         'activations'
                     ]
                 ]);
-                $this->Flash->success(__('Заявка была заблокирована успешно.'));
+                $this->Flash->success('Заявка была заблокирована успешно.');
             } else {
                 $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть заблокирована. Пожалуйста, попробуйте позже.', [
                     'user_name' => $this->Auth->user('name'),
