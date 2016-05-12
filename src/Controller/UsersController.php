@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
+
 use Cake\I18n\Time;
+use Cake\Utility\Text;
 
 /**
  * Users Controller
@@ -87,6 +89,11 @@ class UsersController extends AppController
 
     public function index()
     {
+        $message = Text::insert('User :user_name(:client_ip) load users list. ', [
+            'user_name' => $this->Auth->user('name'),
+            'client_ip' => $this->request->clientIp()
+        ]);
+        $this->log($message, 'info', ['scope' => ['activations']]);
         $users = $this->Users->find('all', [
             'contain' => ['Groups']
         ]);

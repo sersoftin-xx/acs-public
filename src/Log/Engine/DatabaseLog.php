@@ -14,7 +14,12 @@ use Cake\ORM\TableRegistry;
 
 class DatabaseLog extends BaseLog
 {
-    public $Logs;
+    public $_logs;
+
+    protected $_defaultConfig = [
+        'model' => 'Logs',
+        'scopes' => []
+    ];
 
     /**
      * Construct the model class
@@ -22,9 +27,12 @@ class DatabaseLog extends BaseLog
      * @param array $config
      */
     public function __construct($config = []) {
+        
         parent::__construct($config);
-        $model = !empty($config['model']) ? $config['model'] : 'Logs';
-        $this->Logs = TableRegistry::get($model);
+
+        if (!empty($this->_config['model'])) {
+            $this->_logs = TableRegistry::get($this->_config['model']);
+        }
     }
 
     public function log($level, $message, array $context = [])
@@ -34,6 +42,6 @@ class DatabaseLog extends BaseLog
             'message' => $message,
             'date' => Time::now()
         ]);
-        $this->Logs->save($log);
+        $this->_logs->save($log);
     }
 }
