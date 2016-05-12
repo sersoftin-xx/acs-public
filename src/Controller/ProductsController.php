@@ -14,9 +14,9 @@ class ProductsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о продукте #:products.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о продукте #:products.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
             'products' => $id
         ]), 'info', [
             'scope' => [
@@ -42,9 +42,9 @@ class ProductsController extends AppController
 
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список продуктов.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список продуктов.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'

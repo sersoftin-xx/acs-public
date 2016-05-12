@@ -82,9 +82,9 @@ class UsersController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о пользователе #:user_id.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о пользователе #:user_id.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
             'user_id' => $id
         ]), 'info', [
             'scope' => [
@@ -98,9 +98,9 @@ class UsersController extends AppController
 
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список пользователей.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список пользователей.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'

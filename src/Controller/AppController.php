@@ -18,6 +18,7 @@ use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\I18n\Time;
+use Cake\Utility\Text;
 
 /**
  * Application Controller
@@ -75,7 +76,16 @@ class AppController extends Controller
             return true;
         }
         $operation = $this->Acl->getOperationName($this->request);
-        $this->Flash->error("Access to $operation denied!");
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) попытался выполнить запрещенную для его группы команду: :operation_name.', [
+            'user_name' => $this->Auth->user('name'),
+            'user_ip' => $this->request->clientIp(),
+            'operation_name' => $operation
+        ]), 'alert', [
+            'scope' => [
+                'auth'
+            ]
+        ]);
+        $this->Flash->error("Вашей группе запрещен досутп к операции $operation");
         return false;
     }
 }

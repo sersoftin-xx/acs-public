@@ -26,9 +26,9 @@ class PcsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о компьютере #:pc_id.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о компьютере #:pc_id.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
             'pc_id' => $id
         ]), 'info', [
             'scope' => [
@@ -42,9 +42,9 @@ class PcsController extends AppController
 
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список компьютеров.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список компьютеров.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'

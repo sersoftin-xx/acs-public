@@ -13,7 +13,6 @@ use Cake\Utility\Text;
  */
 class ClientsController extends AppController
 {
-
     public function block($id = null)
     {
         $this->loadModel('Pcs');
@@ -25,7 +24,17 @@ class ClientsController extends AppController
         foreach ($pcs as $pc) {
             $total += $this->Bids->blockBidsForPc($pc['id']);
         }
-        $this->Flash->success(__(Text::insert('For client #:client_id was blocked :bids_count bids.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip). Для клиента #:client_id было заблокировано :bids_count заявок.', [
+            'user_name' => $this->Auth->user('name'),
+            'user_ip' => $this->request->clientIp(),
+            'client_id' => $id,
+            'bids_count' => $total
+        ]), 'notice', [
+            'scope' => [
+                'activations'
+            ]
+        ]);
+        $this->Flash->success(__(Text::insert('Для клиента #:client_id было заблокировано :bids_count заявок.', [
             'client_id' => $id,
             'bids_count' => $total
         ])));
@@ -34,9 +43,9 @@ class ClientsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о клиенте #:client_id.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о клиенте #:client_id.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
             'client_id' => $id
         ]), 'info', [
             'scope' => [
@@ -50,9 +59,9 @@ class ClientsController extends AppController
 
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список клиентов.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список клиентов.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -97,9 +106,22 @@ class ClientsController extends AppController
                 'note' => $this->request->data('client_note'),
             ]);
             if ($this->Clients->save($client)) {
-                $this->Flash->success(__('The client has been saved.'));
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) был добавлен успешно.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'client_id' => $client['id'],
+                    'client_name' => $client['name']
+                ]), 'notice', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->success(Text::insert('Клиент #:client_id (:client_name) был добавлен успешно.', [
+                    'client_id' => $client['id'],
+                    'client_name' => $client['name']
+                ]));
             } else {
-                $this->Flash->error(__('The client could not be saved. Please, try again.'));
+                $this->Flash->error('При добавлении клиента произошла ошибка. Пожалуйста, попробуйте позже.');
             }
             $this->redirect(['action' => 'index']);
         }
@@ -115,8 +137,28 @@ class ClientsController extends AppController
                 'note' => $this->request->data['client_note']
             ]);
             if ($this->Clients->save($client)) {
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id(:client_name) был сохранен успешно.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'client_id' => $id,
+                    'client_name' => $client['name']
+                ]), 'notice', [
+                    'scope' => [
+                        'activations'
+                    ]
+                ]);
                 $this->Flash->success(__('The client has been saved.'));
             } else {
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении клиента #:client_id(:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'client_id' => $id,
+                    'client_name' => $client['name']
+                ]), 'notice', [
+                    'scope' => [
+                        'activations'
+                    ]
+                ]);
                 $this->Flash->error(__('The client could not be saved. Please, try again.'));
             }
             $this->redirect(['action' => 'index']);
@@ -128,9 +170,29 @@ class ClientsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $client = $this->Clients->get($id);
         if ($this->Clients->delete($client)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) был успешно удален.', [
+                'user_name' => $this->Auth->user('name'),
+                'user_ip' => $this->request->clientIp(),
+                'client_id' => $id,
+                'client_name' => $client['name']
+            ]), 'notice', [
+                'scope' => [
+                    'erases'
+                ]
+            ]);
+            $this->Flash->success('Клиент был удален успешно со всеми своими заявками.');
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+                'user_name' => $this->Auth->user('name'),
+                'user_ip' => $this->request->clientIp(),
+                'client_id' => $id,
+                'client_name' => $client['name']
+            ]), 'error', [
+                'scope' => [
+                    'erases'
+                ]
+            ]);
+            $this->Flash->error('Клиент #$id не может быть удален сейчас. Пожалуйста, попробуйте позже.');
         }
         return $this->redirect(['action' => 'index']);
     }

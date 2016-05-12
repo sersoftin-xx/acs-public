@@ -19,9 +19,9 @@ class GroupsController extends AppController
      */
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил список групп.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список групп.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -38,9 +38,9 @@ class GroupsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил запросил информацию о группе #:group_id.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о группе #:group_id.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
             'group_id' => $id
         ]), 'info', [
             'scope' => [

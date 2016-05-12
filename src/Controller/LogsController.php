@@ -11,9 +11,9 @@ class LogsController extends AppController
 {
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) запросил логи.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил логи.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp(),
+            'user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -29,9 +29,9 @@ class LogsController extends AppController
 
     public function clear()
     {
-        $this->log(Text::insert('Пользователь :user_name (:client_ip) очистил логи базы данных.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip) очистил логи базы данных.', [
             'user_name' => $this->Auth->user('name'),
-            'client_ip' => $this->request->clientIp()
+            'user_ip' => $this->request->clientIp()
         ]), 'info', [
             'scope' => [
                 'requests'
