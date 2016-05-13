@@ -23,7 +23,7 @@ return [
         ],
         [
             'name' => 'new_bids',
-            'caption' => 'Заявки',
+            'caption' => 'Новые',
             'hasBadge' => true,
             'icon' => 'glyphicon glyphicon-asterisk',
             'classes' => [

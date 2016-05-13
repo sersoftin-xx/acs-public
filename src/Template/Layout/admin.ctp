@@ -54,23 +54,25 @@
         <div class="collapse navbar-collapse" id="navcol">
             <?= $this->cell('Menu', ['administrators']); ?>
             <ul class="nav navbar-nav navbar-right">
-                <li role="presentation">
-                    <?= $this->Html->link(
-                        $this->Html->tag('span', '', ['class' => 'fa fa-sign-out']) . ' Выход',
-                        ['controller' => 'Users', 'action' => 'logout'],
-                        ['escape' => false]
-                    ); ?></li>
-            </ul>
-            <p class="navbar-text navbar-right show hidden-xs hidden-sm">
-                <strong>Привет, <?= $this->fetch('username') ?>!</strong>
-            </p>
-            <ul class="nav navbar-nav navbar-right">
-                <li role="presentation">
-                    <?= $this->Html->link(
-                        $this->Html->tag('span', '', ['class' => 'fa fa-user']) . ' Зона пользователя',
-                        ['controller' => 'Bids', 'action' => 'recent'],
-                        ['escape' => false]
-                    ); ?></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><strong>Привет, <?= $this->fetch('username') ?>!</strong></a>
+                    <ul class="dropdown-menu">
+                        <li role="presentation">
+                            <?= $this->Html->link(
+                                $this->Html->tag('span', '', ['class' => 'fa fa-user']) . ' Зона пользователя',
+                                ['controller' => 'Bids', 'action' => 'recent'],
+                                ['escape' => false]
+                            ); ?></li>
+                        <li role="separator" class="divider"></li>
+                        <li role="presentation">
+                            <?= $this->Html->link(
+                                $this->Html->tag('span', '', ['class' => 'fa fa-sign-out']) . ' Выход',
+                                ['controller' => 'Users', 'action' => 'logout'],
+                                ['escape' => false]
+                            ); ?></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
