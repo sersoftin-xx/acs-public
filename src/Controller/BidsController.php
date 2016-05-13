@@ -18,9 +18,9 @@ class BidsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о заявке #:bid_id.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил запросил информацию о заявке #:bid_id.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'bid_id' => $id
         ]), 'info', [
             'scope' => [
@@ -40,9 +40,9 @@ class BidsController extends AppController
                 'is_active' => false
             ]);
             if ($this->Bids->save($bid)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) была заблокирована успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Заявка (#:bid_id) была заблокирована успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'bid_id' => $id
                 ]), 'notice', [
                     'scope' => [
@@ -53,9 +53,9 @@ class BidsController extends AppController
                     'bid_id' => $id
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть заблокирована. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Заявка (#:bid_id) не может быть заблокирована. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'bid_id' => $id
                 ]), 'error', [
                     'scope' => [
@@ -85,9 +85,9 @@ class BidsController extends AppController
                 $this->loadModel('Pcs');
                 $pc = $this->Pcs->get($bid['pc_id']);
                 if ($this->Pcs->delete($pc)) {
-                    $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер (:pc_id) для этой заявки (#:bid_id) был удален.', [
-                        'user_name' => $this->Auth->user('name'),
-                        'user_ip' => $this->request->clientIp(),
+                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Компьютер (:pc_id) для этой заявки (#:bid_id) был удален.', [
+                        'auth_user_name' => $this->Auth->user('name'),
+                        'auth_user_ip' => $this->request->clientIp(),
                         'pc_id' => $bid['pc_id'],
                         'bid_id' => $id
                     ]), 'notice', [
@@ -100,9 +100,9 @@ class BidsController extends AppController
                         'bid_id' => $id
                     ]));
                 } else {
-                    $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер (:pc_id) для этой заявки (#:bid_id) не мможет быть удален.', [
-                        'user_name' => $this->Auth->user('name'),
-                        'user_ip' => $this->request->clientIp(),
+                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Компьютер (:pc_id) для этой заявки (#:bid_id) не мможет быть удален.', [
+                        'auth_user_name' => $this->Auth->user('name'),
+                        'auth_user_ip' => $this->request->clientIp(),
                         'pc_id' => $bid['pc_id'],
                         'bid_id' => $id
                     ]), 'error', [
@@ -116,9 +116,9 @@ class BidsController extends AppController
                     ]));
                 }
             }
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) была отклонена успешно.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Заявка (#:bid_id) была отклонена успешно.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'bid_id' => $id
             ]), 'notice', [
                 'scope' => [
@@ -129,9 +129,9 @@ class BidsController extends AppController
                 'bid_id' => $id
             ]));
         } else {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть отклонена. Пожалуйста, попробуйте позже.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Заявка (#:bid_id) не может быть отклонена. Пожалуйста, попробуйте позже.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'bid_id' => $id
             ]), 'error', [
                 'scope' => [
@@ -155,9 +155,9 @@ class BidsController extends AppController
                 'expiration_date' => Time::parse($this->request->data('bid_expiration_date')),
             ]);
             if ($this->Bids->save($bid)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) была принята успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Заявка (#:bid_id) была принята успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'bid_id' => $id
                 ]), 'notice', [
                     'scope' => [
@@ -168,9 +168,9 @@ class BidsController extends AppController
                     'bid_id' => $id
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть принята. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Заявка (#:bid_id) не может быть принята. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'bid_id' => $id
                 ]), 'error', [
                     'scope' => [
@@ -192,9 +192,9 @@ class BidsController extends AppController
      */
     public function recent()
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список неактивированных заявок.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp()
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил список неактивированных заявок.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp()
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -214,9 +214,9 @@ class BidsController extends AppController
      */
     public function active()
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список активированных заявок.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp()
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил список активированных заявок.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp()
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -265,9 +265,9 @@ class BidsController extends AppController
                 'expiration_date' => Time::parse($this->request->data('active_bid_expiration_date'))
             ]);
             if ($this->Bids->save($bid)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) была сохранена успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Заявка (#:bid_id) была сохранена успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'bid_id' => $id
                 ]), 'notice', [
                     'scope' => [
@@ -278,9 +278,9 @@ class BidsController extends AppController
                     'bid_id' => $id
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть сохранена. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Заявка (#:bid_id) не может быть сохранена. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'bid_id' => $id
                 ]), 'error', [
                     'scope' => [

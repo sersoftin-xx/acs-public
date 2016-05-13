@@ -14,9 +14,9 @@ class ProductsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о продукте #:product_id.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил запросил информацию о продукте #:product_id.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'product_id' => $id
         ]), 'info', [
             'scope' => [
@@ -32,8 +32,8 @@ class ProductsController extends AppController
     {
         $product = $this->Products->get($id);
         $this->log(Text::insert('Какой-то клиент :client_ip загружает продукт #:product_id (product_name).', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'product_id' => $id,
             'product_name' => $product['name']
         ]), 'info', [
@@ -52,9 +52,9 @@ class ProductsController extends AppController
 
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список продуктов.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил список продуктов.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -82,9 +82,9 @@ class ProductsController extends AppController
                 ];
                 $product = $this->Products->patchEntity($product, $product_data);
                 if ($this->Products->save($product)) {
-                    $this->log(Text::insert('Пользователь :user_name (:user_ip). Продукт #:product_id (:product_name) был добавлен успешно.', [
-                        'user_name' => $this->Auth->user('name'),
-                        'user_ip' => $this->request->clientIp(),
+                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Продукт #:product_id (:product_name) был добавлен успешно.', [
+                        'auth_user_name' => $this->Auth->user('name'),
+                        'auth_user_ip' => $this->request->clientIp(),
                         'product_id' => $product['id'],
                         'product_name' => $product['name']
                     ]), 'notice', [
@@ -97,9 +97,9 @@ class ProductsController extends AppController
                         'product_name' => $product['name']
                     ]));
                 } else {
-                    $this->log(Text::insert('Пользователь :user_name (:user_ip). При добавлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                        'user_name' => $this->Auth->user('name'),
-                        'user_ip' => $this->request->clientIp(),
+                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При добавлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                        'auth_user_name' => $this->Auth->user('name'),
+                        'auth_user_ip' => $this->request->clientIp(),
                         'product_id' => $product['id'],
                         'product_name' => $product['name']
                     ]), 'error', [
@@ -114,9 +114,9 @@ class ProductsController extends AppController
                 }
                 $this->redirect(['action' => 'index']);
             }
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). При загрузке файла продукта #:product_id (:product_name) произошла ошибка.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При загрузке файла продукта #:product_id (:product_name) произошла ошибка.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'product_id' => $product['id'],
                 'product_name' => $product['name']
             ]), 'error', [
@@ -144,9 +144,9 @@ class ProductsController extends AppController
             ];
             $product = $this->Products->patchEntity($product, $product_data);
             if ($this->Products->save($product)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Продукт #:product_id (:product_name) был сохранен успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Продукт #:product_id (:product_name) был сохранен успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'product_id' => $id,
                     'product_name' => $product['name']
                 ]), 'notice', [
@@ -159,9 +159,9 @@ class ProductsController extends AppController
                     'product_name' => $product['name']
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При сохранении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'product_id' => $id,
                     'product_name' => $product['name']
                 ]), 'error', [
@@ -190,9 +190,9 @@ class ProductsController extends AppController
                 ];
                 $product = $this->Products->patchEntity($product, $product_data);
                 if ($this->Products->save($product)) {
-                    $this->log(Text::insert('Пользователь :user_name (:user_ip). Продукт #:product_id (:product_name) был обновлен успешно.', [
-                        'user_name' => $this->Auth->user('name'),
-                        'user_ip' => $this->request->clientIp(),
+                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Продукт #:product_id (:product_name) был обновлен успешно.', [
+                        'auth_user_name' => $this->Auth->user('name'),
+                        'auth_user_ip' => $this->request->clientIp(),
                         'product_id' => $id,
                         'product_name' => $product['name']
                     ]), 'notice', [
@@ -205,9 +205,9 @@ class ProductsController extends AppController
                         'product_name' => $product['name']
                     ]));
                 } else {
-                    $this->log(Text::insert('Пользователь :user_name (:user_ip). При обновлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                        'user_name' => $this->Auth->user('name'),
-                        'user_ip' => $this->request->clientIp(),
+                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При обновлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                        'auth_user_name' => $this->Auth->user('name'),
+                        'auth_user_ip' => $this->request->clientIp(),
                         'product_id' => $id,
                         'product_name' => $product['name']
                     ]), 'error', [
@@ -222,9 +222,9 @@ class ProductsController extends AppController
                 }
                 $this->redirect(['action' => 'index']);
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При загрузке файла для продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При загрузке файла для продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'product_id' => $id,
                     'product_name' => $product['name']
                 ]), 'error', [
@@ -246,9 +246,9 @@ class ProductsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $product = $this->Products->get($id);
         if ($this->Products->delete($product)) {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Продукт #:product_id (:product_name) был успешно удален.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Продукт #:product_id (:product_name) был успешно удален.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'product_id' => $id,
                 'product_name' => $product['name']
             ]), 'notice', [
@@ -261,9 +261,9 @@ class ProductsController extends AppController
                 'product_name' => $product['name']
             ]));
         } else {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Продукт #:product_id (:product_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Продукт #:product_id (:product_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'product_id' => $id,
                 'product_name' => $product['name']
             ]), 'error', [

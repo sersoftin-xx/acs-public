@@ -43,11 +43,11 @@ class UsersController extends AppController
                 'edit_date' => Time::now()
             ]);
             if ($this->Users->save($user)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Пользователь #:user_id (:user_name2) был сохранен успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Пользователь #:user_id (:user_name) был сохранен успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'user_id' => $id,
-                    'user_name2' => $user['name']
+                    'user_name' => $user['name']
                 ]), 'notice', [
                     'scope' => [
                         'changes'
@@ -58,11 +58,11 @@ class UsersController extends AppController
                     'user_id' => $id
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении пользователя #:user_id (:user_name2) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При сохранении пользователя #:user_id (:user_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'user_id' => $id,
-                    'user_name2' => $user['name']
+                    'user_name' => $user['name']
                 ]), 'error', [
                     'scope' => [
                         'changes'
@@ -86,11 +86,11 @@ class UsersController extends AppController
                 'edit_date' => Time::now()
             ]);
             if ($this->Users->save($user)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Пароль пользователя #:user_id (:user_name2) был сброшен успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Пароль пользователя #:user_id (:user_name) был сброшен успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'user_id' => $id,
-                    'user_name2' => $user['name']
+                    'user_name' => $user['name']
                 ]), 'notice', [
                     'scope' => [
                         'changes'
@@ -101,11 +101,11 @@ class UsersController extends AppController
                     'user_id' => $id
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сбросе пароля пользователя #:user_id (:user_name2) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При сбросе пароля пользователя #:user_id (:user_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'user_id' => $id,
-                    'user_name2' => $user['name']
+                    'user_name' => $user['name']
                 ]), 'error', [
                     'scope' => [
                         'changes'
@@ -125,34 +125,34 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Пользователь #:user_id (:user_name2) был успешно удален.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Пользователь #:user_id (:user_name) был успешно удален.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'user_id' => $id,
-                'user_name2' => $user['name']
+                'user_name' => $user['name']
             ]), 'notice', [
                 'scope' => [
                     'erases'
                 ]
             ]);
-            $this->Flash->success(Text::insert('Пользователь #:user_id (:user_name2) был успешно удален.', [
+            $this->Flash->success(Text::insert('Пользователь #:user_id (:user_name) был успешно удален.', [
                 'user_id' => $id,
-                'user_name2' => $user['name']
+                'user_name' => $user['name']
             ]));
         } else {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Пользователь #:user_id (:user_name2) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Пользователь #:user_id (:user_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'user_id' => $id,
-                'user_name2' => $user['name']
+                'user_name' => $user['name']
             ]), 'error', [
                 'scope' => [
                     'erases'
                 ]
             ]);
-            $this->Flash->error(Text::insert('Пользователь #:user_id (:user_name2) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+            $this->Flash->error(Text::insert('Пользователь #:user_id (:user_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
                 'user_id' => $id,
-                'user_name2' => $user['name']
+                'user_name' => $user['name']
             ]));
         }
         return $this->redirect(['action' => 'index']);
@@ -160,9 +160,9 @@ class UsersController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о пользователе #:user_id.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил запросил информацию о пользователе #:user_id.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'user_id' => $id
         ]), 'info', [
             'scope' => [
@@ -176,9 +176,9 @@ class UsersController extends AppController
 
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список пользователей.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил список пользователей.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -203,9 +203,9 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                $this->log(Text::insert('Пользователь :user_name (:user_ip) вошел в систему.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) вошел в систему.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                 ]), 'notice', [
                     'scope' => [
                         'auth'
@@ -213,9 +213,9 @@ class UsersController extends AppController
                 ]);
                 $this->redirect($this->Auth->redirectUrl());
             }
-            $this->log(Text::insert('Пользователь :user_name (:user_ip) не смог войти в систему. Неправильный логин или пароль.', [
+            $this->log(Text::insert('Пользователь :user_name (:auth_user_ip) не смог войти в систему. Неправильный логин или пароль.', [
                 'user_name' => $this->request->data('login'),
-                'user_ip' => $this->request->clientIp(),
+                'auth_user_ip' => $this->request->clientIp(),
             ]), 'alert', [
                 'scope' => [
                     'auth'
@@ -228,9 +228,9 @@ class UsersController extends AppController
 
     public function logout()
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) вышел из системы.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) вышел из системы.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
         ]), 'notice', [
             'scope' => [
                 'auth'

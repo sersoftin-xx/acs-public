@@ -17,9 +17,9 @@ class PcsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $this->loadModel('Bids');
         $bids_count = $this->Bids->blockBidsForPc($id);
-        $this->log(Text::insert('Пользователь :user_name (:user_ip). Для компьютера #:pc_id было заблокировано :bids_count заявок.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Для компьютера #:pc_id было заблокировано :bids_count заявок.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'pc_id' => $id,
             'bids_count' => $bids_count
         ]), 'notice', [
@@ -36,9 +36,9 @@ class PcsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о компьютере #:pc_id.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил запросил информацию о компьютере #:pc_id.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'pc_id' => $id
         ]), 'info', [
             'scope' => [
@@ -52,9 +52,9 @@ class PcsController extends AppController
 
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список компьютеров.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил список компьютеров.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -94,9 +94,9 @@ class PcsController extends AppController
                 'comment' => $this->request->data('pc_comment')
             ]);
             if ($this->Pcs->save($pc)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер #:pc_id (:pc_name) был сохранен успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Компьютер #:pc_id (:pc_name) был сохранен успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'pc_id' => $id,
                     'pc_name' => $pc['name']
                 ]), 'notice', [
@@ -109,9 +109,9 @@ class PcsController extends AppController
                     'pc_name' => $pc['name']
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении компьютера #:pc_id (:pc_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При сохранении компьютера #:pc_id (:pc_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'pc_id' => $id,
                     'pc_name' => $pc['name']
                 ]), 'error', [
@@ -133,9 +133,9 @@ class PcsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $pc = $this->Pcs->get($id);
         if ($this->Pcs->delete($pc)) {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер #:pc_id (:pc_name) был успешно удален.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Компьютер #:pc_id (:pc_name) был успешно удален.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'pc_id' => $id,
                 'pc_name' => $pc['name']
             ]), 'notice', [
@@ -148,9 +148,9 @@ class PcsController extends AppController
                 'pc_name' => $pc['name']
             ]));
         } else {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер #:pc_id (:pc_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Компьютер #:pc_id (:pc_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'pc_id' => $id,
                 'pc_name' => $pc['name']
             ]), 'error', [

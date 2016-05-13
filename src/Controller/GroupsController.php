@@ -19,9 +19,9 @@ class GroupsController extends AppController
      */
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список групп.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил список групп.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -38,9 +38,9 @@ class GroupsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о группе #:group_id.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил запросил информацию о группе #:group_id.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'group_id' => $id
         ]), 'info', [
             'scope' => [
@@ -62,9 +62,9 @@ class GroupsController extends AppController
                 'addition_date' => Time::now()
             ]);
             if ($this->Groups->save($group)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Группа #:group_id (:group_name) была добавлена успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Группа #:group_id (:group_name) была добавлена успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'group_id' => $group['id'],
                     'group_name' => $group['name']
                 ]), 'notice', [
@@ -77,9 +77,9 @@ class GroupsController extends AppController
                     'group_name' => $group['name']
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При добавлении группы #:group_id (:group_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При добавлении группы #:group_id (:group_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'group_id' => $group['id'],
                     'group_name' => $group['name']
                 ]), 'error', [
@@ -101,9 +101,9 @@ class GroupsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $group = $this->Groups->get($id);
         if ($this->Groups->delete($group)) {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Группа #:group_id (:group_name) была успешно удалена.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Группа #:group_id (:group_name) была успешно удалена.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'group_id' => $id,
                 'group_name' => $group['name']
             ]), 'notice', [
@@ -116,9 +116,9 @@ class GroupsController extends AppController
                 'group_name' => $group['name']
             ]));
         } else {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Группа #:group_id (:group_name) не может быть удалена сейчас. Пожалуйста, попробуйте позже.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Группа #:group_id (:group_name) не может быть удалена сейчас. Пожалуйста, попробуйте позже.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'group_id' => $id,
                 'group_name' => $group['name']
             ]), 'error', [
@@ -144,9 +144,9 @@ class GroupsController extends AppController
                 'edit_date' => Time::now()
             ]);
             if ($this->Groups->save($group)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Группа #:group_id (:group_name) была сохранена успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Группа #:group_id (:group_name) была сохранена успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'group_id' => $id,
                     'group_name' => $group['name']
                 ]), 'notice', [
@@ -159,9 +159,9 @@ class GroupsController extends AppController
                     'group_name' => $group['name']
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении группы #:group_id (:group_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При сохранении группы #:group_id (:group_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'group_id' => $id,
                     'group_name' => $group['name']
                 ]), 'error', [

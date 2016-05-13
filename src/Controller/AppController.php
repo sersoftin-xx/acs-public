@@ -76,9 +76,9 @@ class AppController extends Controller
             return true;
         }
         $operation = $this->Acl->getOperationName($this->request);
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) попытался выполнить запрещенную для его группы команду: :operation_name.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) попытался выполнить запрещенную для его группы команду: :operation_name.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'operation_name' => $operation
         ]), 'alert', [
             'scope' => [

@@ -24,9 +24,9 @@ class ClientsController extends AppController
         foreach ($pcs as $pc) {
             $total += $this->Bids->blockBidsForPc($pc['id']);
         }
-        $this->log(Text::insert('Пользователь :user_name (:user_ip). Для клиента #:client_id было заблокировано :bids_count заявок.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Для клиента #:client_id было заблокировано :bids_count заявок.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'client_id' => $id,
             'bids_count' => $total
         ]), 'notice', [
@@ -43,9 +43,9 @@ class ClientsController extends AppController
 
     public function getInfo($id = null)
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил запросил информацию о клиенте #:client_id.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил запросил информацию о клиенте #:client_id.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
             'client_id' => $id
         ]), 'info', [
             'scope' => [
@@ -59,9 +59,9 @@ class ClientsController extends AppController
 
     public function index()
     {
-        $this->log(Text::insert('Пользователь :user_name (:user_ip) запросил список клиентов.', [
-            'user_name' => $this->Auth->user('name'),
-            'user_ip' => $this->request->clientIp(),
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил список клиентов.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
         ]), 'info', [
             'scope' => [
                 'requests'
@@ -106,9 +106,9 @@ class ClientsController extends AppController
                 'note' => $this->request->data('client_note'),
             ]);
             if ($this->Clients->save($client)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) был добавлен успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Клиент #:client_id (:client_name) был добавлен успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'client_id' => $client['id'],
                     'client_name' => $client['name']
                 ]), 'notice', [
@@ -121,9 +121,9 @@ class ClientsController extends AppController
                     'client_name' => $client['name']
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При добавлении клиента #:client_id (:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При добавлении клиента #:client_id (:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'client_id' => $client['id'],
                     'client_name' => $client['name']
                 ]), 'error', [
@@ -150,9 +150,9 @@ class ClientsController extends AppController
                 'note' => $this->request->data['client_note']
             ]);
             if ($this->Clients->save($client)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) был сохранен успешно.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Клиент #:client_id (:client_name) был сохранен успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'client_id' => $id,
                     'client_name' => $client['name']
                 ]), 'notice', [
@@ -165,9 +165,9 @@ class ClientsController extends AppController
                     'client_name' => $client['name']
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении клиента #:client_id (:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'user_name' => $this->Auth->user('name'),
-                    'user_ip' => $this->request->clientIp(),
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При сохранении клиента #:client_id (:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
                     'client_id' => $id,
                     'client_name' => $client['name']
                 ]), 'error', [
@@ -189,9 +189,9 @@ class ClientsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $client = $this->Clients->get($id);
         if ($this->Clients->delete($client)) {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) был успешно удален со всеми заявками.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Клиент #:client_id (:client_name) был успешно удален со всеми заявками.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'client_id' => $id,
                 'client_name' => $client['name']
             ]), 'notice', [
@@ -204,9 +204,9 @@ class ClientsController extends AppController
                 'client_name' => $client['name']
             ]));
         } else {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
-                'user_name' => $this->Auth->user('name'),
-                'user_ip' => $this->request->clientIp(),
+            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Клиент #:client_id (:client_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+                'auth_user_name' => $this->Auth->user('name'),
+                'auth_user_ip' => $this->request->clientIp(),
                 'client_id' => $id,
                 'client_name' => $client['name']
             ]), 'error', [
