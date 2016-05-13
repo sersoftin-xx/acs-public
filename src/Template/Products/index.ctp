@@ -1,5 +1,6 @@
 <?php $this->assign('username', $username) ?>
 <?= $this->Html->css('awesome-bootstrap-checkbox.css', ['block' => true]) ?>
+<?php $this->assign('isMobile', $isMobile) ?>
     <div class="container">
         <button id="add-button" class="btn btn-success pull-right" data-toggle="modal"
                 data-target="#add-new-product"><span class="fa fa-plus"></span> Добавить продукт
@@ -27,16 +28,22 @@
                     <td class="hidden-xs"><?= $product['update_date'] ?></td>
                     <td>
                         <div class="btn-group btn-group-xs btn-group-xs-small" role="group">
-                            <button type="button" class="btn btn-info"
-                                    onclick="showUploadNewProductVersionDialog(<?= $product['id'] ?>);"><span
-                                    class="fa fa-upload"></span></button>
+                            <?php if (!$isMobile): ?>
+                                <button type="button" class="btn btn-info"
+                                        onclick="showUploadNewProductVersionDialog(<?= $product['id'] ?>);"><span
+                                        class="fa fa-upload"></span></button>
+                            <?php endif; ?>
+
                             <button type="button" class="btn btn-warning"
                                     onclick="showEditProductDialog(<?= $product['id'] ?>);"><span
                                     class="fa fa-pencil-square-o"></span></button>
-                            <button type="button" class="btn btn-success download-link-generator hidden-xs hidden-sm"
-                                    data-clipboard-text="<?= $this->Url->build(['controller' => 'products', 'action' => 'download', $product['id']], true); ?>">
-                                <span class="fa fa-copy"></span>
-                            </button>
+                            <?php if (!$isMobile): ?>
+                                <button type="button"
+                                        class="btn btn-success download-link-generator hidden-xs hidden-sm"
+                                        data-clipboard-text="<?= $this->Url->build(['controller' => 'products', 'action' => 'download', $product['id']], true); ?>">
+                                    <span class="fa fa-copy"></span>
+                                </button>
+                            <?php endif; ?>
                             <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'products', 'action' => 'delete', $product['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
                         </div>
                     </td>

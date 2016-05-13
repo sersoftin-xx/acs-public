@@ -237,7 +237,7 @@ class UsersController extends AppController
                         'auth'
                     ]
                 ]);
-                $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect($this->Auth->redirectUrl());
             }
             $this->log(Text::insert('Пользователь с логином :user_login (:auth_user_ip) не смог войти в систему. Неправильный логин или пароль.', [
                 'user_login' => $this->request->data('login'),

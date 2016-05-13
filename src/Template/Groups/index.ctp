@@ -10,8 +10,8 @@
         <tr>
             <th>#</th>
             <th>Имя</th>
-            <th>Дата добавления</th>
-            <th>Дата изменения</th>
+            <th class="hidden-xs">Дата добавления</th>
+            <th class="hidden-xs">Дата изменения</th>
             <th>Действия</th>
         </tr>
         </thead>
@@ -20,8 +20,8 @@
             <tr>
                 <td><?= $group['id'] ?></td>
                 <td><?= $group['name'] ?></td>
-                <td><?= $group['addition_date'] ?></td>
-                <td><?= $group['edit_date'] ?></td>
+                <td class="hidden-xs"><?= $group['addition_date'] ?></td>
+                <td class="hidden-xs"><?= $group['edit_date'] ?></td>
                 <td>
                     <div class="btn-group btn-group-xs btn-group-xs-small" role="group">
                         <button type="button" class="btn btn-warning"
