@@ -27,7 +27,7 @@
                         <button type="button" class="btn btn-warning"
                                 onclick="showEditUserDialog(<?= $group['id'] ?>);"><span
                                 class="fa fa-pencil-square-o"></span></button>
-                        <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'users', 'action' => 'delete', $group['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                        <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'Groups', 'action' => 'delete', $group['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
                     </div>
                 </td>
             </tr>
