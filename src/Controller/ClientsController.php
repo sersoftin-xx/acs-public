@@ -34,10 +34,10 @@ class ClientsController extends AppController
                 'activations'
             ]
         ]);
-        $this->Flash->success(__(Text::insert('Для клиента #:client_id было заблокировано :bids_count заявок.', [
+        $this->Flash->success(Text::insert('Для клиента #:client_id было заблокировано :bids_count заявок.', [
             'client_id' => $id,
             'bids_count' => $total
-        ])));
+        ]));
         return $this->redirect(['action' => 'index']);
     }
 
@@ -121,7 +121,20 @@ class ClientsController extends AppController
                     'client_name' => $client['name']
                 ]));
             } else {
-                $this->Flash->error('При добавлении клиента произошла ошибка. Пожалуйста, попробуйте позже.');
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). При добавлении клиента #:client_id (:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'client_id' => $client['id'],
+                    'client_name' => $client['name']
+                ]), 'error', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->error(Text::insert('При добавлении клиента #:client_id (:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'client_id' => $client['id'],
+                    'client_name' => $client['name']
+                ]));
             }
             $this->redirect(['action' => 'index']);
         }
@@ -144,22 +157,28 @@ class ClientsController extends AppController
                     'client_name' => $client['name']
                 ]), 'notice', [
                     'scope' => [
-                        'activations'
+                        'changes'
                     ]
                 ]);
-                $this->Flash->success(__('The client has been saved.'));
+                $this->Flash->success(Text::insert('Клиент #:client_id(:client_name) был сохранен успешно.', [
+                    'client_id' => $id,
+                    'client_name' => $client['name']
+                ]));
             } else {
                 $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении клиента #:client_id(:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
                     'user_name' => $this->Auth->user('name'),
                     'user_ip' => $this->request->clientIp(),
                     'client_id' => $id,
                     'client_name' => $client['name']
-                ]), 'notice', [
+                ]), 'error', [
                     'scope' => [
-                        'activations'
+                        'changes'
                     ]
                 ]);
-                $this->Flash->error(__('The client could not be saved. Please, try again.'));
+                $this->Flash->error(Text::insert('При сохранении клиента #:client_id(:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'client_id' => $id,
+                    'client_name' => $client['name']
+                ]));
             }
             $this->redirect(['action' => 'index']);
         }
