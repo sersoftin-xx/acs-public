@@ -24,9 +24,35 @@ class UsersController extends AppController
                 'addition_date' => Time::now()
             ]);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Пользователь #:user_id (:user_name) был добавлен успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
+                    'user_id' => $user['id'],
+                    'user_name' => $user['name']
+                ]), 'notice', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->success(Text::insert('Пользователь #:user_id (:user_name) был добавлен успешно.', [
+                    'user_id' => $user['id'],
+                    'user_name' => $user['name']
+                ]));
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При добавлении пользователя #:user_id (:user_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
+                    'user_id' => $user['id'],
+                    'user_name' => $user['name']
+                ]), 'error', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->error(Text::insert('При добавлении пользователя #:user_id (:user_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'user_id' => $user['id'],
+                    'user_name' => $user['name']
+                ]));
             }
             $this->redirect(['action' => 'index']);
         }
