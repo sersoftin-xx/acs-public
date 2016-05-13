@@ -44,7 +44,16 @@
                                     <span class="fa fa-copy"></span>
                                 </button>
                             <?php endif; ?>
-                            <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'products', 'action' => 'delete', $product['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                            <?= $this->Form->postLink($this->Html->tag('span', '', [
+                                'class' => 'fa fa-remove'
+                            ]), [
+                                'controller' => 'products',
+                                'action' => 'delete', $product['id']
+                            ], [
+                                'class' => 'btn btn-danger',
+                                'escape' => false,
+                                'confirm' => 'Вы действительно хотите удалить продукт? Будут удалены все заявки на него.'
+                            ]) ?>
                         </div>
                     </td>
                 </tr>

@@ -47,7 +47,16 @@
                             <button type="button" class="btn btn-warning"
                                     onclick="showEditActiveBidDialog(<?= $bid['id'] ?>);"><span
                                     class="fa fa-pencil-square-o"></span></button>
-                            <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-lock']), ['controller' => 'bids', 'action' => 'block', $bid['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                            <?= $this->Form->postLink($this->Html->tag('span', '', [
+                                'class' => 'fa fa-lock'
+                            ]), [
+                                'controller' => 'bids',
+                                'action' => 'block', $bid['id']
+                            ], [
+                                'class' => 'btn btn-danger',
+                                'escape' => false,
+                                'confirm' => 'Вы действительно хотите заблокировать заявку?'
+                            ]) ?>
                         </div>
                     </td>
                 </tr>

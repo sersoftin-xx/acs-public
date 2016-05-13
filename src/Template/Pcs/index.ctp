@@ -44,9 +44,27 @@
                         <button type="button" class="btn btn-warning"
                                 onclick="showEditPcDialog(<?= $pc['id'] ?>);"><span
                                 class="fa fa-pencil-square-o"></span></button>
-                        <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-lock']), ['controller' => 'pcs', 'action' => 'block', $pc['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                        <?= $this->Form->postLink($this->Html->tag('span', '', [
+                            'class' => 'fa fa-lock'
+                        ]), [
+                            'controller' => 'pcs',
+                            'action' => 'block', $pc['id']
+                        ], [
+                            'class' => 'btn btn-danger',
+                            'escape' => false,
+                            'confirm' => 'Вы действительно хотите заблокировать компьютер? Все заявки на этом компьютере будут заблокированы.'
+                        ]) ?>
                         <?php if (!$isMobile): ?>
-                            <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'pcs', 'action' => 'delete', $pc['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                            <?= $this->Form->postLink($this->Html->tag('span', '', [
+                                'class' => 'fa fa-remove'
+                            ]), [
+                                'controller' => 'pcs',
+                                'action' => 'delete', $pc['id']
+                            ], [
+                                'class' => 'btn btn-danger',
+                                'escape' => false,
+                                'confirm' => 'Вы действительно хотите удалить компьютер? Все заявки на этом компьютере будут удалены.'
+                            ]) ?>
                         <?php endif; ?>
                     </div>
                 </td>

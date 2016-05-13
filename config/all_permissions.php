@@ -55,7 +55,8 @@ return [
             'index',
             'getInfo',
             'add',
-            'save'
+            'save',
+            'delete'
         ],
         'Logs' => [
             'index',

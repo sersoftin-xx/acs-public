@@ -27,7 +27,17 @@
                         <button type="button" class="btn btn-warning"
                                 onclick="showEditUserDialog(<?= $group['id'] ?>);"><span
                                 class="fa fa-pencil-square-o"></span></button>
-                        <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'Groups', 'action' => 'delete', $group['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                        <?= $this->Form->postLink($this->Html->tag(
+                            'span', '', [
+                            'class' => 'fa fa-remove'
+                        ]), [
+                            'controller' => 'Groups',
+                            'action' => 'delete', $group['id']
+                        ], [
+                            'class' => 'btn btn-danger',
+                            'escape' => false,
+                            'confirm' => 'Вы действительно хотите удалить группу?'
+                        ]) ?>
                     </div>
                 </td>
             </tr>
@@ -61,9 +71,10 @@
                             <label class="control-label" for="edit-group-group-permissions-input">Права:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select multiple  class="form-control" name="group_permissions[]" id="edit-group-group-permissions-input"
+                            <select multiple class="form-control" name="group_permissions[]"
+                                    id="edit-group-group-permissions-input"
                                     data-live-search="true">
-                                <?php foreach ($permissions as $controller=>$actions): ?>
+                                <?php foreach ($permissions as $controller => $actions): ?>
                                     <optgroup label="<?= $controller ?>">
                                         <?php foreach ($actions as $action): ?>
                                             <option value="<?= "$controller/$action" ?>"><?= $action ?></option>
@@ -115,9 +126,10 @@
                             <label class="control-label" for="add-group-group-permissions-input">Права:</label>
                         </div>
                         <div class="col-sm-5">
-                            <select multiple  class="form-control" name="group_permissions[]" id="add-group-group-permissions-input"
+                            <select multiple class="form-control" name="group_permissions[]"
+                                    id="add-group-group-permissions-input"
                                     data-live-search="true">
-                                <?php foreach ($permissions as $controller=>$actions): ?>
+                                <?php foreach ($permissions as $controller => $actions): ?>
                                     <optgroup label="<?= $controller ?>">
                                         <?php foreach ($actions as $action): ?>
                                             <option value="<?= "$controller/$action" ?>"><?= $action ?></option>

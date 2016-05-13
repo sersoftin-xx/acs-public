@@ -34,7 +34,16 @@
                         <button type="button" class="btn btn-success"
                                 onclick="showResetPasswordDialog(<?= $user['id'] ?>);"><span
                                 class="fa fa-undo"></span></button>
-                        <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'users', 'action' => 'delete', $user['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                        <?= $this->Form->postLink($this->Html->tag('span', '', [
+                            'class' => 'fa fa-remove'
+                        ]), [
+                            'controller' => 'Users',
+                            'action' => 'delete',
+                            $user['id']
+                        ], [
+                            'class' => 'btn btn-danger', 'escape' => false,
+                            'confirm' => 'Вы действительно хотите удалить пользователя?'
+                        ]) ?>
                     </div>
                 </td>
             </tr>

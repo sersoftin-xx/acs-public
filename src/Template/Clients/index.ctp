@@ -49,9 +49,27 @@
                             <button type="button" class="btn btn-warning"
                                     onclick="showEditClientDialog(<?= $client['id'] ?>);"><span
                                     class="fa fa-pencil-square-o"></span></button>
-                            <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-lock']), ['controller' => 'clients', 'action' => 'block', $client['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                            <?= $this->Form->postLink($this->Html->tag('span', '', [
+                                'class' => 'fa fa-lock'
+                            ]), [
+                                'controller' => 'clients',
+                                'action' => 'block', $client['id']
+                            ], [
+                                'class' => 'btn btn-danger',
+                                'escape' => false,
+                                'confirm' => 'Вы действительно хотите заблокировать клиента? Все заявки этого клиента будут заблокированы.'
+                            ]) ?>
                             <?php if (!$isMobile): ?>
-                                <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'clients', 'action' => 'delete', $client['id']], ['class' => 'btn btn-danger hidden-xs', 'escape' => false]) ?>
+                                <?= $this->Form->postLink($this->Html->tag('span', '', [
+                                    'class' => 'fa fa-remove'
+                                ]), [
+                                    'controller' => 'clients',
+                                    'action' => 'delete', $client['id']
+                                ], [
+                                    'class' => 'btn btn-danger hidden-xs',
+                                    'escape' => false,
+                                    'confirm' => 'Вы действительно хотите удалить клиента? Все заявки этого клиента будут удалены.'
+                                ]) ?>
                             <?php endif; ?>
 
                         </div>

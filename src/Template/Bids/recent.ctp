@@ -46,7 +46,16 @@
                             <button type="button" class="btn btn-success"
                                     onclick="showAcceptBidDialog(<?= $recent_bid['id'] ?>);"><span
                                     class="fa fa-check"></span></button>
-                            <?= $this->Form->postLink($this->Html->tag('span', '', ['class' => 'fa fa-remove']), ['controller' => 'bids', 'action' => 'reject', $recent_bid['id']], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+                            <?= $this->Form->postLink($this->Html->tag('span', '', [
+                                'class' => 'fa fa-remove'
+                            ]), [
+                                'controller' => 'bids',
+                                'action' => 'reject', $recent_bid['id']
+                            ], [
+                                'class' => 'btn btn-danger',
+                                'escape' => false,
+                                'confirm' => 'Вы действительно хотите отклонить заявку? Восстановить заявку будет невозможно.'
+                            ]) ?>
                         </div>
                     </td>
                 </tr>
