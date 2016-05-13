@@ -62,7 +62,7 @@ class ClientsTable extends Table
 
         $validator
             ->allowEmpty('note')
-            ->add('note', 'length', ['rule' => ['maxLength', 150, 'message' => 'Заметка клиента не может быть больше 150 символов.']]);
+            ->add('note', 'length', ['rule' => ['maxLength', 150, 'message' => 'Примечание клиента не может быть больше 150 символов.']]);
 
         return $validator;
     }

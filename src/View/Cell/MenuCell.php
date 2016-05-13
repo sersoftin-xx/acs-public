@@ -34,21 +34,7 @@ class MenuCell extends Cell
             $counters[$menuItem['name']] = TableRegistry::get($menuItem['controller'])
                 ->find($menuItem['finder'])->count();
         }
-
-//        $this->loadModel('Bids');
-//        $this->loadModel('Clients');
-//        $this->loadModel('Pcs');
-//        $this->loadModel('Products');
-
         $this->set('counters', $counters);
-
-//        $this->set('counters', [
-//            'active_bids' => $this->Bids->find('active')->count(),
-//            'new_bids' => $this->Bids->find('recent')->count(),
-//            'clients' => $this->Clients->find('all')->count(),
-//            'pcs' => $this->Pcs->find('all')->count(),
-//            'products' => $this->Products->find('all')->count()
-//        ]);
         $this->set('type', $type);
     }
 }

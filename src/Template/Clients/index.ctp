@@ -93,7 +93,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label for="edit-client-note-textarea">Записка:</label>
+                                <label for="edit-client-note-textarea">Примечание:</label>
                             </div>
                             <div class="col-sm-5">
                             <textarea name="client_note" class="form-control" rows="5"
@@ -147,7 +147,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label for="add-client-note-textarea">Записка:</label>
+                                <label for="add-client-note-textarea">Примечание:</label>
                             </div>
                             <div class="col-sm-5">
                             <textarea name="client_note" class="form-control" rows="5"
