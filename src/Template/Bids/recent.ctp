@@ -27,7 +27,7 @@
             <tr>
                 <th>#</th>
                 <th>Продукт</th>
-                <th>Имя компьютера</th>
+                <th class="hidden-xs">Имя компьютера</th>
                 <th class="hidden-xs hidden-sm hidden-md">Уникальный ключ компьютера</th>
                 <th class="hidden-xs">Дата подачи</th>
                 <th>Действия</th>
@@ -38,7 +38,7 @@
                 <tr>
                     <td><?= $recent_bid['id'] ?></td>
                     <td><?= $recent_bid['product']['name'] ?></td>
-                    <td><?= $recent_bid['pc']['name'] ?></td>
+                    <td class="hidden-xs"><?= $recent_bid['pc']['name'] ?></td>
                     <td class="hidden-xs hidden-sm hidden-md"><?= $recent_bid['pc']['unique_key'] ?></td>
                     <td class="hidden-xs"><?= $recent_bid['application_date'] ?></td>
                     <td>

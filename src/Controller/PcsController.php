@@ -81,7 +81,7 @@ class PcsController extends AppController
         $this->set('clients', $this->Clients->find('all')->select(['id', 'name']));
         $this->set('pcs', $pcs);
         $this->set('isMobile', $this->RequestHandler->isMobile());
-        $this->set('username', $this->Auth->user('login'));
+        $this->set('username', $this->Auth->user('name'));
     }
 
     public function save($id = null)

@@ -23,7 +23,7 @@ class LogsController extends AppController
             'order' => ['id' => 'DESC']
         ])->limit(100);
         $this->set(compact('logs'));
-        $this->set('username', $this->Auth->user('login'));
+        $this->set('username', $this->Auth->user('name'));
         $this->viewBuilder()->layout('admin');
     }
 

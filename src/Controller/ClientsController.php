@@ -92,7 +92,7 @@ class ClientsController extends AppController
             ]);
         $this->set('clients', $clients);
         $this->set('isMobile', $this->RequestHandler->isMobile());
-        $this->set('username', $this->Auth->user('login'));
+        $this->set('username', $this->Auth->user('name'));
     }
 
     public function add()

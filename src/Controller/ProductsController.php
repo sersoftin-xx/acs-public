@@ -62,7 +62,7 @@ class ProductsController extends AppController
         ]);
         $this->viewBuilder()->layout('admin');
         $this->set('products', $this->Products->find('all'));
-        $this->set('username', $this->Auth->user('login'));
+        $this->set('username', $this->Auth->user('name'));
         $this->set('isMobile', $this->RequestHandler->isMobile());
     }
 

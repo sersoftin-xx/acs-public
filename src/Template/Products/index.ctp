@@ -39,7 +39,7 @@
                                     class="fa fa-pencil-square-o"></span></button>
                             <?php if (!$isMobile): ?>
                                 <button type="button"
-                                        class="btn btn-success download-link-generator hidden-xs hidden-sm"
+                                        class="btn btn-success download-link-generator"
                                         data-clipboard-text="<?= $this->Url->build(['controller' => 'products', 'action' => 'download', $product['id']], true); ?>">
                                     <span class="fa fa-copy"></span>
                                 </button>

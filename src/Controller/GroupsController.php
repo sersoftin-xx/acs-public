@@ -32,7 +32,7 @@ class GroupsController extends AppController
         $this->set(compact('groups'));
         $this->set(compact('permissions'));
         $this->set('isMobile', $this->RequestHandler->isMobile());
-        $this->set('username', $this->Auth->user('login'));
+        $this->set('username', $this->Auth->user('name'));
         $this->viewBuilder()->layout('admin');
     }
 

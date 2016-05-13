@@ -56,7 +56,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><strong>Привет, <?= $this->fetch('username') ?>!</strong></a>
+                       aria-expanded="false"><strong><?= $this->fetch('username') ?></strong>
+                    <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li role="presentation">
                             <?= $this->Html->link(

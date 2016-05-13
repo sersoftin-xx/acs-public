@@ -218,7 +218,7 @@ class UsersController extends AppController
         $this->set(compact('users'));
         $this->set(compact('groups'));
         $this->set('isMobile', $this->RequestHandler->isMobile());
-        $this->set('username', $this->Auth->user('login'));
+        $this->set('username', $this->Auth->user('name'));
         $this->viewBuilder()->layout('admin');
     }
 
