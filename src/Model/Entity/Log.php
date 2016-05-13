@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $message
- * @property int $level
+ * @property string $level
  * @property \Cake\I18n\Time $date
  */
 class Log extends Entity
