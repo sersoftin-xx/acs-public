@@ -59,12 +59,12 @@ class ProductsTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name')
             ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
-            ->add('name', 'length', ['rule' => ['lengthBetween', 3, 32], 'message' => __('Name of product must been more 3 and small 32 chars')]);
+            ->add('name', 'length', ['rule' => ['lengthBetween', 3, 32], 'message' => 'Имя продукта не может быть мнеьше 3-х и больше 32-х символов.']);
 
         $validator
             ->notEmpty('product_file')
             ->add('product_file', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
-            ->add('product_file', 'length', ['rule' => ['maxLength', 255], 'message' => __('Product file path must been small 255 chars')]);
+            ->add('product_file', 'length', ['rule' => ['maxLength', 255], 'message' => 'Имя файла продукта не может быть больше 255 символов.']);
 
         $validator
             ->notEmpty('download_name')
@@ -73,7 +73,7 @@ class ProductsTable extends Table
                 'message' => 'Please enter a valid download file name.'
             ])
             ->requirePresence('download_name', 'create')
-            ->add('download_name', 'length', ['rule' => ['maxLength', 100], 'message' => __('Download file name must been small 100 chars')]);
+            ->add('download_name', 'length', ['rule' => ['maxLength', 100], 'message' => 'Имя файла для загрузки не может быть больше 100 символов.']);
 
         $validator
             ->add('version', 'valid', ['rule' => 'numeric'])
@@ -95,7 +95,7 @@ class ProductsTable extends Table
 
         $validator
             ->allowEmpty('description')
-            ->add('description', 'length', ['rule' => ['maxLength', 255], 'message' => __('Description of product must been small 255 chars')]);
+            ->add('description', 'length', ['rule' => ['maxLength', 255], 'message' => 'Описание продукта должно быть меньше 255 символов.']);
 
         return $validator;
     }

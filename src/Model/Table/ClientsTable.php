@@ -48,13 +48,13 @@ class ClientsTable extends Table
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name')
-            ->add('name', 'length', ['rule' => ['lengthBetween', 3, 32]]);
+            ->add('name', 'length', ['rule' => ['lengthBetween', 3, 32], 'message' => 'Имя клиента должно быть не менее 3-х и не более 32-х символов.']);
 
         $validator
             ->requirePresence('contact', 'create')
             ->notEmpty('contact')
-            ->add('contact', 'valid-url', ['rule' => 'url', 'message' => __('Enter valid contact url.')])
-            ->add('contact', 'length', ['rule' => ['lengthBetween', 3, 32], 'message' => __('Contact must be 3-32 chars.')]);
+            ->add('contact', 'valid-url', ['rule' => 'url', 'message' => 'Введите валидный контакт клиента'])
+            ->add('contact', 'length', ['rule' => ['lengthBetween', 3, 32], 'message' => 'Контакт клиента должен быть не менее 3-х и не более 32-х символов.']);
 
         $validator
             ->requirePresence('addition_date', 'create')
@@ -62,7 +62,7 @@ class ClientsTable extends Table
 
         $validator
             ->allowEmpty('note')
-            ->add('note', 'length', ['rule' => ['maxLength', 150, 'message' => __('Note must be before 150 chars.')]]);
+            ->add('note', 'length', ['rule' => ['maxLength', 150, 'message' => 'Заметка клиента не может быть больше 150 символов.']]);
 
         return $validator;
     }

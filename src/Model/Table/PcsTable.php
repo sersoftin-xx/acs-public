@@ -54,12 +54,12 @@ class PcsTable extends Table
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name')
-            ->add('name', 'length', ['rule' => ['lengthBetween', 3, 15], 'message' => __('PC name len must be between 3 and 15 chars.')]);
+            ->add('name', 'length', ['rule' => ['lengthBetween', 3, 15], 'message' => 'Имя компьютера должно быть не менее 3-х и не более 15-ти символов.']);
 
         $validator
             ->requirePresence('unique_key', 'create')
             ->notEmpty('unique_key')
-            ->add('unique_key', 'length', ['rule' => ['maxLength', 256], 'message' => __('PC unique key len must been small 256 chars.')]);
+            ->add('unique_key', 'length', ['rule' => ['maxLength', 256], 'message' => 'Уникальный ключ не может быть больше 256-ти символов.']);
 
         $validator
             ->requirePresence('addition_date', 'create')
@@ -67,7 +67,7 @@ class PcsTable extends Table
 
         $validator
             ->allowEmpty('comment')
-            ->add('comment', 'length', ['rule' => ['maxLength', 150], 'message' => __('PC comment max len = 150 chars.')]);
+            ->add('comment', 'length', ['rule' => ['maxLength', 150], 'message' => 'Комментарий компьютера не может быть больше 150 символов']);
 
         return $validator;
     }

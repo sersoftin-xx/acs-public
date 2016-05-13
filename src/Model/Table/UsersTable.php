@@ -51,7 +51,7 @@ class UsersTable extends Table
                 'rule' => [
                     'maxLength', 64
                 ],
-                'message' => 'Name max len 64 characters'
+                'message' => 'Имя пользователя не может быть больше 64-х символов.'
             ]);
 
         $validator
@@ -60,7 +60,7 @@ class UsersTable extends Table
                 'rule' => [
                     'lengthBetween', 6, 16
                 ],
-                'message' => __('Login must be 6-16 chars.')
+                'message' => 'Логин пользователя не может быть меньше 6-ти и больше 16-ти символов.'
             ])
             ->notEmpty('login');
 
@@ -71,7 +71,7 @@ class UsersTable extends Table
                 'rule' => [
                     'minLength', 12
                 ],
-                'message' => 'The password must be longer than 12 characters.'
+                'message' => 'Пароль пользователя не может быть меньше 12-ти символов.'
             ]);
 
         $validator

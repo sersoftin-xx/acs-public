@@ -57,7 +57,7 @@ class GroupsTable extends Table
                 'rule' => [
                     'lengthBetween', 4, 32
                 ],
-                'message' => __('Group name must be 4-32 chars.')
+                'message' => 'Имя группы должно быть не менее 4-х и не более 32-х символов.'
             ]);
 
         $validator
