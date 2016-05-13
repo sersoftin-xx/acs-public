@@ -62,12 +62,76 @@ class GroupsController extends AppController
                 'addition_date' => Time::now()
             ]);
             if ($this->Groups->save($group)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). Группа #:group_id (:group_name) была добавлена успешно.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'group_id' => $group['id'],
+                    'group_name' => $group['name']
+                ]), 'notice', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->success(Text::insert('Группа #:group_id (:group_name) была добавлена успешно.', [
+                    'group_id' => $group['id'],
+                    'group_name' => $group['name']
+                ]));
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). При добавлении группы #:group_id (:group_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'group_id' => $group['id'],
+                    'group_name' => $group['name']
+                ]), 'error', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->error(Text::insert('При добавлении группы #:group_id (:group_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'group_id' => $group['id'],
+                    'group_name' => $group['name']
+                ]));
             }
             $this->redirect(['action' => 'index']);
         }
+    }
+
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $group = $this->Groups->get($id);
+        if ($this->Groups->delete($group)) {
+            $this->log(Text::insert('Пользователь :user_name (:user_ip). Группа #:group_id (:group_name) была успешно удалена.', [
+                'user_name' => $this->Auth->user('name'),
+                'user_ip' => $this->request->clientIp(),
+                'group_id' => $id,
+                'group_name' => $group['name']
+            ]), 'notice', [
+                'scope' => [
+                    'erases'
+                ]
+            ]);
+            $this->Flash->success(Text::insert('Группа #:group_id (:group_name) была успешно удалена.', [
+                'group_id' => $id,
+                'group_name' => $group['name']
+            ]));
+        } else {
+            $this->log(Text::insert('Пользователь :user_name (:user_ip). Группа #:group_id (:group_name) не может быть удалена сейчас. Пожалуйста, попробуйте позже.', [
+                'user_name' => $this->Auth->user('name'),
+                'user_ip' => $this->request->clientIp(),
+                'group_id' => $id,
+                'group_name' => $group['name']
+            ]), 'error', [
+                'scope' => [
+                    'erases'
+                ]
+            ]);
+            $this->Flash->error(Text::insert('Группа #:group_id (:group_name) не может быть удалена сейчас. Пожалуйста, попробуйте позже.', [
+                'group_id' => $id,
+                'group_name' => $group['name']
+            ]));
+        }
+        return $this->redirect(['action' => 'index']);
     }
 
     public function save($id = null)
@@ -80,9 +144,35 @@ class GroupsController extends AppController
                 'edit_date' => Time::now()
             ]);
             if ($this->Groups->save($group)) {
-                $this->Flash->success(__('The group has been saved.'));
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). Группа #:group_id (:group_name) была сохранена успешно.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'group_id' => $id,
+                    'group_name' => $group['name']
+                ]), 'notice', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->success(Text::insert('Группа #:group_id (:group_name) была сохранена успешно.', [
+                    'group_id' => $id,
+                    'group_name' => $group['name']
+                ]));
             } else {
-                $this->Flash->error(__('The group could not be saved. Please, try again.'));
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении группы #:group_id (:group_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'group_id' => $id,
+                    'group_name' => $group['name']
+                ]), 'error', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->error(Text::insert('При сохранении группы #:group_id (:group_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'group_id' => $id,
+                    'group_name' => $group['name']
+                ]));
             }
             $this->redirect(['action' => 'index']);
         }

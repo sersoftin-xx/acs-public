@@ -150,7 +150,7 @@ class ClientsController extends AppController
                 'note' => $this->request->data['client_note']
             ]);
             if ($this->Clients->save($client)) {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id(:client_name) был сохранен успешно.', [
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) был сохранен успешно.', [
                     'user_name' => $this->Auth->user('name'),
                     'user_ip' => $this->request->clientIp(),
                     'client_id' => $id,
@@ -160,12 +160,12 @@ class ClientsController extends AppController
                         'changes'
                     ]
                 ]);
-                $this->Flash->success(Text::insert('Клиент #:client_id(:client_name) был сохранен успешно.', [
+                $this->Flash->success(Text::insert('Клиент #:client_id (:client_name) был сохранен успешно.', [
                     'client_id' => $id,
                     'client_name' => $client['name']
                 ]));
             } else {
-                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении клиента #:client_id(:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении клиента #:client_id (:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
                     'user_name' => $this->Auth->user('name'),
                     'user_ip' => $this->request->clientIp(),
                     'client_id' => $id,
@@ -175,7 +175,7 @@ class ClientsController extends AppController
                         'changes'
                     ]
                 ]);
-                $this->Flash->error(Text::insert('При сохранении клиента #:client_id(:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                $this->Flash->error(Text::insert('При сохранении клиента #:client_id (:client_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
                     'client_id' => $id,
                     'client_name' => $client['name']
                 ]));
@@ -189,7 +189,7 @@ class ClientsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $client = $this->Clients->get($id);
         if ($this->Clients->delete($client)) {
-            $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) был успешно удален.', [
+            $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) был успешно удален со всеми заявками.', [
                 'user_name' => $this->Auth->user('name'),
                 'user_ip' => $this->request->clientIp(),
                 'client_id' => $id,
@@ -199,7 +199,10 @@ class ClientsController extends AppController
                     'erases'
                 ]
             ]);
-            $this->Flash->success('Клиент был удален успешно со всеми своими заявками.');
+            $this->Flash->success(Text::insert('Клиент #:client_id (:client_name) был успешно удален со всеми заявками.', [
+                'client_id' => $id,
+                'client_name' => $client['name']
+            ]));
         } else {
             $this->log(Text::insert('Пользователь :user_name (:user_ip). Клиент #:client_id (:client_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
                 'user_name' => $this->Auth->user('name'),
@@ -211,7 +214,10 @@ class ClientsController extends AppController
                     'erases'
                 ]
             ]);
-            $this->Flash->error('Клиент #$id не может быть удален сейчас. Пожалуйста, попробуйте позже.');
+            $this->Flash->error(Text::insert('Клиент #:client_id (:client_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+                'client_id' => $id,
+                'client_name' => $client['name']
+            ]));
         }
         return $this->redirect(['action' => 'index']);
     }

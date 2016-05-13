@@ -49,7 +49,9 @@ class BidsController extends AppController
                         'activations'
                     ]
                 ]);
-                $this->Flash->success('Заявка была заблокирована успешно.');
+                $this->Flash->success(Text::insert('Заявка (#:bid_id) была заблокирована успешно.', [
+                    'bid_id' => $id
+                ]));
             } else {
                 $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть заблокирована. Пожалуйста, попробуйте позже.', [
                     'user_name' => $this->Auth->user('name'),
@@ -60,7 +62,9 @@ class BidsController extends AppController
                         'activations'
                     ]
                 ]);
-                $this->Flash->error('Заявка не может быть заблокирована. Пожалуйста, попробуйте позже.');
+                $this->Flash->error(Text::insert('Заявка (#:bid_id) не может быть заблокирована. Пожалуйста, попробуйте позже.', [
+                    'bid_id' => $id
+                ]));
             }
         }
         return $this->redirect(['action' => 'active']);
@@ -91,7 +95,10 @@ class BidsController extends AppController
                             'erases'
                         ]
                     ]);
-                    $this->Flash->success('Компьютер для этой заявки был удален');
+                    $this->Flash->success(Text::insert('Компьютер (:pc_id) для этой заявки (#:bid_id) был удален.', [
+                        'pc_id' => $bid['pc_id'],
+                        'bid_id' => $id
+                    ]));
                 } else {
                     $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер (:pc_id) для этой заявки (#:bid_id) не мможет быть удален.', [
                         'user_name' => $this->Auth->user('name'),
@@ -103,7 +110,10 @@ class BidsController extends AppController
                             'erases'
                         ]
                     ]);
-                    $this->Flash->error('Компьютер для этой заявки не мможет быть удален.');
+                    $this->Flash->error(Text::insert('Компьютер (:pc_id) для этой заявки (#:bid_id) не мможет быть удален.', [
+                        'pc_id' => $bid['pc_id'],
+                        'bid_id' => $id
+                    ]));
                 }
             }
             $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) была отклонена успешно.', [
@@ -115,7 +125,9 @@ class BidsController extends AppController
                     'erases'
                 ]
             ]);
-            $this->Flash->success('Заявка была отклонена успешно.');
+            $this->Flash->success(Text::insert('Заявка (#:bid_id) была отклонена успешно.', [
+                'bid_id' => $id
+            ]));
         } else {
             $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть отклонена. Пожалуйста, попробуйте позже.', [
                 'user_name' => $this->Auth->user('name'),
@@ -126,7 +138,9 @@ class BidsController extends AppController
                     'erases'
                 ]
             ]);
-            $this->Flash->error('Заявка не может быть отклонена. Пожалуйста, попробуйте позже.');
+            $this->Flash->error(Text::insert('Заявка (#:bid_id) не может быть отклонена. Пожалуйста, попробуйте позже.', [
+                'bid_id' => $id
+            ]));
         }
         return $this->redirect(['action' => 'recent']);
     }
@@ -150,7 +164,9 @@ class BidsController extends AppController
                         'activations'
                     ]
                 ]);
-                $this->Flash->success('Заявка была принята успешно.');
+                $this->Flash->success(Text::insert('Заявка (#:bid_id) была принята успешно.', [
+                    'bid_id' => $id
+                ]));
             } else {
                 $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть принята. Пожалуйста, попробуйте позже.', [
                     'user_name' => $this->Auth->user('name'),
@@ -161,7 +177,9 @@ class BidsController extends AppController
                         'activations'
                     ]
                 ]);
-                $this->Flash->error('Заявка не может быть принята. Пожалуйста, попробуйте позже.');
+                $this->Flash->error(Text::insert('Заявка (#:bid_id) не может быть принята. Пожалуйста, попробуйте позже.', [
+                    'bid_id' => $id
+                ]));
             }
         }
         return $this->redirect(['action' => 'recent']);
@@ -256,7 +274,9 @@ class BidsController extends AppController
                         'changes'
                     ]
                 ]);
-                $this->Flash->success('Заявка была успешно сохранена.');
+                $this->Flash->success(Text::insert('Заявка (#:bid_id) была сохранена успешно.', [
+                    'bid_id' => $id
+                ]));
             } else {
                 $this->log(Text::insert('Пользователь :user_name (:user_ip). Заявка (#:bid_id) не может быть сохранена. Пожалуйста, попробуйте позже.', [
                     'user_name' => $this->Auth->user('name'),
@@ -267,7 +287,9 @@ class BidsController extends AppController
                         'changes'
                     ]
                 ]);
-                $this->Flash->error('Заявка не может быть сохранена. Пожалуйта, попробуйте позже.');
+                $this->Flash->error(Text::insert('Заявка (#:bid_id) не может быть сохранена. Пожалуйста, попробуйте позже.', [
+                    'bid_id' => $id
+                ]));
             }
         }
         return $this->redirect(['action' => 'active']);

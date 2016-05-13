@@ -17,10 +17,20 @@ class PcsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $this->loadModel('Bids');
         $bids_count = $this->Bids->blockBidsForPc($id);
-        $this->Flash->success(__(Text::insert('For PC #:pc_id was blocked :bids_count bids.', [
+        $this->log(Text::insert('Пользователь :user_name (:user_ip). Для компьютера #:pc_id было заблокировано :bids_count заявок.', [
+            'user_name' => $this->Auth->user('name'),
+            'user_ip' => $this->request->clientIp(),
             'pc_id' => $id,
             'bids_count' => $bids_count
-        ])));
+        ]), 'notice', [
+            'scope' => [
+                'activations'
+            ]
+        ]);
+        $this->Flash->success(Text::insert('Для компьютера #:pc_id было заблокировано :bids_count заявок.', [
+            'pc_id' => $id,
+            'bids_count' => $bids_count
+        ]));
         return $this->redirect(['action' => 'index']);
     }
 
@@ -84,9 +94,35 @@ class PcsController extends AppController
                 'comment' => $this->request->data('pc_comment')
             ]);
             if ($this->Pcs->save($pc)) {
-                $this->Flash->success(__('The pc has been saved.'));
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер #:pc_id (:pc_name) был сохранен успешно.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'pc_id' => $id,
+                    'pc_name' => $pc['name']
+                ]), 'notice', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->success(Text::insert('Компьютер #:pc_id (:pc_name) был сохранен успешно.', [
+                    'pc_id' => $id,
+                    'pc_name' => $pc['name']
+                ]));
             } else {
-                $this->Flash->error(__('The pc could not be saved. Please, try again.'));
+                $this->log(Text::insert('Пользователь :user_name (:user_ip). При сохранении компьютера #:pc_id (:pc_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'user_name' => $this->Auth->user('name'),
+                    'user_ip' => $this->request->clientIp(),
+                    'pc_id' => $id,
+                    'pc_name' => $pc['name']
+                ]), 'error', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->error(Text::insert('При сохранении компьютера #:pc_id (:pc_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'pc_id' => $id,
+                    'pc_name' => $pc['name']
+                ]));
             }
             $this->redirect(['action' => 'index']);
         }
@@ -97,9 +133,35 @@ class PcsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $pc = $this->Pcs->get($id);
         if ($this->Pcs->delete($pc)) {
-            $this->Flash->success(__('The pc has been deleted.'));
+            $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер #:pc_id (:pc_name) был успешно удален.', [
+                'user_name' => $this->Auth->user('name'),
+                'user_ip' => $this->request->clientIp(),
+                'pc_id' => $id,
+                'pc_name' => $pc['name']
+            ]), 'notice', [
+                'scope' => [
+                    'erases'
+                ]
+            ]);
+            $this->Flash->success(Text::insert('Компьютер #:pc_id (:pc_name) был успешно удален.', [
+                'pc_id' => $id,
+                'pc_name' => $pc['name']
+            ]));
         } else {
-            $this->Flash->error(__('The pc could not be deleted. Please, try again.'));
+            $this->log(Text::insert('Пользователь :user_name (:user_ip). Компьютер #:pc_id (:pc_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+                'user_name' => $this->Auth->user('name'),
+                'user_ip' => $this->request->clientIp(),
+                'pc_id' => $id,
+                'pc_name' => $pc['name']
+            ]), 'error', [
+                'scope' => [
+                    'erases'
+                ]
+            ]);
+            $this->Flash->error(Text::insert('Компьютер #:pc_id (:pc_name) не может быть удален сейчас. Пожалуйста, попробуйте позже.', [
+                'pc_id' => $id,
+                'pc_name' => $pc['name']
+            ]));
         }
         return $this->redirect(['action' => 'index']);
     }
