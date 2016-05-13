@@ -21,7 +21,7 @@ class LogsController extends AppController
         ]);
         $logs = $this->Logs->find('all', [
             'order' => ['id' => 'DESC']
-        ])->limit(30);
+        ])->limit(100);
         $this->set(compact('logs'));
         $this->set('username', $this->Auth->user('login'));
         $this->viewBuilder()->layout('admin');
