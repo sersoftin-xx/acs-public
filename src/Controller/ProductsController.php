@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\Utility\Text;
 
@@ -11,6 +12,54 @@ use Cake\Utility\Text;
  */
 class ProductsController extends AppController
 {
+    public function getList()
+    {
+        $this->log(Text::insert('Запрос списка продуктов с :ip.', [
+            'ip' => $this->request->clientIp(),
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
+        $products = $this->Products->find('all', [
+            'conditions' => [
+                'hidden' => false
+            ]
+        ])->select(['id', 'name', 'hidden']);
+        $this->set([
+            'products' => $products
+        ]);
+        $this->set('_serialize', ['products']);
+    }
+
+    public function getVersion($id = null)
+    {
+        $this->log(Text::insert('Запрос версии продукта :product_id с ip :ip', [
+            'ip' => $this->request->clientIp(),
+            'product_id' => $id
+        ]), 'info', [
+            'scope' => [
+                'requests'
+            ]
+        ]);
+        $product = $this->Products->find('all', [
+            'conditions' => [
+                'id' => $id
+            ],
+            'fields' => [
+                'id',
+                'name',
+                'version'
+            ]
+        ]);
+        $this->set('product', $product);
+        $this->set('_serialize', ['product']);
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['download', 'getList', 'getVersion']);
+    }
 
     public function getInfo($id = null)
     {

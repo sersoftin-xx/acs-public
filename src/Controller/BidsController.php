@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
+use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\Utility\Text;
 
@@ -15,6 +16,25 @@ use Cake\Utility\Text;
  */
 class BidsController extends AppController
 {
+
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['add', 'check']);
+    }
+
+    public function add()
+    {
+        if ($this->request->is(['post'])) {
+            debug($this->request->data);
+        }
+    }
+
+    public function check()
+    {
+        if ($this->request->is(['post'])) {
+            debug($this->request->data);
+        }
+    }
 
     public function getInfo($id = null)
     {
