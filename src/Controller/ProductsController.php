@@ -23,9 +23,12 @@ class ProductsController extends AppController
         ]);
         $products = $this->Products->find('all', [
             'conditions' => [
-                'hidden' => false
+                'hidden' => false,
+            ],
+            'fields' => [
+                'id', 'name'
             ]
-        ])->select(['id', 'name', 'hidden']);
+        ]);
         $this->set([
             'products' => $products
         ]);

@@ -23,7 +23,7 @@
                     <td><?= $product['id'] ?></td>
                     <td><?= $product['name'] ?></td>
                     <td class="hidden-xs"><?= $product['version'] ?></td>
-                    <td class="hidden-xs"><?= $product['is_hidden'] ?></td>
+                    <td class="hidden-xs"><?= $product['hidden'] ? 'Да' : 'Нет'?></td>
                     <td class="hidden-xs"><?= $product['addition_date'] ?></td>
                     <td class="hidden-xs"><?= $product['update_date'] ?></td>
                     <td>
