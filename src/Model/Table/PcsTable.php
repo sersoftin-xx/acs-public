@@ -1,6 +1,8 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\Pc;
+use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -8,7 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Pcs Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Clients
  * @property \Cake\ORM\Association\HasMany $Bids
  */
 class PcsTable extends Table
@@ -33,8 +35,6 @@ class PcsTable extends Table
             'joinType' => 'LEFT'
         ]);
         $this->hasMany('Bids', [
-            'dependent' => true,
-            'cascadeCallbacks' => true,
             'foreignKey' => 'pc_id'
         ]);
     }
@@ -48,7 +48,7 @@ class PcsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
+            ->integer('id')
             ->allowEmpty('id', 'create');
 
         $validator
@@ -59,9 +59,11 @@ class PcsTable extends Table
         $validator
             ->requirePresence('unique_key', 'create')
             ->notEmpty('unique_key')
-            ->add('unique_key', 'length', ['rule' => ['maxLength', 256], 'message' => 'Уникальный ключ не может быть больше 256-ти символов.']);
+            ->add('unique_key', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
+            ->add('unique_key', 'length', ['rule' => ['maxLength', 64], 'message' => 'Уникальный ключ не может быть больше 64-х символов.']);
 
         $validator
+            ->dateTime('addition_date')
             ->requirePresence('addition_date', 'create')
             ->notEmpty('addition_date');
 
@@ -81,7 +83,8 @@ class PcsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['client_id'], 'Clients'));
+        $rules->add($rules->isUnique(['unique_key']));
+        //$rules->add($rules->existsIn(['client_id'], 'Clients'));
         return $rules;
     }
 }

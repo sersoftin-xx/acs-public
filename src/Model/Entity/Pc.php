@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $client_id
- * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Client $client
  * @property string $name
  * @property string $unique_key
  * @property \Cake\I18n\Time $addition_date

@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Model\Entity\Bid;
+use App\Model\Entity\Pc;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\I18n\Time;
@@ -22,17 +24,70 @@ class BidsController extends AppController
         $this->Auth->allow(['add', 'check']);
     }
 
-    public function add()
+    public function add() // api
     {
         if ($this->request->is(['post'])) {
-            debug($this->request->data);
+            $this->request->input('json_decode');
+            $this->loadModel('Pcs');
+            $this->loadModel('Products');
+            if ($this->Products->exists([
+                'id' => $this->request->data('product_id')
+            ])
+            ) {
+                $pc = new Pc([
+                    'unique_key' => $this->request->data('pc_unique_key'),
+                    'client_id' => 0,
+                    'name' => $this->request->data('pc_name'),
+                    'addition_date' => Time::now()
+                ]);
+                if (!$this->Pcs->exists([
+                    'unique_key' => $pc->unique_key
+                ])
+                ) {
+                    if ($this->Pcs->save($pc)) {
+                        $bid = new Bid([
+                            'product_id' => $this->request->data('product_id'),
+                            'pc_id' => $pc->id,
+                            'application_date' => Time::now(),
+                            'is_active' => false
+                        ]);
+                        if ($this->Bids->save($bid)) {
+                            $this->set('bid', $bid);
+                        }
+                    }
+                }
+            }
         }
+        $this->render('active');
     }
 
-    public function check()
+    public function check() // api
     {
         if ($this->request->is(['post'])) {
-            debug($this->request->data);
+            $this->request->input('json_decode');
+            $this->loadModel('Pcs');
+            $state = 0;
+            $pc = $this->Pcs->find('all', [
+                'conditions' => [
+                    'unique_key' => $this->request->data('pc_unique_key')
+                ]
+            ])->first();
+            if ($pc != null) {
+                if (!$this->Bids->exists([
+                    'product_id' => $this->request->data('product_id'),
+                    'pc_id' => $pc->id,
+                    'is_active' => true,
+                    'expiration_date >=' => Time::now()
+                ])
+                ) {
+                    $state = 2; // no activation for this product on existing pc
+                }
+            } else {
+                $state = 1; // no pc in db
+            }
+            $this->set('random_string', $this->request->data('random_string'));
+            $this->set('state', $state);
+//            $this->render('active');
         }
     }
 
