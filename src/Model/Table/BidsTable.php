@@ -69,18 +69,14 @@ class BidsTable extends Table
 
         $validator
             ->add('is_active', 'valid', ['rule' => 'boolean'])
-            ->requirePresence('active', 'create')
-            ->notEmpty('active');
+            ->requirePresence('is_active', 'create')
+            ->notEmpty('is_active');
 
         $validator
-            ->requirePresence('activation_date', 'create')
-            ->dateTime('activation_date')
-            ->notEmpty('activation_date');
+            ->dateTime('activation_date');
 
         $validator
-            ->requirePresence('expiration_date', 'create')
-            ->dateTime('expiration_date')
-            ->notEmpty('expiration_date');
+            ->dateTime('expiration_date');
 
         return $validator;
     }
