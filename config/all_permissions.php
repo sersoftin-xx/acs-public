@@ -36,10 +36,8 @@ return [
         ],
         'Products' => [
             'getInfo',
-            'download',
             'index',
             'save',
-            'update',
             'add',
             'edit',
             'delete'
