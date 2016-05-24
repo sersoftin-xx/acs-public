@@ -10,14 +10,6 @@ class Acs extends AbstractMigration
     {
 
         $this->table('bids')
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-                'signed' => false,
-            ])
-            ->addPrimaryKey(['id'])
             ->addColumn('product_id', 'integer', [
                 'default' => null,
                 'limit' => 10,
@@ -53,14 +45,6 @@ class Acs extends AbstractMigration
             ->create();
 
         $this->table('clients')
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-                'signed' => false,
-            ])
-            ->addPrimaryKey(['id'])
             ->addColumn('name', 'string', [
                 'default' => null,
                 'limit' => 32,
@@ -84,14 +68,6 @@ class Acs extends AbstractMigration
             ->create();
 
         $this->table('groups')
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-                'signed' => false,
-            ])
-            ->addPrimaryKey(['id'])
             ->addColumn('name', 'string', [
                 'default' => null,
                 'limit' => 32,
@@ -115,14 +91,6 @@ class Acs extends AbstractMigration
             ->create();
 
         $this->table('logs')
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-                'signed' => false,
-            ])
-            ->addPrimaryKey(['id'])
             ->addColumn('message', 'text', [
                 'default' => null,
                 'limit' => null,
@@ -141,14 +109,6 @@ class Acs extends AbstractMigration
             ->create();
 
         $this->table('pcs')
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-                'signed' => false,
-            ])
-            ->addPrimaryKey(['id'])
             ->addColumn('client_id', 'integer', [
                 'default' => null,
                 'limit' => 10,
@@ -184,14 +144,6 @@ class Acs extends AbstractMigration
             ->create();
 
         $this->table('products')
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-                'signed' => false,
-            ])
-            ->addPrimaryKey(['id'])
             ->addColumn('name', 'string', [
                 'default' => null,
                 'limit' => 32,
@@ -247,14 +199,6 @@ class Acs extends AbstractMigration
             ->create();
 
         $this->table('users')
-            ->addColumn('id', 'integer', [
-                'autoIncrement' => true,
-                'default' => null,
-                'limit' => 10,
-                'null' => false,
-                'signed' => false,
-            ])
-            ->addPrimaryKey(['id'])
             ->addColumn('name', 'string', [
                 'default' => null,
                 'limit' => 64,
