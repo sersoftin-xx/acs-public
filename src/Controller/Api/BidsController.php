@@ -20,7 +20,7 @@ class BidsController extends AppController
     {
         $this->request->allowMethod('post');
 
-        $key = Configure::read('App.encryptionKey');
+        $key = Configure::read('Security.encryptionKey');
         $data = json_decode(Security::decrypt(base64_decode($this->request->data('data')), $key));
 
         $pc_unique_key = $data->pc_unique_key;
@@ -65,7 +65,7 @@ class BidsController extends AppController
     {
         $this->request->allowMethod('post');
 
-        $key = Configure::read('App.encryptionKey');
+        $key = Configure::read('Security.encryptionKey');
         $data = json_decode(Security::decrypt(base64_decode($this->request->data('data')), $key));
 
         $pc_unique_key = $data->pc_unique_key;
