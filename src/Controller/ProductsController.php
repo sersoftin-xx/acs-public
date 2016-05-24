@@ -12,12 +12,6 @@ use Cake\Utility\Text;
  */
 class ProductsController extends AppController
 {
-
-    public function beforeFilter(Event $event)
-    {
-        $this->Auth->allow(['download']);
-    }
-
     public function getInfo($id = null)
     {
         $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip) запросил запросил информацию о продукте #:product_id.', [
@@ -32,28 +26,6 @@ class ProductsController extends AppController
         $product = $this->Products->get($id);
         $this->set('product', $product);
         $this->set('_serialize', ['product']);
-    }
-
-    public function download($id = null)
-    {
-        $product = $this->Products->get($id);
-        $this->log(Text::insert('Какой-то клиент :client_ip загружает продукт #:product_id (product_name).', [
-            'auth_user_name' => $this->Auth->user('name'),
-            'auth_user_ip' => $this->request->clientIp(),
-            'product_id' => $id,
-            'product_name' => $product['name']
-        ]), 'info', [
-            'scope' => [
-                'requests'
-            ]
-        ]);
-        $this->response->file(
-            $product['product_file'], [
-                'download' => true,
-                'name' => $product['download_name']
-            ]
-        );
-        return $this->response;
     }
 
     public function index()
@@ -76,67 +48,60 @@ class ProductsController extends AppController
     {
         $product = $this->Products->newEntity();
         if ($this->request->is('post')) {
-            if (is_uploaded_file($this->request->data('product_file')['tmp_name'])) {
-                $product_data = [
-                    'name' => $this->request->data('product_name'),
-                    'product_file_upload' => $this->request->data('product_file'),
-                    'download_name' => $this->request->data('product_download_name'),
-                    'hidden' => isset($this->request->data['product_hidden']),
-                    'version' => 1,
-                    'addition_date' => Time::now(),
-                    'update_date' => Time::now(),
-                    'description' => $this->request->data('product_description'),
-                ];
-                $product = $this->Products->patchEntity($product, $product_data);
-                if ($this->Products->save($product)) {
-                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Продукт #:product_id (:product_name) был добавлен успешно.', [
-                        'auth_user_name' => $this->Auth->user('name'),
-                        'auth_user_ip' => $this->request->clientIp(),
-                        'product_id' => $product['id'],
-                        'product_name' => $product['name']
-                    ]), 'notice', [
-                        'scope' => [
-                            'changes'
-                        ]
-                    ]);
-                    $this->Flash->success(Text::insert('Продукт #:product_id (:product_name) был добавлен успешно.', [
-                        'product_id' => $product['id'],
-                        'product_name' => $product['name']
-                    ]));
-                } else {
-                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При добавлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                        'auth_user_name' => $this->Auth->user('name'),
-                        'auth_user_ip' => $this->request->clientIp(),
-                        'product_id' => $product['id'],
-                        'product_name' => $product['name']
-                    ]), 'error', [
-                        'scope' => [
-                            'changes'
-                        ]
-                    ]);
-                    $this->Flash->error(Text::insert('При добавлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                        'product_id' => $product['id'],
-                        'product_name' => $product['name']
-                    ]));
-                }
-                $this->redirect(['action' => 'index']);
+            $product_data = [
+                'name' => $this->request->data('product_name'),
+                'addition_date' => Time::now(),
+                'description' => $this->request->data('product_description'),
+            ];
+            $product = $this->Products->patchEntity($product, $product_data);
+            if ($this->Products->save($product)) {
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Продукт #:product_id (:product_name) был добавлен успешно.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
+                    'product_id' => $product['id'],
+                    'product_name' => $product['name']
+                ]), 'notice', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->success(Text::insert('Продукт #:product_id (:product_name) был добавлен успешно.', [
+                    'product_id' => $product['id'],
+                    'product_name' => $product['name']
+                ]));
+            } else {
+                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При добавлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'auth_user_name' => $this->Auth->user('name'),
+                    'auth_user_ip' => $this->request->clientIp(),
+                    'product_id' => $product['id'],
+                    'product_name' => $product['name']
+                ]), 'error', [
+                    'scope' => [
+                        'changes'
+                    ]
+                ]);
+                $this->Flash->error(Text::insert('При добавлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
+                    'product_id' => $product['id'],
+                    'product_name' => $product['name']
+                ]));
             }
-            $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При загрузке файла продукта #:product_id (:product_name) произошла ошибка.', [
-                'auth_user_name' => $this->Auth->user('name'),
-                'auth_user_ip' => $this->request->clientIp(),
-                'product_id' => $product['id'],
-                'product_name' => $product['name']
-            ]), 'error', [
-                'scope' => [
-                    'changes'
-                ]
-            ]);
-            $this->Flash->error(Text::insert('При загрузке файла продукта #:product_id (:product_name) произошла ошибка.', [
-                'product_id' => $product['id'],
-                'product_name' => $product['name']
-            ]));
             $this->redirect(['action' => 'index']);
         }
+        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При загрузке файла продукта #:product_id (:product_name) произошла ошибка.', [
+            'auth_user_name' => $this->Auth->user('name'),
+            'auth_user_ip' => $this->request->clientIp(),
+            'product_id' => $product['id'],
+            'product_name' => $product['name']
+        ]), 'error', [
+            'scope' => [
+                'changes'
+            ]
+        ]);
+        $this->Flash->error(Text::insert('При загрузке файла продукта #:product_id (:product_name) произошла ошибка.', [
+            'product_id' => $product['id'],
+            'product_name' => $product['name']
+        ]));
+        $this->redirect(['action' => 'index']);
     }
 
     public function save($id = null)
@@ -145,8 +110,6 @@ class ProductsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product_data = [
                 'name' => $this->request->data('product_name'),
-                'hidden' => isset($this->request->data['product_hidden']),
-                'download_name' => $this->request->data('product_download_name'),
                 'description' => $this->request->data('product_description')
             ];
             $product = $this->Products->patchEntity($product, $product_data);
@@ -177,69 +140,6 @@ class ProductsController extends AppController
                     ]
                 ]);
                 $this->Flash->error(Text::insert('При сохранении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'product_id' => $id,
-                    'product_name' => $product['name']
-                ]));
-            }
-            $this->redirect(['action' => 'index']);
-        }
-    }
-
-    public function update($id = null)
-    {
-        $product = $this->Products->get($id);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            if (is_uploaded_file($this->request->data('product_file')['tmp_name'])) {
-                $product_data = [
-                    'product_file_upload' => $this->request->data['product_file'],
-                    'update_date' => Time::now(),
-                    'version' => $product['version'] + 1
-                ];
-                $product = $this->Products->patchEntity($product, $product_data);
-                if ($this->Products->save($product)) {
-                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). Продукт #:product_id (:product_name) был обновлен успешно.', [
-                        'auth_user_name' => $this->Auth->user('name'),
-                        'auth_user_ip' => $this->request->clientIp(),
-                        'product_id' => $id,
-                        'product_name' => $product['name']
-                    ]), 'notice', [
-                        'scope' => [
-                            'changes'
-                        ]
-                    ]);
-                    $this->Flash->success(Text::insert('Продукт #:product_id (:product_name) был обновлен успешно.', [
-                        'product_id' => $id,
-                        'product_name' => $product['name']
-                    ]));
-                } else {
-                    $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При обновлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                        'auth_user_name' => $this->Auth->user('name'),
-                        'auth_user_ip' => $this->request->clientIp(),
-                        'product_id' => $id,
-                        'product_name' => $product['name']
-                    ]), 'error', [
-                        'scope' => [
-                            'changes'
-                        ]
-                    ]);
-                    $this->Flash->error(Text::insert('При обновлении продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                        'product_id' => $id,
-                        'product_name' => $product['name']
-                    ]));
-                }
-                $this->redirect(['action' => 'index']);
-            } else {
-                $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При загрузке файла для продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
-                    'auth_user_name' => $this->Auth->user('name'),
-                    'auth_user_ip' => $this->request->clientIp(),
-                    'product_id' => $id,
-                    'product_name' => $product['name']
-                ]), 'error', [
-                    'scope' => [
-                        'changes'
-                    ]
-                ]);
-                $this->Flash->error(Text::insert('При загрузке файла для продукта #:product_id (:product_name) произошла ошибка. Пожалуйста, попробуйте позже.', [
                     'product_id' => $id,
                     'product_name' => $product['name']
                 ]));
