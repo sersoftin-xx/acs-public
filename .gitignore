@@ -1,8 +1,6 @@
 /config/app.php
 /tmp/*
 /logs/*
-.idea/php.xml
-.idea/sqldialects.xml
-.idea/workspace.xml
+.idea/
 vendor/
 webroot/upload/
