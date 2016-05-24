@@ -28,6 +28,23 @@ class BidsController extends AppController
         }
     }
 
+    public function edit($id = null)
+    {
+        $this->request->allowMethod('post');
+
+        $bid = $this->Bids->get($id);
+        $bid = $this->Bids->patchEntity($bid, $this->request->data, [
+            'fieldList' => [
+                'product_id', 'expiration_date'
+            ]
+        ]);
+        if ($this->Bids->save($bid)) {
+            $this->set(compact('bid'));
+        } else {
+            $this->set('errors', $bid->errors());
+        }
+    }
+
     public function block($id = null)
     {
         $this->request->allowMethod('post');

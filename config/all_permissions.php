@@ -15,7 +15,8 @@ return [
             'block',
             'accept',
             'reject',
-            'save'
+            'save',
+            'edit'
         ],
         'Pcs' => [
             'block',
@@ -28,17 +29,19 @@ return [
             'block',
             'getInfo',
             'index',
-            'add',
             'save',
+            'add',
+            'edit',
             'delete'
         ],
         'Products' => [
             'getInfo',
             'download',
             'index',
-            'add',
             'save',
             'update',
+            'add',
+            'edit',
             'delete'
         ],
         'Users' => [
