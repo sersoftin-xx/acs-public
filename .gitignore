@@ -1,6 +1,6 @@
 /config/app.php
 /tmp/*
 /logs/*
-.idea/
+.idea/*
 vendor/
 webroot/upload/
