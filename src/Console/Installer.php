@@ -63,6 +63,7 @@ class Installer
         }
 
         static::setSecuritySalt($rootDir, $io);
+        static::setEncryptionKey($rootDir, $io);
 
         if (class_exists('\Cake\Codeception\Console\Installer')) {
             \Cake\Codeception\Console\Installer::customizeCodeceptionBinary($event);
@@ -160,6 +161,27 @@ class Installer
         $walker($dir . '/tmp', $worldWritable, $io);
         $changePerms($dir . '/tmp', $worldWritable, $io);
         $changePerms($dir . '/logs', $worldWritable, $io);
+    }
+
+    public static function setEncryptionKey($dir, $io)
+    {
+        $config = $dir . '/config/app.php';
+        $content = file_get_contents($config);
+
+        $newKey = hash('md5', $dir . php_uname() . microtime(true));
+        $content = str_replace('__ENC_KEY__', $newKey, $content, $count);
+
+        if ($count == 0) {
+            $io->write('No Security.encryptionKey placeholder to replace.');
+            return;
+        }
+
+        $result = file_put_contents($config, $content);
+        if ($result) {
+            $io->write('Updated Security.encryptionKey value in config/app.php');
+            return;
+        }
+        $io->write('Unable to update Security.encryptionKey value.');
     }
 
     /**
