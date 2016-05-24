@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\ClientApi;
+namespace App\Controller\Api;
 
 use Cake\Controller\Controller;
 use Cake\Core\Configure;

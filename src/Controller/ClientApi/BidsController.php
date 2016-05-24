@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\Api;
+namespace App\Controller\ClientApi;
 
 use App\Model\Entity\Bid;
 use App\Model\Entity\Pc;

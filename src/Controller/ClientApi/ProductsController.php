@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\Api;
+namespace App\Controller\ClientApi;
 
 use Cake\Utility\Text;
 
