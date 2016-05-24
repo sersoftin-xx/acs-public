@@ -29,7 +29,6 @@ class ClientsTable extends Table
         $this->hasMany('Pcs', [
             'foreignKey' => 'client_id',
             'dependent' => true,
-            'cascadeCallbacks' => true,
         ]);
     }
 

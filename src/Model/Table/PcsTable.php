@@ -35,7 +35,8 @@ class PcsTable extends Table
             'joinType' => 'LEFT'
         ]);
         $this->hasMany('Bids', [
-            'foreignKey' => 'pc_id'
+            'foreignKey' => 'pc_id',
+            'dependent' => true
         ]);
     }
 

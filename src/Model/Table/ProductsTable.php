@@ -28,8 +28,7 @@ class ProductsTable extends Table
 
         $this->hasMany('Bids', [
             'foreignKey' => 'product_id',
-            'dependent' => true,
-            'cascadeCallbacks' => true,
+            'dependent' => true
         ]);
     }
 

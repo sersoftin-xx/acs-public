@@ -10,10 +10,7 @@
             <tr>
                 <th>#</th>
                 <th>Наименование</th>
-                <th class="hidden-xs">Версия</th>
-                <th class="hidden-xs">Скрыт</th>
                 <th class="hidden-xs">Дата добавления</th>
-                <th class="hidden-xs">Дата обновления</th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -22,28 +19,13 @@
                 <tr>
                     <td><?= $product['id'] ?></td>
                     <td><?= $product['name'] ?></td>
-                    <td class="hidden-xs"><?= $product['version'] ?></td>
-                    <td class="hidden-xs"><?= $product['hidden'] ? 'Да' : 'Нет'?></td>
                     <td class="hidden-xs"><?= $product['addition_date'] ?></td>
-                    <td class="hidden-xs"><?= $product['update_date'] ?></td>
                     <td>
                         <div class="btn-group btn-group-xs btn-group-xs-small" role="group">
-                            <?php if (!$isMobile): ?>
-                                <button type="button" class="btn btn-info"
-                                        onclick="showUploadNewProductVersionDialog(<?= $product['id'] ?>);"><span
-                                        class="fa fa-upload"></span></button>
-                            <?php endif; ?>
 
                             <button type="button" class="btn btn-warning"
                                     onclick="showEditProductDialog(<?= $product['id'] ?>);"><span
                                     class="fa fa-pencil-square-o"></span></button>
-                            <?php if (!$isMobile): ?>
-                                <button type="button"
-                                        class="btn btn-success download-link-generator"
-                                        data-clipboard-text="<?= $this->Url->build(['controller' => 'products', 'action' => 'download', $product['id']], true); ?>">
-                                    <span class="fa fa-copy"></span>
-                                </button>
-                            <?php endif; ?>
                             <?= $this->Form->postLink($this->Html->tag('span', '', [
                                 'class' => 'fa fa-remove'
                             ]), [
@@ -85,37 +67,6 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label">Скрыт:</label>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="checkbox checkbox-success">
-                                    <input type="checkbox" id="add-new-product-hidden-checkbox" name="product_hidden">
-                                    <label for="add-new-product-hidden-checkbox"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label">Product file:</label>
-                            </div>
-                            <div class="col-sm-5">
-                                <input type="file" data-filename-placement="inside" name="product_file"
-                                       accept=".exe,.dll">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label" for="add-new-product-download-name-input">Имя
-                                    файла:</label>
-                            </div>
-                            <div class="col-sm-5">
-                                <input class="form-control" type="text" name="product_download_name"
-                                       id="add-new-product-download-name-input"
-                                       required="required">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-5 text-right-not-xs">
                                 <label for="add-new-product-description">Описание:</label>
                             </div>
                             <div class="col-sm-5">
@@ -136,45 +87,6 @@
             </div>
         </div>
     </div>
-<?php if (!$isMobile): ?>
-    <div id="update-product" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Загрузка новой версии</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="update-product-form" name="update_product_form"
-                          class="form-horizontal bootstrap-form-with-validation"
-                          enctype="multipart/form-data" method="post"
-                          action="">
-                        <div class="form-group">
-                            <div class="col-sm-6 text-right-not-xs">
-                                <label class="control-label">Файл продукта:</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="file" data-filename-placement="inside" name="product_file"
-                                       accept=".exe,.dll">
-                            </div>
-                        </div>
-                        <input type="hidden"
-                               value="<?= $this->Url->build(['controller' => 'products', 'action' => 'update']); ?>"
-                               id="update-product-form-action">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="upload-button" class="btn btn-primary"
-                            onclick="update_product_form.submit();"><span class="fa fa-upload"></span> Загрузить
-                    </button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>
-                        Закрыть
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
     <div id="edit-product" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -191,27 +103,6 @@
                             </div>
                             <div class="col-sm-5">
                                 <input class="form-control" type="text" name="product_name" id="edit-product-name-input"
-                                       required="required">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label">Скрыт:</label>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="checkbox checkbox-success">
-                                    <input type="checkbox" id="edit-product-hidden-checkbox" name="product_hidden">
-                                    <label for="edit-product-hidden-checkbox"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-5 text-right-not-xs">
-                                <label class="control-label" for="edit-product-download-name-input">Имя файла:</label>
-                            </div>
-                            <div class="col-sm-5">
-                                <input class="form-control" type="text" name="product_download_name"
-                                       id="edit-product-download-name-input"
                                        required="required">
                             </div>
                         </div>

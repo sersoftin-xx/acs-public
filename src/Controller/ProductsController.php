@@ -87,20 +87,6 @@ class ProductsController extends AppController
             }
             $this->redirect(['action' => 'index']);
         }
-        $this->log(Text::insert('Пользователь :auth_user_name (:auth_user_ip). При загрузке файла продукта #:product_id (:product_name) произошла ошибка.', [
-            'auth_user_name' => $this->Auth->user('name'),
-            'auth_user_ip' => $this->request->clientIp(),
-            'product_id' => $product['id'],
-            'product_name' => $product['name']
-        ]), 'error', [
-            'scope' => [
-                'changes'
-            ]
-        ]);
-        $this->Flash->error(Text::insert('При загрузке файла продукта #:product_id (:product_name) произошла ошибка.', [
-            'product_id' => $product['id'],
-            'product_name' => $product['name']
-        ]));
         $this->redirect(['action' => 'index']);
     }
 

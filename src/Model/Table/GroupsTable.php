@@ -34,7 +34,8 @@ class GroupsTable extends Table
         $this->primaryKey('id');
 
         $this->hasMany('Users', [
-            'foreignKey' => 'group_id'
+            'foreignKey' => 'group_id',
+            'dependent' => true
         ]);
     }
 
