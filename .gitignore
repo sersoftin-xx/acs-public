@@ -1,4 +1,8 @@
-/vendor/*
 /config/app.php
 /tmp/*
 /logs/*
+.idea/php.xml
+.idea/sqldialects.xml
+.idea/workspace.xml
+vendor/
+webroot/upload/
