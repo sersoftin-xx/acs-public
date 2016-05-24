@@ -11,6 +11,7 @@
             <excludedPath path="/www/sergo-cheats.ru/acs/bin" />
             <excludedPath path="/www/sergo-cheats.ru/acs/logs" />
             <excludedPath path="/www/sergo-cheats.ru/acs/tmp" />
+            <excludedPath path="/www/sergo-cheats.ru/acs/tests" />
           </excludedPaths>
         </serverdata>
       </paths>
