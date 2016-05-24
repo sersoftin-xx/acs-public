@@ -43,6 +43,26 @@ use Cake\Routing\Router;
 Router::extensions(['json']);
 Router::defaultRouteClass('DashedRoute');
 
+
+Router::prefix('api', function ($routes) {
+    $routes->connect('/products/add',
+        ['controller' => 'Products', 'action' => 'add', '_method' => 'POST', '_ext' => 'json']
+    );
+    $routes->connect('/products/edit/:id',
+        ['controller' => 'Products', 'action' => 'edit', '_method' => 'POST', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $routes->connect('/bids/accept/:id',
+        ['controller' => 'Bids', 'action' => 'accept', '_method' => 'POST', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $routes->connect('/bids/reject/:id',
+        ['controller' => 'Bids', 'action' => 'reject', '_method' => 'POST', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $routes->fallbacks('DashedRoute');
+});
+
 Router::prefix('client_api', function ($routes) {
     $routes->connect('/products/list',
         ['controller' => 'Products', 'action' => 'index', '_method' => 'GET', '_ext' => 'json']

@@ -30,5 +30,14 @@ return [
             'controller' => 'Users',
             'action' => 'login',
         ],
+    ],
+    'api_auth' => [
+        'authenticate' => [
+            'Digest' => [
+                'userModel' => 'Users',
+            ]
+        ],
+        'unauthorizedRedirect' => false,
+        'storage' => 'Memory'
     ]
 ];
