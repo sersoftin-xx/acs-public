@@ -1,13 +1,8 @@
 <?php
 namespace App\Controller\Api;
 
-use App\Model\Entity\Bid;
-use App\Model\Entity\Pc;
 use Cake\Core\Configure;
 use Cake\I18n\Time;
-use Cake\Network\Exception\BadRequestException;
-use Cake\Network\Exception\NotFoundException;
-use Cake\Utility\Security;
 
 /**
  * Bids Controller
@@ -53,7 +48,7 @@ class BidsController extends AppController
         $this->request->allowMethod('post');
 
         $bid = $this->Bids->get($id);
-        
+
         if (!$this->Bids->delete($bid)) {
             $this->set('errors', $bid->errors());
         }

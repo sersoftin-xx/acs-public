@@ -2,8 +2,6 @@
 namespace App\Controller\Api;
 
 use App\Model\Entity\Client;
-use Cake\I18n\Time;
-use Cake\Utility\Text;
 
 /**
  * Clients Controller
