@@ -32,9 +32,14 @@ return [
         ],
     ],
     'api_auth' => [
+        'authorize' => 'Controller',
         'authenticate' => [
-            'Digest' => [
+            'Basic' => [
                 'userModel' => 'Users',
+                'fields' => [
+                    'username' => 'login',
+                    'password' => 'password'
+                ]
             ]
         ],
         'unauthorizedRedirect' => false,

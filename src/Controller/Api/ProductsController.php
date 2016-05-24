@@ -2,9 +2,7 @@
 namespace App\Controller\Api;
 
 use App\Model\Entity\Product;
-use App\Model\Table\ProductsTable;
 use Cake\I18n\Time;
-use Cake\Utility\Text;
 
 /**
  * @property \App\Model\Table\ProductsTable Products
