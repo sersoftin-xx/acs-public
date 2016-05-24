@@ -169,7 +169,7 @@ class Installer
         $content = file_get_contents($config);
 
         $newKey = hash('md5', $dir . php_uname() . microtime(true));
-        $content = str_replace('__ENC_KEY__', $newKey, $content, $count);
+        $content = str_replace('__KEY__', $newKey, $content, $count);
 
         if ($count == 0) {
             $io->write('No Security.encryptionKey placeholder to replace.');
