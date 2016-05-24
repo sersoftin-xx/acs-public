@@ -52,12 +52,39 @@ Router::prefix('api', function ($routes) {
         ['controller' => 'Products', 'action' => 'edit', '_method' => 'POST', '_ext' => 'json'],
         ['id' => '\d+', 'pass' => ['id']]
     );
+    $routes->connect('/products/delete/:id',
+        ['controller' => 'Products', 'action' => 'delete', '_method' => 'DELETE', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
     $routes->connect('/bids/accept/:id',
         ['controller' => 'Bids', 'action' => 'accept', '_method' => 'POST', '_ext' => 'json'],
         ['id' => '\d+', 'pass' => ['id']]
     );
+    $routes->connect('/bids/block/:id',
+        ['controller' => 'Bids', 'action' => 'block', '_method' => 'POST', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
     $routes->connect('/bids/reject/:id',
         ['controller' => 'Bids', 'action' => 'reject', '_method' => 'POST', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $routes->connect('/pcs/edit/:id',
+        ['controller' => 'Pcs', 'action' => 'edit', '_method' => 'POST', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $routes->connect('/pcs/delete/:id',
+        ['controller' => 'Pcs', 'action' => 'delete', '_method' => 'DELETE', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $routes->connect('/clients/add',
+        ['controller' => 'Clients', 'action' => 'add', '_method' => 'POST', '_ext' => 'json']
+    );
+    $routes->connect('/clients/edit/:id',
+        ['controller' => 'Clients', 'action' => 'edit', '_method' => 'POST', '_ext' => 'json'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
+    $routes->connect('/clients/delete/:id',
+        ['controller' => 'Clients', 'action' => 'delete', '_method' => 'DELETE', '_ext' => 'json'],
         ['id' => '\d+', 'pass' => ['id']]
     );
     $routes->fallbacks('DashedRoute');
