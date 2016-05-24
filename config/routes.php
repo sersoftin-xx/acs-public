@@ -43,7 +43,7 @@ use Cake\Routing\Router;
 Router::extensions(['json']);
 Router::defaultRouteClass('DashedRoute');
 
-Router::prefix('api', function ($routes) {
+Router::prefix('client_api', function ($routes) {
     $routes->connect('/products/list',
         ['controller' => 'Products', 'action' => 'index', '_method' => 'GET', '_ext' => 'json']
     );
