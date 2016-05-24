@@ -1,7 +1,11 @@
 {
   "name": "sersoftin/acs",
   "description": "ACS - web-app, that can control access to third-party developers software.",
-  "homepage": "http://sersoftin.ru",
+  "homepage": "http://sersoftin.xyz",
+  "dist": {
+    "url": "http://www.sersoftin.xyz/files/acs.zip",
+    "type": "zip"
+  },
   "type": "project",
   "license": "MIT",
   "require": {
