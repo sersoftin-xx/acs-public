@@ -1,4 +1,5 @@
 <?php
+
 return [
     /**
      * Debug Level:
@@ -9,7 +10,7 @@ return [
      * Development Mode:
      * true: Errors and warnings shown.
      */
-    'debug' => true,
+    'debug' => false,
 
     /**
      * Configure basic information about the application.
@@ -36,6 +37,7 @@ return [
      *   paths for plugins, view templates and locale files respectively.
      */
     'App' => [
+        'AppName' => 'ACS Panel',
         'namespace' => 'App',
         'encoding' => 'UTF-8',
         'base' => false,
@@ -45,13 +47,14 @@ return [
         // 'baseUrl' => env('SCRIPT_NAME'),
         'fullBaseUrl' => false,
         'imageBaseUrl' => 'img/',
+        'iconsBaseUrl' => '/img/icons/',
         'cssBaseUrl' => 'css/',
         'jsBaseUrl' => 'js/',
         'paths' => [
             'plugins' => [ROOT . DS . 'plugins' . DS],
             'templates' => [APP . 'Template' . DS],
-            'locales' => [APP . 'Locale' . DS],
-        ],
+            'locales' => [APP . 'Locale' . DS]
+        ]
     ],
 
     /**
@@ -63,6 +66,7 @@ return [
      */
     'Security' => [
         'salt' => '__SALT__',
+        'encryptionKey' => '__ENC_KEY__'
     ],
 
     /**
@@ -215,11 +219,11 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'nonstandard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
+            'username' => 'app_username',
+            'password' => '123123123',
+            'database' => 'acs',
             'encoding' => 'utf8',
-            'timezone' => 'UTC',
+            'timezone' => '+03:00',
             'cacheMetadata' => true,
             'log' => false,
 
@@ -252,11 +256,11 @@ return [
             'persistent' => false,
             'host' => 'localhost',
             //'port' => 'nonstandard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'test_myapp',
+            'username' => 'test',
+            'password' => 'test',
+            'database' => 'test',
             'encoding' => 'utf8',
-            'timezone' => 'UTC',
+            'timezone' => '+03:00',
             'cacheMetadata' => true,
             'quoteIdentifiers' => false,
             'log' => false,
@@ -280,6 +284,32 @@ return [
             'file' => 'error',
             'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         ],
+        'database' => [
+            'className' => 'App\Log\Engine\DatabaseLog',
+            'levels' => ['notice', 'warning', 'error', 'alert'],
+            'scopes' => ['activations', 'changes', 'erases', 'auth']
+        ],
+        'api' => [
+            'className' => 'Cake\Log\Engine\FileLog',
+            'path' => LOGS,
+            'levels' => ['info', 'alert'],
+            'file' => 'api',
+            'scopes' => ['applications', 'checks']
+        ],
+        'panel' => [
+            'className' => 'Cake\Log\Engine\FileLog',
+            'path' => LOGS,
+            'levels' => ['notice', 'info', 'debug', 'warning', 'error', 'critical', 'alert', 'emergency'],
+            'scopes' => ['activations', 'changes', 'erases', 'requests'],
+            'file' => 'panel',
+        ],
+        'auth' => [
+            'className' => 'Cake\Log\Engine\FileLog',
+            'path' => LOGS,
+            'levels' => ['notice', 'alert'],
+            'scopes' => ['auth'],
+            'file' => 'auth',
+        ]
     ],
 
     /**
@@ -322,5 +352,6 @@ return [
      */
     'Session' => [
         'defaults' => 'php',
+        'cookie' => 'ACSSESSION'
     ],
 ];
