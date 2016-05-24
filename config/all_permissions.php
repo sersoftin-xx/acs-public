@@ -23,6 +23,7 @@ return [
             'getInfo',
             'index',
             'save',
+            'edit',
             'delete'
         ],
         'Clients' => [
