@@ -34,7 +34,7 @@ class BidsController extends AppController
 //        $random_string = $this->request->data('random_string');
 
         $pc = $this->Bids->Pcs->findOrCreate(['unique_key' => $pc_unique_key],
-            function (Pc $pc) use ($pc_unique_key, $pc_name) {
+            function (Pc $pc) use ($pc_name) {
                 $pc->client_id = 0;
                 $pc->name = $pc_name;
                 $pc->addition_date = Time::now();
