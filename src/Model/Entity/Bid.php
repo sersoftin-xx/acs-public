@@ -32,4 +32,14 @@ class Bid extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    protected $_virtual = [
+        'is_expired'
+    ];
+
+    protected function _getIsExpired()
+    {
+        return $this->activation_date >= $this->expiration_date;
+//        return null;
+    }
 }

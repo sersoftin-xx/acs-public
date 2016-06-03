@@ -12,15 +12,10 @@ class ProductsController extends AppController
     {
         $this->request->allowMethod('get');
         $products = $this->Products->find('all', [
-            'conditions' => [
-                'hidden' => false
-            ],
             'fields' => [
                 'id',
                 'name',
-                'version',
                 'addition_date',
-                'update_date',
                 'description'
             ]
         ]);

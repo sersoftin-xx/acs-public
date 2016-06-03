@@ -7,7 +7,6 @@ use Cake\Core\Configure;
 use Cake\I18n\Time;
 use Cake\Network\Exception\BadRequestException;
 use Cake\Network\Exception\NotFoundException;
-use Cake\Utility\Security;
 
 /**
  * Bids Controller
@@ -20,21 +19,12 @@ class BidsController extends AppController
     {
         $this->request->allowMethod('post');
 
-        $key = Configure::read('Security.encryptionKey');
-        $data = json_decode(Security::decrypt(base64_decode($this->request->data('data')), $key));
-
-        $pc_unique_key = $data->pc_unique_key;
-        $product_id = $data->product_id;
-        $random_string = $data->random_string;
-        $pc_name = $data->pc_name;
-
-//        $pc_unique_key = $this->request->data('pc_unique_key');
-//        $pc_name = $this->request->data('pc_name');
-//        $product_id = $this->request->data('product_id');
-//        $random_string = $this->request->data('random_string');
+        $pc_unique_key = $this->request->data('pc_unique_key');
+        $pc_name = $this->request->data('pc_name');
+        $product_id = $this->request->data('product_id');
 
         $pc = $this->Bids->Pcs->findOrCreate(['unique_key' => $pc_unique_key],
-            function (Pc $pc) use ($pc_unique_key, $pc_name) {
+            function (Pc $pc) use ($pc_name) {
                 $pc->client_id = 0;
                 $pc->name = $pc_name;
                 $pc->addition_date = Time::now();
@@ -50,27 +40,19 @@ class BidsController extends AppController
         });
 
         if (!$bid->has('id')) {
-            throw new BadRequestException('BadRequest. Invalid data accepted');
+            throw new BadRequestException('Bid not saved. Invalid data accepted.');
         }
-        $response = new \stdClass();
-        $response->bid = $bid;
-        $response->random_string = $random_string;
-        $data = Security::encrypt(json_encode($response), $key);
-        $data = base64_encode($data);
-        $this->set(compact('data'));
-//        $this->set(compact('bid', 'random_string'));
+
+        $this->set(compact('bid'));
     }
 
     public function check()
     {
         $this->request->allowMethod('post');
 
-        $key = Configure::read('Security.encryptionKey');
-        $data = json_decode(Security::decrypt(base64_decode($this->request->data('data')), $key));
+        $pc_unique_key = $this->request->data('pc_unique_key');
+        $product_id = $this->request->data('product_id');
 
-        $pc_unique_key = $data->pc_unique_key;
-        $product_id = $data->product_id;
-        $random_string = $data->random_string;
         $bid = $this->Bids->find('all', [
             'conditions' => [
                 'Pcs.unique_key' => $pc_unique_key,
@@ -83,12 +65,7 @@ class BidsController extends AppController
         } else {
             $bid->unsetProperty('pc');
         }
-        $response = new \stdClass();
-        $response->bid = $bid;
-        $response->random_string = $random_string;
-        $data = Security::encrypt(json_encode($response), $key);
-        $data = base64_encode($data);
-        $this->set(compact('data'));
-//        $this->set(compact('bid'));
+
+        $this->set(compact('bid'));
     }
 }
