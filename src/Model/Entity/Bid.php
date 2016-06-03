@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
+use Cake\I18n\Time;
 use Cake\ORM\Entity;
 
 /**
@@ -39,6 +40,6 @@ class Bid extends Entity
 
     protected function _getIsExpired()
     {
-        return $this->activation_date >= $this->expiration_date;
+        return $this->expiration_date < Time::now();
     }
 }
