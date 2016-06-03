@@ -40,6 +40,5 @@ class Bid extends Entity
     protected function _getIsExpired()
     {
         return $this->activation_date >= $this->expiration_date;
-//        return null;
     }
 }
